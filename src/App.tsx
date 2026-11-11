@@ -1,5 +1,25 @@
-import { useState } from 'react'
+
+import { useState, type FormEvent } from 'react'
 import './App.css'
+
+type SearchResult = {
+  title: string
+  authors: string[]
+  description: string
+  year: string | number
+  source: string
+  type: string
+  access: string
+  link: string
+  cover: string
+  relevance: string
+  relevanceScore: number
+}
+
+type SourceStatus = {
+  name: string
+  status: string
+}
 
 const categories = [
   { icon: '📚', name: 'Livros', description: 'Explore obras e autores' },
@@ -10,29 +30,33 @@ const categories = [
   { icon: '🚀', name: 'Descobertas', description: 'Assuntos e novidades' },
 ]
 
-const API_URL = ''
-
 function App() {
   const [query, setQuery] = useState('')
-  const [result, setResult] = useState('')
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [sources, setSources] = useState<SourceStatus[]>([])
   const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const [searched, setSearched] = useState(false)
 
-  async function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (query.trim().length < 3) {
-      setResult('Digite pelo menos 3 caracteres.')
+      setMessage('Digite pelo menos 3 caracteres.')
       return
     }
 
     setLoading(true)
-    setResult('Enviando sua pesquisa...')
+    setSearched(false)
+    setResults([])
+    setSources([])
+    setMessage('Pesquisando em fontes de conhecimento...')
 
     try {
-      const response = await fetch(`${API_URL}/api/search`, {
+      const response = await fetch('/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query: query.trim() }),
       })
 
       const data = await response.json()
@@ -41,9 +65,43 @@ function App() {
         throw new Error(data.error || 'Não foi possível pesquisar.')
       }
 
-      setResult(data.message)
+      const uniqueResults: SearchResult[] = []
+      const seen = new Set<string>()
+
+      for (const item of data.results || []) {
+        if (!item.title?.trim()) continue
+
+        const key = item.title.trim().toLowerCase()
+
+        if (!seen.has(key)) {
+          seen.add(key)
+          uniqueResults.push(item)
+        }
+      }
+
+      uniqueResults.sort((a, b) => {
+  const relevanceOrder = b.relevanceScore - a.relevanceScore
+
+  if (relevanceOrder !== 0) {
+    return relevanceOrder
+  }
+
+  const freeA = a.access === 'Gratuito' ? 1 : 0
+  const freeB = b.access === 'Gratuito' ? 1 : 0
+
+  return freeB - freeA
+})
+
+      setResults(uniqueResults)
+      setSources(data.sources || [])
+      setMessage(
+        uniqueResults.length > 0
+          ? `${uniqueResults.length} resultados encontrados para sua pesquisa.`
+          : 'Nenhum resultado com título válido foi encontrado.'
+      )
+      setSearched(true)
     } catch {
-      setResult('Não foi possível conectar ao servidor. Verifique se o backend está ligado.')
+      setMessage('Não foi possível conectar ao servidor. Verifique se o backend está ligado.')
     } finally {
       setLoading(false)
     }
@@ -86,11 +144,13 @@ function App() {
               aria-label="Sua pesquisa"
             />
             <button type="submit" disabled={loading}>
-              {loading ? 'Enviando...' : 'Pesquisar →'}
+              {loading ? 'Pesquisando...' : 'Pesquisar →'}
             </button>
           </form>
 
-          {result && <p role="status" aria-live="polite">{result}</p>}
+          {message && (
+            <p role="status" aria-live="polite">{message}</p>
+          )}
 
           <div className="search-hint">
             <span>Experimente:</span>
@@ -116,6 +176,86 @@ function App() {
           <span className="floating-item item-three">◈</span>
         </div>
       </section>
+
+      {searched && (
+        <section className="results-section" id="resultados">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">SUA DESCOBERTA COMEÇA AQUI</span>
+              <h2>Resultados da pesquisa</h2>
+            </div>
+            <span className="section-note">{results.length} resultados</span>
+          </div>
+
+          <div className="sources-list">
+            {sources.map((source) => (
+              <span className="source-tag" key={source.name}>
+                {source.status === 'consultada' ? '●' : '○'} {source.name}
+              </span>
+            ))}
+          </div>
+
+          <div className="results-grid">
+            {results.map((item, index) => (
+              <article className="result-card" key={`${item.source}-${item.title}-${index}`}>
+                {item.cover ? (
+                  <img
+                    className="result-cover"
+                    src={item.cover}
+                    alt={`Capa de ${item.title}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="result-cover result-cover-empty">📖</div>
+                )}
+
+                <div className="result-content">
+                  <span className={`result-relevance ${
+  item.relevance === 'Diretamente relacionado'
+    ? 'relevance-direct'
+    : item.relevance === 'Aprofundamento'
+      ? 'relevance-deep'
+      : 'relevance-complementary'
+}`}>
+  {item.relevance}
+</span>
+
+<span className="result-type">{item.type}</span>
+                  <h3>{item.title}</h3>
+
+                  {item.authors.length > 0 && (
+                    <p className="result-author">
+                      {item.authors.filter(Boolean).join(', ')}
+                    </p>
+                  )}
+
+                  {item.year && (
+                    <span className="result-year">{item.year}</span>
+                  )}
+
+                  <div className="result-meta">
+                    <span className="result-source">{item.source}</span>
+                    <span className={item.access === 'Gratuito' ? 'access-free' : 'access-check'}>
+                      {item.access}
+                    </span>
+                  </div>
+
+                  {item.link && (
+                    <a
+                      className="result-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Consultar conteúdo ↗
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="discovery" id="explorar">
         <div className="section-heading">
