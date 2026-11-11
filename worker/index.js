@@ -36,9 +36,8 @@ function buildSearchTerms(query) {
   const terms = [query.trim()];
   if (cleaned && cleaned !== normalized) terms.push(cleaned);
 
-  const words = cleaned.split(/\s+/).filter(word =>
-    word.length > 2 && !["sobre", "para", "com", "uma", "dos", "das", "que", "como", "the", "and"].includes(word)
-  );
+  const stopWords = ["sobre", "para", "com", "uma", "dos", "das", "que", "como", "the", "and", "quero", "gostaria", "preciso", "procuro", "filmes", "filme", "series", "séries", "livros", "livro", "pesquisas", "pesquisa", "documentarios", "documentários"];
+  const words = cleaned.split(/\s+/).filter(word => word.length > 2 && !stopWords.includes(word));
   if (words.length > 1) terms.push(words.join(" "));
 
   if (/\bcronos\b/.test(normalized)) {
@@ -60,7 +59,8 @@ function score(item, query) {
   const title = normalizeText(item.title);
   const description = normalizeText(item.description);
   const normalizedQuery = normalizeText(query);
-  const terms = normalizedQuery.split(/\s+/).filter(term => term.length > 2);
+  const stopWords = ["quero", "gostaria", "preciso", "procuro", "pesquise", "pesquisar", "encontre", "buscar", "busque", "fale", "entender", "compreender", "sobre", "para", "com", "uma", "dos", "das", "que", "como", "filmes", "filme", "series", "séries", "livros", "livro", "pesquisas", "pesquisa", "documentarios", "documentários"];
+  const terms = normalizedQuery.split(/\s+/).filter(term => term.length > 2 && !stopWords.includes(term));
   let points = 0;
 
   if (title === normalizedQuery) points += 70;
@@ -244,9 +244,11 @@ export default {
         { name: "Crossref", run: () => searchMultiple(searchCrossref, terms) },
         { name: "Project Gutenberg", run: () => searchMultiple(searchGutendex, terms) },
         { name: "Apple iTunes", run: () => searchMultiple(searchMovies, terms) },
-        { name: "TVmaze", run: () => searchMultiple(searchShows, terms) },
-        { name: "The Movie Database", run: () => searchMultiple(term => searchTmdb(term, env) || [], terms) }
+        { name: "TVmaze", run: () => searchMultiple(searchShows, terms) }
       ];
+      if (env?.TMDB_API_TOKEN) {
+        sourceJobs.push({ name: "The Movie Database", run: () => searchMultiple(term => searchTmdb(term, env), terms) });
+      }
 
       const settled = await Promise.allSettled(sourceJobs.map(job => job.run()));
       const allResults = [];
@@ -271,6 +273,7 @@ export default {
       return json({
         status: "success", query, total: results.length, sources,
         interpretation: terms.slice(1),
+        notes: env?.TMDB_API_TOKEN ? [] : ["A busca avançada no TMDB pode ser ativada com um token de API gratuito, armazenado como segredo no servidor."],
         results
       });
     }
