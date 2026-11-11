@@ -52,7 +52,7 @@ function buildSearchTerms(query) {
     terms.push("mudancas climaticas aquecimento global impactos");
   }
 
-  return [...new Set(terms.map(term => term.trim()).filter(Boolean))].slice(0, 4);
+  return [...new Set(terms.map(term => term.trim()).filter(Boolean))].slice(0, 3);
 }
 
 function score(item, query) {
