@@ -1,121 +1,95 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+
 import './App.css'
 
+const categories = [
+  { icon: '📚', name: 'Livros', description: 'Explore obras e autores' },
+  { icon: '🎓', name: 'Pesquisas', description: 'Artigos e conhecimento científico' },
+  { icon: '🎬', name: 'Filmes', description: 'Histórias e produções' },
+  { icon: '📺', name: 'Séries', description: 'Universos para descobrir' },
+  { icon: '🌍', name: 'Documentários', description: 'Conheça o mundo' },
+  { icon: '🚀', name: 'Descobertas', description: 'Assuntos e novidades' },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
+    <main className="site">
+      <header className="topbar">
+        <a className="brand" href="#">
+          <span className="brand-symbol">N</span>
+          <span>nexo<span className="brand-dot">.</span></span>
+        </a>
+
+        <nav>
+          <a href="#explorar">Explorar</a>
+          <a href="#categorias">Categorias</a>
+          <a href="#novidades">Novidades</a>
+        </nav>
+
+        <button className="access-button">Acessar</button>
+      </header>
+
+      <section className="hero">
+        <div className="hero-content">
+          <span className="eyebrow">CONHECIMENTO SEM FRONTEIRAS</span>
+          <h1>O mundo é vasto.<br />
+            <span>Descubra mais.</span>
+          </h1>
           <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+            Encontre livros, pesquisas, filmes e ideias.
+            Explore qualquer assunto e descubra novas perspectivas.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <form className="search-box" onSubmit={(event) => event.preventDefault()}>
+            <span>⌕</span>
+            <input placeholder="O que você gostaria de descobrir?" />
+            <button type="submit">Pesquisar <span>→</span></button>
+          </form>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <div className="search-hint">
+            <span>Experimente:</span>
+            <button type="button">História antiga</button>
+            <button type="button">Inteligência artificial</button>
+            <button type="button">Astronomia</button>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+
+        <div className="hero-art" aria-hidden="true">
+          <div className="orbit orbit-one" />
+          <div className="orbit orbit-two" />
+          <div className="glow" />
+          <div className="core">N</div>
+          <span className="floating-item item-one">📖</span>
+          <span className="floating-item item-two">✦</span>
+          <span className="floating-item item-three">◈</span>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <section className="discovery" id="explorar">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">UM UNIVERSO DE POSSIBILIDADES</span>
+            <h2>Explore o conhecimento</h2>
+          </div>
+          <span className="section-note">Descubra por onde começar <span>↗</span></span>
+        </div>
+
+        <div className="category-grid" id="categorias">
+          {categories.map((category) => (
+            <button className="category-card" key={category.name}>
+              <span className="category-icon">{category.icon}</span>
+              <strong>{category.name}</strong>
+              <small>{category.description}</small>
+              <span className="card-arrow">↗</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <footer id="novidades">
+        <span className="footer-brand">nexo.</span>
+        <span>Conhecimento conecta possibilidades.</span>
+      </footer>
+    </main>
   )
 }
 
