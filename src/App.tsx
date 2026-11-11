@@ -1,4 +1,4 @@
-
+import { useState } from 'react'
 import './App.css'
 
 const categories = [
@@ -10,7 +10,45 @@ const categories = [
   { icon: '🚀', name: 'Descobertas', description: 'Assuntos e novidades' },
 ]
 
+const API_URL = ''
+
 function App() {
+  const [query, setQuery] = useState('')
+  const [result, setResult] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (query.trim().length < 3) {
+      setResult('Digite pelo menos 3 caracteres.')
+      return
+    }
+
+    setLoading(true)
+    setResult('Enviando sua pesquisa...')
+
+    try {
+      const response = await fetch(`${API_URL}/api/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Não foi possível pesquisar.')
+      }
+
+      setResult(data.message)
+    } catch {
+      setResult('Não foi possível conectar ao servidor. Verifique se o backend está ligado.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <main className="site">
       <header className="topbar">
@@ -39,17 +77,32 @@ function App() {
             Explore qualquer assunto e descubra novas perspectivas.
           </p>
 
-          <form className="search-box" onSubmit={(event) => event.preventDefault()}>
+          <form className="search-box" onSubmit={handleSearch}>
             <span>⌕</span>
-            <input placeholder="O que você gostaria de descobrir?" />
-            <button type="submit">Pesquisar <span>→</span></button>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="O que você gostaria de descobrir?"
+              aria-label="Sua pesquisa"
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? 'Enviando...' : 'Pesquisar →'}
+            </button>
           </form>
+
+          {result && <p role="status" aria-live="polite">{result}</p>}
 
           <div className="search-hint">
             <span>Experimente:</span>
-            <button type="button">História antiga</button>
-            <button type="button">Inteligência artificial</button>
-            <button type="button">Astronomia</button>
+            {['História antiga', 'Inteligência artificial', 'Astronomia'].map((term) => (
+              <button
+                type="button"
+                key={term}
+                onClick={() => setQuery(term)}
+              >
+                {term}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -70,7 +123,7 @@ function App() {
             <span className="eyebrow">UM UNIVERSO DE POSSIBILIDADES</span>
             <h2>Explore o conhecimento</h2>
           </div>
-          <span className="section-note">Descubra por onde começar <span>↗</span></span>
+          <span className="section-note">Descubra por onde começar ↗</span>
         </div>
 
         <div className="category-grid" id="categorias">
