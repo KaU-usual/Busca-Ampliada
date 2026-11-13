@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import './App.css'
+import ConstellationBackground from './ConstellationBackground'
 
 type SearchResult = {
   title: string
@@ -157,6 +158,7 @@ function App() {
 
   return (
     <main className="site" data-theme={theme}>
+      <ConstellationBackground />
       <header className="topbar">
         <a className="brand" href="#" aria-label="Nexo, início">
           <span className="brand-symbol">N</span>

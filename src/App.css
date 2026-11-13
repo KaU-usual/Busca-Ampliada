@@ -1663,3 +1663,424 @@ body {
 .site[data-theme="light"] .result-pdf-link {
   color: #087c55 !important;
 }
+
+
+/* --- Constelações sequenciais do NEXO --- */
+.constellation-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: .68;
+}
+
+.constellation-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.constellation-group {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+  cursor: pointer;
+  outline: none;
+  animation: constellation-cycle 72s linear infinite;
+}
+
+.constellation-group.is-selected,
+.constellation-group:focus-visible {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 9px var(--constellation-glow));
+  pointer-events: auto;
+}
+
+.constellation-lines {
+  stroke: var(--constellation-line);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: constellation-draw 72s linear infinite;
+}
+
+.constellation-stars {
+  fill: var(--constellation-star);
+  animation: constellation-appear 72s linear infinite;
+}
+
+.constellation-star {
+  stroke: var(--constellation-halo);
+  stroke-width: 5;
+  paint-order: stroke fill;
+  vector-effect: non-scaling-stroke;
+}
+
+.constellation-tooltip {
+  pointer-events: none;
+  filter: drop-shadow(0 3px 12px var(--constellation-glow));
+}
+
+.constellation-tooltip rect {
+  fill: var(--constellation-label-bg);
+  stroke: var(--constellation-line);
+  stroke-width: 1;
+}
+
+.constellation-tooltip text {
+  font-family: 'DM Sans', sans-serif;
+  fill: var(--constellation-label-text);
+}
+
+.constellation-tooltip .tooltip-name {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.constellation-tooltip .tooltip-note {
+  font-size: 7px;
+}
+
+@keyframes constellation-cycle {
+  0%, 1.5%, 15%, 100% { opacity: 0; visibility: hidden; }
+  2.5%, 13.5% { opacity: .78; visibility: visible; }
+}
+
+@keyframes constellation-draw {
+  0%, 1.5% { stroke-dashoffset: 280; }
+  5% { stroke-dashoffset: 0; }
+  13.5% { stroke-dashoffset: 0; }
+  15% , 100% { stroke-dashoffset: 280; }
+}
+
+@keyframes constellation-appear {
+  0%, 2% { opacity: 0; }
+  4% , 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+.site {
+  position: relative;
+  isolation: isolate;
+}
+
+.site > :not(.constellation-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.site[data-theme="dark"] {
+  --constellation-star: #e5faff;
+  --constellation-halo: #73dfff;
+  --constellation-line: #83dfff99;
+  --constellation-glow: #6edfff99;
+  --constellation-label-bg: #101c39ed;
+  --constellation-label-text: #f0faff;
+}
+
+.site[data-theme="light"] {
+  --constellation-star: #173b69;
+  --constellation-halo: #d9a94d;
+  --constellation-line: #315b8c99;
+  --constellation-glow: #d9a94d88;
+  --constellation-label-bg: #fff8e9f2;
+  --constellation-label-text: #19385d;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer { opacity: .48; }
+  .constellation-tooltip rect { width: 205px; }
+  .constellation-tooltip .tooltip-note { font-size: 6.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .constellation-group,
+  .constellation-lines,
+  .constellation-stars {
+    animation: none !important;
+  }
+
+  .constellation-group {
+    opacity: .35;
+  }
+
+  .constellation-lines {
+    stroke-dashoffset: 0;
+  }
+
+  .constellation-stars {
+    opacity: 1;
+  }
+}
+
+
+/* --- Céu mais vivo e formação progressiva das constelações --- */
+.constellation-layer {
+  opacity: .88;
+}
+
+.background-stars {
+  pointer-events: none;
+  fill: var(--ambient-star);
+}
+
+.background-stars circle {
+  opacity: .25;
+  filter: drop-shadow(0 0 4px var(--ambient-glow));
+  animation: ambient-twinkle 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-twinkle {
+  from { opacity: .18; }
+  to { opacity: .95; }
+}
+
+.constellation-lines {
+  animation: none !important;
+}
+
+.constellation-lines line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke-width: 1.9;
+  animation: constellation-line-cycle 72s linear infinite;
+}
+
+@keyframes constellation-line-cycle {
+  0%, 1.5% { stroke-dashoffset: 100; opacity: 0; }
+  2.5% { opacity: 1; }
+  6.5%, 13.5% { stroke-dashoffset: 0; opacity: 1; }
+  15%, 100% { stroke-dashoffset: 100; opacity: 0; }
+}
+
+.constellation-stars {
+  animation: none !important;
+}
+
+.constellation-star {
+  opacity: 0;
+  stroke-width: 7;
+  filter: drop-shadow(0 0 5px var(--constellation-glow));
+  animation: constellation-star-cycle 72s linear infinite;
+}
+
+@keyframes constellation-star-cycle {
+  0%, 1.5% { opacity: 0; }
+  3%, 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+.site[data-theme="dark"] {
+  --ambient-star: #e8faff;
+  --ambient-glow: #73dfff;
+  --constellation-star: #f3fdff;
+  --constellation-halo: #72dfff;
+  --constellation-line: #75dfff;
+  --constellation-glow: #55cfff;
+}
+
+.site[data-theme="light"] {
+  --ambient-star: #bd8127;
+  --ambient-glow: #e8ad43;
+  --constellation-star: #173b69;
+  --constellation-halo: #e5a936;
+  --constellation-line: #28578b;
+  --constellation-glow: #d89b32;
+}
+
+.site[data-theme="light"] .constellation-layer {
+  opacity: .82;
+}
+
+.site[data-theme="light"] .constellation-star {
+  stroke-width: 8;
+}
+
+.site[data-theme="light"] .background-stars circle {
+  opacity: .48;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer { opacity: .72; }
+  .site[data-theme="light"] .constellation-layer { opacity: .68; }
+}
+
+
+/* --- Interação das constelações e identidade do tema claro --- */
+.constellation-layer {
+  z-index: 2;
+}
+
+.constellation-layer svg {
+  pointer-events: none;
+}
+
+.constellation-group {
+  pointer-events: visiblePainted;
+}
+
+.constellation-group.is-selected,
+.constellation-group:focus-visible {
+  pointer-events: visiblePainted;
+  opacity: 1 !important;
+}
+
+.constellation-tooltip {
+  opacity: 1;
+}
+
+/* Tema claro: observatório solar, sem constelações em formação */
+.site[data-theme="light"] .constellation-group {
+  display: none;
+}
+
+.site[data-theme="light"] .constellation-layer {
+  opacity: 1;
+  background:
+    radial-gradient(ellipse at 82% 17%, #fff5c6a8 0%, #ffe6a333 22%, transparent 43%),
+    radial-gradient(ellipse at 15% 78%, #ffd88b35 0%, transparent 42%);
+}
+
+.site[data-theme="light"] .constellation-layer::before,
+.site[data-theme="light"] .constellation-layer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 78vw;
+  height: 29vw;
+  border: 1px solid #c18a3b35;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  pointer-events: none;
+}
+
+.site[data-theme="light"] .constellation-layer::after {
+  width: 58vw;
+  height: 42vw;
+  transform: translate(-50%, -50%) rotate(28deg);
+  border-color: #52749a30;
+}
+
+.site[data-theme="light"] .background-stars circle {
+  fill: #c28a35;
+  opacity: .55;
+  filter: drop-shadow(0 0 4px #e7b75b);
+}
+
+.site[data-theme="light"] .constellation-layer svg {
+  opacity: .85;
+}
+
+@media (max-width: 650px) {
+  .site[data-theme="light"] .constellation-layer::before {
+    width: 125vw;
+    height: 55vw;
+  }
+
+  .site[data-theme="light"] .constellation-layer::after {
+    width: 105vw;
+    height: 70vw;
+  }
+}
+
+
+/* --- Ajuste de enquadramento e formação completa --- */
+.constellation-layer {
+  overflow: hidden;
+}
+
+.constellation-layer svg {
+  overflow: visible;
+}
+
+.constellation-group {
+  transform-box: view-box;
+}
+
+.constellation-lines line {
+  stroke-dasharray: 300 !important;
+  stroke-dashoffset: 300;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+@keyframes constellation-line-cycle {
+  0%, 1.5% { stroke-dashoffset: 300; opacity: 0; }
+  2.5% { opacity: 1; }
+  6.5%, 13.5% { stroke-dashoffset: 0; opacity: 1; }
+  15%, 100% { stroke-dashoffset: 300; opacity: 0; }
+}
+
+.constellation-star {
+  filter: drop-shadow(0 0 6px var(--constellation-glow));
+}
+
+.constellation-tooltip {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .constellation-tooltip rect {
+    width: 205px;
+  }
+}
+
+/* Ajustes finais: quadros completos e legíveis */
+.constellation-layer {
+  overflow: hidden;
+}
+
+.constellation-layer svg {
+  overflow: hidden;
+}
+
+.constellation-tooltip {
+  opacity: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 12px var(--constellation-glow));
+}
+
+.constellation-tooltip rect {
+  width: 270px;
+  height: 64px;
+  fill: var(--constellation-label-bg);
+  stroke: var(--constellation-line);
+  stroke-width: 1.2;
+}
+
+.constellation-tooltip .tooltip-name {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.constellation-tooltip .tooltip-note {
+  font-size: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 650px) {
+  .constellation-tooltip rect {
+    width: 250px;
+    height: 64px;
+  }
+
+  .constellation-tooltip .tooltip-name {
+    font-size: 12px;
+  }
+
+  .constellation-tooltip .tooltip-note {
+    font-size: 7.5px;
+  }
+}
