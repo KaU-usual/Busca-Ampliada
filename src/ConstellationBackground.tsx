@@ -1,157 +1,128 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { constellationCatalog } from './constellation-data'
+import type { Star } from './constellation-data'
 
-type Star = { name: string; ra: number; dec: number; mag: number }
-type Edge = readonly [string, string]
-
-const catalog = [
-  {
-    name: 'Ursa Maior',
-    note: 'O Grande Carro: Dubhe, Merak, Phecda, Megrez, Alioth, Mizar e Alkaid.',
-    position: [65, 65] as const,
-    stars: [
-      { name: 'Dubhe', ra: 11.062, dec: 61.75, mag: 1.79 },
-      { name: 'Merak', ra: 11.031, dec: 56.38, mag: 2.37 },
-      { name: 'Phecda', ra: 11.898, dec: 53.69, mag: 2.44 },
-      { name: 'Megrez', ra: 12.257, dec: 57.03, mag: 3.31 },
-      { name: 'Alioth', ra: 12.9, dec: 55.96, mag: 1.77 },
-      { name: 'Mizar', ra: 13.399, dec: 54.93, mag: 2.27 },
-      { name: 'Alkaid', ra: 13.793, dec: 49.31, mag: 1.86 },
-    ],
-    edges: [
-      ['Dubhe', 'Merak'], ['Merak', 'Phecda'], ['Phecda', 'Megrez'],
-      ['Megrez', 'Dubhe'], ['Megrez', 'Alioth'], ['Alioth', 'Mizar'],
-      ['Mizar', 'Alkaid'],
-    ] as Edge[],
-  },
-  {
-    name: 'Órion',
-    note: 'O caçador, marcado pelas estrelas Betelgeuse, Rigel e o cinturão.',
-    position: [570, 55] as const,
-    stars: [
-      { name: 'Betelgeuse', ra: 5.92, dec: 7.41, mag: 0.42 },
-      { name: 'Rigel', ra: 5.242, dec: -8.2, mag: 0.13 },
-      { name: 'Bellatrix', ra: 5.419, dec: 6.35, mag: 1.64 },
-      { name: 'Mintaka', ra: 5.533, dec: -0.3, mag: 2.23 },
-      { name: 'Alnilam', ra: 5.604, dec: -1.2, mag: 1.69 },
-      { name: 'Alnitak', ra: 5.679, dec: -1.94, mag: 1.77 },
-      { name: 'Saiph', ra: 5.796, dec: -9.67, mag: 2.09 },
-    ],
-    edges: [
-      ['Betelgeuse', 'Bellatrix'], ['Betelgeuse', 'Alnitak'],
-      ['Bellatrix', 'Mintaka'], ['Alnitak', 'Alnilam'],
-      ['Alnilam', 'Mintaka'], ['Alnitak', 'Saiph'],
-      ['Mintaka', 'Rigel'],
-    ] as Edge[],
-  },
-  {
-    name: 'Cassiopeia',
-    note: 'As cinco estrelas principais formam o conhecido desenho em W.',
-    position: [340, 275] as const,
-    stars: [
-      { name: 'Schedar', ra: 0.675, dec: 56.54, mag: 2.23 },
-      { name: 'Caph', ra: 0.153, dec: 59.15, mag: 2.27 },
-      { name: 'Tsih', ra: 0.945, dec: 60.72, mag: 2.47 },
-      { name: 'Ruchbah', ra: 1.43, dec: 60.24, mag: 2.68 },
-      { name: 'Segin', ra: 1.907, dec: 63.67, mag: 3.37 },
-    ],
-    edges: [
-      ['Caph', 'Schedar'], ['Schedar', 'Tsih'],
-      ['Tsih', 'Ruchbah'], ['Ruchbah', 'Segin'],
-    ] as Edge[],
-  },
-  {
-    name: 'Escorpião',
-    note: 'Antares marca o corpo do escorpião, cuja cauda segue em direção a Shaula.',
-    position: [700, 325] as const,
-    stars: [
-      { name: 'Antares', ra: 16.49, dec: -26.43, mag: 0.96 },
-      { name: 'Shaula', ra: 17.56, dec: -37.1, mag: 1.63 },
-      { name: 'Dschubba', ra: 16.006, dec: -22.62, mag: 2.32 },
-      { name: 'Acrab', ra: 16.091, dec: -19.81, mag: 2.62 },
-      { name: 'Larawag', ra: 16.836, dec: -34.29, mag: 2.29 },
-    ],
-    edges: [
-      ['Acrab', 'Dschubba'], ['Dschubba', 'Antares'],
-      ['Antares', 'Larawag'], ['Larawag', 'Shaula'],
-    ] as Edge[],
-  },
-  {
-    name: 'Cruzeiro do Sul',
-    note: 'Crux: Acrux e Gacrux formam o eixo maior; Mimosa e Imai, o braço transversal.',
-    position: [120, 470] as const,
-    stars: [
-      { name: 'Acrux', ra: 12.443, dec: -63.1, mag: 0.76 },
-      { name: 'Mimosa', ra: 12.795, dec: -59.69, mag: 1.25 },
-      { name: 'Gacrux', ra: 12.519, dec: -57.11, mag: 1.63 },
-      { name: 'Imai', ra: 12.252, dec: -58.75, mag: 2.8 },
-    ],
-    edges: [
-      ['Acrux', 'Gacrux'], ['Mimosa', 'Imai'],
-    ] as Edge[],
-  },
-  {
-    name: 'Leão',
-    note: 'A cabeça forma uma foice; Regulus, Algieba, Zosma e Denebola marcam o corpo.',
-    position: [420, 495] as const,
-    stars: [
-      { name: 'Regulus', ra: 10.14, dec: 11.97, mag: 1.35 },
-      { name: 'Algieba', ra: 10.333, dec: 19.84, mag: 2.28 },
-      { name: 'Zosma', ra: 11.235, dec: 20.52, mag: 2.56 },
-      { name: 'Denebola', ra: 11.818, dec: 14.57, mag: 2.14 },
-    ],
-    edges: [
-      ['Regulus', 'Algieba'], ['Algieba', 'Zosma'],
-      ['Zosma', 'Denebola'], ['Regulus', 'Denebola'],
-    ] as Edge[],
-  },
-]
+const catalog = constellationCatalog
 
 function projectStars(stars: Star[]) {
-  const meanDec = stars.reduce((sum, star) => sum + star.dec, 0) / stars.length
-  const cosDec = Math.cos(meanDec * Math.PI / 180)
-  const raw = stars.map(star => ({
-    ...star,
-    x: -star.ra * 15 * cosDec,
-    y: -star.dec,
-  }))
+  // Centro calculado com média circular da ascensão reta.
+  const raRadians = stars.map(star => star.ra * Math.PI / 12)
+  const centerRa = Math.atan2(
+    raRadians.reduce((sum, value) => sum + Math.sin(value), 0),
+    raRadians.reduce((sum, value) => sum + Math.cos(value), 0),
+  )
+  const centerDec = stars.reduce((sum, star) => sum + star.dec, 0) /
+    stars.length * Math.PI / 180
+
+  const sinDec0 = Math.sin(centerDec)
+  const cosDec0 = Math.cos(centerDec)
+
+  const raw = stars.map(star => {
+    const ra = star.ra * Math.PI / 12
+    const dec = star.dec * Math.PI / 180
+    const deltaRa = Math.atan2(
+      Math.sin(ra - centerRa),
+      Math.cos(ra - centerRa),
+    )
+    const sinDec = Math.sin(dec)
+    const cosDec = Math.cos(dec)
+    const denominator =
+      sinDec0 * sinDec + cosDec0 * cosDec * Math.cos(deltaRa)
+
+    const safeDenominator = Math.max(denominator, 0.000001)
+    const x = (cosDec * Math.sin(deltaRa)) / safeDenominator
+    const y = (
+      cosDec0 * sinDec -
+      sinDec0 * cosDec * Math.cos(deltaRa)
+    ) / safeDenominator
+
+    return { ...star, x, y }
+  })
 
   const minX = Math.min(...raw.map(star => star.x))
   const maxX = Math.max(...raw.map(star => star.x))
   const minY = Math.min(...raw.map(star => star.y))
   const maxY = Math.max(...raw.map(star => star.y))
-  const scale = Math.min(
-    190 / Math.max(maxX - minX, 0.01),
-    150 / Math.max(maxY - minY, 0.01),
-  )
+
+  // Escala uniforme: preserva a proporção angular da figura.
+  const width = Math.max(maxX - minX, 0.000001)
+  const height = Math.max(maxY - minY, 0.000001)
+  const scale = Math.min(190 / width, 150 / height)
+  const offsetX = 12 + (190 - width * scale) / 2
+  const offsetY = 12 + (150 - height * scale) / 2
 
   return raw.map(star => ({
     ...star,
-    x: 12 + (star.x - minX) * scale,
-    y: 12 + (star.y - minY) * scale,
-    radius: Math.max(2.2, Math.min(4.8, 5 - star.mag * 0.8)),
+    x: offsetX + (star.x - minX) * scale,
+    y: offsetY + (maxY - star.y) * scale,
+    radius: Math.max(1.35, Math.min(4.8, 5 - star.mag * 0.8)),
   }))
 }
 
 const constellations = catalog.map(item => {
   const stars = projectStars(item.stars)
-  const indexByName = new Map(stars.map((star, index) => [star.name, index]))
-
   return {
     ...item,
     stars,
     points: stars.map(star => [star.x, star.y] as const),
-    lines: item.edges.map(([a, b]) => [
-      indexByName.get(a)!,
-      indexByName.get(b)!,
-    ] as const),
   }
 })
 
-const backgroundStars = Array.from({ length: 100 }, (_, index) => ({
-  x: (index * 137.508) % 1000,
-  y: (index * 83.71 + 29) % 760,
-  radius: 0.8 + (index % 4) * 0.35,
-}))
+function createBackgroundStars() {
+  let seed = 20261116
+
+  const random = () => {
+    seed = (seed * 16807) % 2147483647
+    return (seed - 1) / 2147483646
+  }
+
+  const stars: {
+    x: number
+    y: number
+    radius: number
+    opacity: number
+    delay: number
+  }[] = []
+
+  let attempts = 0
+
+  while (stars.length < 100 && attempts < 5000) {
+    attempts++
+    const x = random() * 1000
+    const y = random() * 760
+
+    const tooClose = stars.some(star => {
+      const dx = star.x - x
+      const dy = star.y - y
+      return Math.sqrt(dx * dx + dy * dy) < 32
+    })
+
+    if (tooClose) continue
+
+    stars.push({
+      x,
+      y,
+      radius: 0.55 + random() * 1.35,
+      opacity: 0.3 + random() * 0.7,
+      delay: random() * 12,
+    })
+  }
+
+  return stars
+}
+
+const backgroundStars = createBackgroundStars()
+
+type SpaceEvent = {
+  id: number
+  kind: 'meteor' | 'asteroid'
+  x: number
+  y: number
+  angle: number
+  duration: number
+  scale: number
+  path: string
+}
 
 function wrapNote(note: string, limit = 48) {
   const words = note.split(' ')
@@ -198,6 +169,74 @@ function tooltipPosition(item: typeof constellations[number]) {
 export default function ConstellationBackground() {
   const [selected, setSelected] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
+  const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
+
+  useEffect(() => {
+    let nextTimer = 0
+    let endTimer = 0
+    let cancelled = false
+
+    const randomBetween = (min: number, max: number) =>
+      Math.random() * (max - min) + min
+
+    const scheduleNext = () => {
+      nextTimer = window.setTimeout(() => {
+        if (cancelled) return
+
+        const isDark = document.documentElement.dataset.theme !== 'light'
+        const reducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches
+
+        if (!isDark || reducedMotion) {
+          scheduleNext()
+          return
+        }
+
+        const roll = Math.random()
+        const kind: SpaceEvent['kind'] =
+          roll < 0.38 ? 'asteroid' : 'meteor'
+
+        const duration =
+          kind === 'meteor' ? randomBetween(1500, 2100)
+          : randomBetween(2800, 4200)
+
+        const travelX = randomBetween(380, 680)
+        const travelY = randomBetween(-160, 160)
+        const curve = randomBetween(-125, 125)
+        const path =
+          `M 0 0 C ${travelX * 0.24} ${curve} ` +
+          `${travelX * 0.72} ${travelY - curve * 0.42} ` +
+          `${travelX} ${travelY}`
+
+        const event: SpaceEvent = {
+          id: Date.now(),
+          kind,
+          x: randomBetween(-80, 420),
+          y: randomBetween(90, 680),
+          angle: randomBetween(-9, 9),
+          duration,
+          scale: randomBetween(0.75, 1.4),
+          path,
+        }
+
+        setSpaceEvents([event])
+
+        endTimer = window.setTimeout(() => {
+          setSpaceEvents([])
+          scheduleNext()
+        }, duration + 180)
+      }, randomBetween(2800, 5800))
+    }
+
+    scheduleNext()
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(nextTimer)
+      window.clearTimeout(endTimer)
+    }
+  }, [])
 
   return (
     <div className="constellation-layer" aria-label="Constelações animadas">
@@ -218,6 +257,60 @@ export default function ConstellationBackground() {
             />
           ))}
         </g>
+
+        {spaceEvents.map(event => (
+          <g
+            key={event.id}
+            className={`nexo-space-event ${event.kind}`}
+            transform={`translate(${event.x} ${event.y}) rotate(${event.angle}) scale(${event.scale})`}
+            style={{ animationDuration: `${event.duration}ms` }}
+            aria-hidden="true"
+          >
+            {event.kind === 'meteor' && (
+              <g className="nexo-meteor-streak">
+                <path
+                  d="M -118 25 Q -57 13 0 0"
+                  className="nexo-meteor-tail"
+                />
+                <circle cx="0" cy="0" r="3.4" className="nexo-meteor-head" />
+                <animateMotion
+                  dur={`${event.duration}ms`}
+                  path={event.path}
+                  rotate="auto"
+                  fill="freeze"
+                />
+              </g>
+            )}
+
+            {event.kind === 'asteroid' && (
+              <g className="nexo-asteroid-body">
+                <polygon
+                  points="-24,-7 -19,-20 -5,-25 12,-20 25,-7 22,11 10,23 -9,22 -23,10"
+                  className="nexo-asteroid-shape"
+                />
+                <polygon
+                  points="-19,-8 -5,-22 3,-13 -4,2 -20,5"
+                  className="nexo-asteroid-facet light"
+                />
+                <polygon
+                  points="3,-13 12,-18 23,-7 13,2"
+                  className="nexo-asteroid-facet dark"
+                />
+                <polygon
+                  points="-4,2 13,2 10,20 -9,19"
+                  className="nexo-asteroid-facet mid"
+                />
+                <circle cx="-11" cy="-5" r="4.2" className="nexo-asteroid-crater" />
+                <circle cx="10" cy="9" r="5" className="nexo-asteroid-crater" />
+                <circle cx="8" cy="-11" r="2.5" className="nexo-asteroid-crater" />
+                <path d="M-17 12 L-7 8 L1 15 L13 13 M-16 -2 L-8 -10 L-1 -7 L4 -15 M5 4 L13 1 L18 8" className="nexo-asteroid-detail" />
+                <path d="M-2 -21 L2 -14 M16 -3 L11 2 M-20 7 L-13 4" className="nexo-asteroid-highlight" />
+              </g>
+            )}
+
+
+          </g>
+        ))}
 
         {constellations.map((item, index) => {
           const delay = `${index * -12}s`
@@ -249,13 +342,14 @@ export default function ConstellationBackground() {
               }}
             >
               <g className="constellation-lines">
-                {item.lines.map(([from, to], lineIndex) => (
+                {item.lines.map((line, lineIndex) => (
                   <line
-                    key={lineIndex}
-                    x1={item.points[from][0]}
-                    y1={item.points[from][1]}
-                    x2={item.points[to][0]}
-                    y2={item.points[to][1]}
+                    key={`${line.from}-${line.to}-${lineIndex}`}
+                    className={`constellation-line${line.thin ? ' is-secondary' : ''}`}
+                    x1={item.points[line.from][0]}
+                    y1={item.points[line.from][1]}
+                    x2={item.points[line.to][0]}
+                    y2={item.points[line.to][1]}
                     style={{ animationDelay: `calc(${delay} + ${lineIndex * 0.42}s)` }}
                   />
                 ))}

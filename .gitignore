@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .wrangler/
+
+# Arquivos locais com credenciais do Worker
+.dev.vars
+.dev.vars.*
