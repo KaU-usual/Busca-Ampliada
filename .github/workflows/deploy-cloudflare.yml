@@ -1,0 +1,83 @@
+name: Deploy NEXO to Cloudflare
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: O que publicar
+        required: true
+        type: choice
+        default: both
+        options:
+          - both
+          - pages
+          - worker
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nexo-cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build frontend
+        run: npm run build
+      - name: Validate Worker syntax
+        run: node --check worker/index.js
+
+  deploy-pages:
+    needs: validate
+    if: ${{ inputs.target == 'both' || inputs.target == 'pages' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build production site
+        run: npm run build
+      - name: Publish Cloudflare Pages
+        run: npx wrangler pages deploy dist --project-name=nexo-bss --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  deploy-worker:
+    needs: validate
+    if: ${{ inputs.target == 'both' || inputs.target == 'worker' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Publish Cloudflare Worker
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
