@@ -1,0 +1,3875 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #f2f5fc;
+  background: #080e1c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #080e1c;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.site {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 78% 23%, #172a4a 0%, transparent 35%),
+    #080e1c;
+}
+
+.topbar {
+  height: 88px;
+  max-width: 1440px;
+  margin: auto;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff0c;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #f4f6fc;
+  text-decoration: none;
+  font: 700 27px 'Space Grotesk', sans-serif;
+  letter-spacing: -1.5px;
+}
+
+.brand-symbol {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #64c9e8, #6979ef);
+  color: #081326;
+  font-size: 22px;
+}
+
+.brand-dot { color: #70cce8; }
+
+.topbar nav {
+  display: flex;
+  gap: 38px;
+}
+
+.topbar nav a {
+  color: #aab5ca;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .2s;
+}
+
+.topbar nav a:hover { color: white; }
+
+.access-button {
+  padding: 11px 22px;
+  border: 1px solid #35435d;
+  border-radius: 9px;
+  background: #ffffff08;
+  color: #edf2ff;
+}
+
+.hero {
+  max-width: 1440px;
+  min-height: 590px;
+  margin: auto;
+  padding: 80px 9% 65px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 680px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  color: #75cbe7;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.hero h1 {
+  margin: 24px 0 18px;
+  font: 700 clamp(48px, 6vw, 76px)/1.08 'Space Grotesk', sans-serif;
+  letter-spacing: -4px;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, #78d5e9, #8b9aff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-content > p {
+  max-width: 510px;
+  color: #a3afc4;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.search-box {
+  width: min(650px, 100%);
+  height: 66px;
+  margin-top: 34px;
+  padding: 7px 8px 7px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #465777;
+  border-radius: 13px;
+  background: #111c30;
+  box-shadow: 0 15px 55px #0005;
+}
+
+.search-box > span {
+  color: #7dd4ed;
+  font-size: 30px;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+}
+
+.search-box input::placeholder { color: #78869e; }
+
+.search-box button {
+  height: 48px;
+  padding: 0 19px;
+  border: 0;
+  border-radius: 9px;
+  background: linear-gradient(110deg, #67cce7, #8294f7);
+  color: #091426;
+  font-weight: 700;
+}
+
+.search-hint {
+  margin-top: 19px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  color: #8290a8;
+  font-size: 12px;
+}
+
+.search-hint button {
+  padding: 6px 11px;
+  border: 1px solid #293851;
+  border-radius: 20px;
+  background: #ffffff06;
+  color: #b8c4d8;
+  font-size: 11px;
+}
+
+.hero-art {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  right: 8%;
+  top: 95px;
+  display: grid;
+  place-items: center;
+  opacity: .9;
+}
+
+.glow {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: #5279ff;
+  filter: blur(100px);
+  opacity: .4;
+}
+
+.orbit {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border: 1px solid #8299e82b;
+  border-radius: 50%;
+  transform: rotate(-28deg) scaleY(.65);
+}
+
+.orbit-two {
+  width: 400px;
+  height: 400px;
+  transform: rotate(48deg) scaleY(.62);
+  border-color: #70d6e82b;
+}
+
+.core {
+  width: 125px;
+  height: 125px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #a1c9ff70;
+  border-radius: 35px;
+  background: linear-gradient(145deg, #283e70, #121d3c);
+  box-shadow: 0 0 65px #698bff50, inset 0 0 30px #ffffff16;
+  color: #a9e8fa;
+  font: 700 75px 'Space Grotesk', sans-serif;
+  transform: rotate(-8deg);
+}
+
+.floating-item {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #8299e855;
+  border-radius: 15px;
+  background: #192945;
+  box-shadow: 0 10px 35px #0006;
+  font-size: 23px;
+}
+
+.item-one { top: 45px; right: 65px; }
+.item-two { bottom: 60px; left: 45px; color: #a8dfff; }
+.item-three { right: 10px; bottom: 115px; color: #9caeff; }
+
+.discovery {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 55px 35px 85px;
+  border-top: 1px solid #ffffff0d;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin: 12px 0 0;
+  font: 600 31px 'Space Grotesk', sans-serif;
+  letter-spacing: -1px;
+}
+
+.section-note {
+  color: #8795ad;
+  font-size: 12px;
+}
+
+.section-note span { color: #78d5e9; }
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.category-card {
+  min-height: 165px;
+  padding: 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #28364e;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #142137, #101a2c);
+  color: #f1f5ff;
+  text-align: left;
+  transition: .25s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  border-color: #6b9bc4;
+  background: #192a43;
+}
+
+.category-icon {
+  margin-bottom: 17px;
+  font-size: 25px;
+}
+
+.category-card strong { font-size: 16px; }
+
+.category-card small {
+  margin-top: 6px;
+  color: #8998b0;
+  font-size: 12px;
+}
+
+.card-arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #7acfe6;
+}
+
+footer {
+  min-height: 85px;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ffffff10;
+  color: #77869f;
+  font-size: 12px;
+}
+
+.footer-brand {
+  color: #eaf2ff;
+  font: 700 21px 'Space Grotesk', sans-serif;
+}
+
+@media (max-width: 900px) {
+  .hero-art { right: -130px; opacity: .25; }
+  .hero-content { max-width: 650px; }
+}
+
+@media (max-width: 650px) {
+  .topbar { height: 72px; padding: 0 20px; }
+  .topbar nav { display: none; }
+  .hero { min-height: 560px; padding: 75px 22px; }
+  .hero h1 { letter-spacing: -2.5px; }
+  .hero-art { right: -200px; top: 100px; }
+  .search-box { height: auto; flex-wrap: wrap; padding: 12px; }
+  .search-box input { min-height: 40px; }
+  .search-box button { width: 100%; }
+  .discovery { padding: 45px 20px 65px; }
+  .section-heading { align-items: flex-start; gap: 15px; flex-direction: column; }
+  .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .category-card { min-height: 155px; padding: 15px; }
+  footer { padding: 20px; gap: 15px; }
+}
+
+.search-error { color: #ff9b9b !important; margin-top: 12px !important; }
+.loading-message { color: #8bd8ee !important; margin-top: 12px !important; }
+.search-box button:disabled { opacity: .65; cursor: wait; }
+.category-card:focus-visible, .filter-row button:focus-visible, .search-box button:focus-visible { outline: 2px solid #83d9ef; outline-offset: 3px; }
+.results-section { max-width: 1250px; margin: 0 auto; padding: 55px 35px 85px; border-top: 1px solid #ffffff0d; }
+.results-heading h2 { margin: 12px 0 7px; font: 600 31px 'Space Grotesk', sans-serif; letter-spacing: -1px; }
+.results-heading p { color: #91a0b9; font-size: 13px; }
+.interpretation { margin: 22px 0 15px; padding: 13px 16px; border: 1px solid #334765; border-radius: 9px; background: #13223a; color: #aebbd0; font-size: 12px; }
+.interpretation strong { color: #8bd8ee; }
+.source-status { display: flex; flex-wrap: wrap; gap: 9px 17px; margin: 18px 0 22px; color: #8292aa; font-size: 11px; }
+.source-status span { display: inline-flex; align-items: center; gap: 6px; }
+.source-status i { width: 6px; height: 6px; border-radius: 50%; background: #62cba3; }
+.source-status .source-offline i { background: #e58c8c; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filter-row button { padding: 8px 13px; border: 1px solid #34445e; border-radius: 20px; background: #111d31; color: #aebbd0; font-size: 12px; }
+.filter-row button.active { border-color: #72cde7; background: #1c3a50; color: #9ce8fa; }
+.results-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 15px; }
+.result-card { min-width: 0; display: flex; gap: 17px; padding: 16px; border: 1px solid #293951; border-radius: 13px; background: linear-gradient(145deg, #142137, #101a2c); }
+.result-cover { flex: 0 0 105px; width: 105px; height: auto; min-height: 0; align-self: flex-start; overflow: hidden; display: block; border-radius: 7px; background: transparent; color: #83cde3; font-size: 36px; }
+.result-cover img { display: block; width: 100%; height: auto; object-fit: contain; border-radius: 7px; }
+.result-cover > span { display: grid; min-height: 145px; width: 100%; place-items: center; border-radius: 7px; background: #1e304a; }
+.result-body { min-width: 0; flex: 1; }
+.result-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 7px; color: #83cfe6; font-size: 10px; text-transform: uppercase; letter-spacing: .5px; }
+.relevance { padding: 3px 7px; border-radius: 10px; text-transform: none; letter-spacing: 0; }
+.relevance-high { background: #1b453e; color: #91e2c1; }
+.relevance-mid { background: #1d3652; color: #9ac9f3; }
+.relevance-low { background: #3b3153; color: #c6b0f2; }
+.result-body h3 { margin: 9px 0 5px; color: #f0f4fc; font: 600 16px/1.35 'Space Grotesk', sans-serif; }
+.result-author, .result-year, .result-genre { color: #8f9eb5; font-size: 11px; }
+.result-description { margin-top: 9px; color: #a4b0c4; font-size: 11px; line-height: 1.6; }
+.result-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; margin-top: 13px; color: #b1bfd2; font-size: 11px; }
+.result-footer .free-access { color: #8cdbb6; }
+.result-footer a { color: #8bd8ee; text-decoration: none; font-weight: 700; }
+.result-source { display: block; margin-top: 9px; color: #72829b; font-size: 10px; }
+.empty-results { padding: 28px; border: 1px dashed #34445e; border-radius: 10px; color: #9eacc1; text-align: center; }
+@media (max-width: 750px) { .results-section { padding: 45px 20px 65px; } .results-grid { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .result-card { gap: 11px; padding: 11px; } .result-cover { flex-basis: 78px; width: 78px; } .result-cover > span { min-height: 115px; } }
+
+
+/* --- Universo flutuante --- */
+
+:root {
+  background: #10152f;
+  color: #f7f7ff;
+}
+
+body {
+  background: #10152f;
+}
+
+.site {
+  background:
+    radial-gradient(ellipse at 15% 15%, #5145a755, transparent 42%),
+    radial-gradient(ellipse at 85% 35%, #367ac455, transparent 43%),
+    radial-gradient(ellipse at 50% 90%, #a4a9ff22, transparent 45%),
+    linear-gradient(135deg, #111936, #25204b 48%, #172d50);
+}
+
+.hero {
+  width: 100%;
+  max-width: none;
+  min-height: 720px;
+  padding: 75px 7% 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero-content {
+  width: min(850px, 100%);
+  max-width: 850px;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+}
+
+.eyebrow {
+  color: #b9c5ff;
+}
+
+.hero-title {
+  margin: 20px 0 12px;
+  font: 700 clamp(38px, 5vw, 66px)/1.08 'Space Grotesk', sans-serif;
+  letter-spacing: -2.5px;
+  color: #fff;
+  text-shadow: 0 4px 35px #9b9bff35;
+}
+
+.hero-title span {
+  background: linear-gradient(90deg, #a9e8ff, #c6b5ff, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-intro {
+  max-width: 650px;
+  margin: 14px auto 0;
+  color: #d0d8f2;
+  font-size: 15px;
+}
+
+.search-box {
+  margin: 25px auto 0;
+  background: #111a35eF;
+  border-color: #a9b7ff55;
+  box-shadow: 0 15px 55px #05081755, 0 0 30px #8d8aff18;
+}
+
+.search-box button {
+  background: linear-gradient(110deg, #8ce0f4, #b5a2ff);
+}
+
+.search-hint {
+  justify-content: center;
+  color: #c0c9e5;
+}
+
+.hero-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.atom-bouncer {
+  --atom-size: clamp(230px, 27vw, 330px);
+  position: absolute;
+  width: var(--atom-size);
+  height: var(--atom-size);
+  top: 0;
+  left: 0;
+  margin: 0;
+  animation: atom-bounce 27s linear infinite;
+  filter: drop-shadow(0 0 22px #8c91ff33);
+}
+
+@keyframes atom-bounce {
+  0%   { left: 0; top: 48%; }
+  25%  { left: calc(100% - var(--atom-size)); top: 0; }
+  50%  { left: calc(100% - var(--atom-size)); top: calc(100% - var(--atom-size)); }
+  75%  { left: 0; top: 0; }
+  100% { left: 0; top: 48%; }
+}
+
+.atom-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 82%;
+  height: 82%;
+  border: 1px solid #9bdfff99;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.atom-orbit.orbit-two {
+  width: 94%;
+  height: 94%;
+  border-color: #c2aaff99;
+}
+
+.atom-orbit.orbit-three {
+  width: 100%;
+  height: 58%;
+  border: 1px solid #ffffff88;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.atom-bouncer .glow {
+  position: absolute;
+  width: 45%;
+  height: 45%;
+  top: 27.5%;
+  left: 27.5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #8bdcff 35%, #9c79ff 72%, transparent);
+  filter: blur(12px);
+  opacity: .42;
+}
+
+.atom-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 23%;
+  height: 23%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ffffffaa;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #9bdcff 38%, #8272e9 78%);
+  box-shadow: 0 0 25px #9ddfffaa, 0 0 65px #a78bfa77;
+  z-index: 2;
+}
+
+.orbiting-category {
+  --orbit-radius: calc(var(--atom-size) * .39);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 43px;
+  height: 43px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #c5c8ffbb;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #536ba5, #342b70);
+  box-shadow: 0 5px 22px #05081788, 0 0 18px #9eabff55;
+  animation: orbit-spin 18s linear infinite;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.orbiting-category > .category-icon {
+  display: block;
+  font-size: 21px;
+  animation: orbit-counter-spin 18s linear infinite;
+}
+
+.category-name {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+  padding: 5px 10px;
+  border: 1px solid #c9c8ff88;
+  border-radius: 20px;
+  background: #191d43ed;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(5px);
+  animation: category-label-cycle 18s linear infinite;
+}
+
+.orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .39); animation-duration: 18s; }
+.orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .43); animation-duration: 23s; animation-direction: reverse; }
+.orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .40); animation-duration: 20s; }
+.orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .43); animation-duration: 25s; animation-direction: reverse; }
+.orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .39); animation-duration: 21s; }
+.orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .40); animation-duration: 24s; animation-direction: reverse; }
+
+.orbiting-category-2 .category-icon,
+.orbiting-category-4 .category-icon,
+.orbiting-category-6 .category-icon {
+  animation-direction: reverse;
+}
+
+.orbiting-category-2 .category-name { animation-delay: 3s; }
+.orbiting-category-3 .category-name { animation-delay: 6s; }
+.orbiting-category-4 .category-name { animation-delay: 9s; }
+.orbiting-category-5 .category-name { animation-delay: 12s; }
+.orbiting-category-6 .category-name { animation-delay: 15s; }
+
+@keyframes category-label-cycle {
+  0%, 2%, 13%, 100% { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  4%, 10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes orbit-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)); }
+  to { transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)); }
+}
+
+@keyframes orbit-counter-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.orbiting-category:hover {
+  border-color: #fff;
+  background: linear-gradient(145deg, #7189d1, #6551a8);
+  box-shadow: 0 0 25px #c2b5ff99;
+}
+
+.orbiting-category:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.results-section {
+  padding-top: 38px;
+}
+
+@media (max-width: 750px) {
+  .hero {
+    min-height: 680px;
+    padding: 65px 20px 35px;
+  }
+
+  .hero-title {
+    font-size: clamp(35px, 9vw, 48px);
+    letter-spacing: -1.5px;
+  }
+
+  .atom-bouncer {
+    --atom-size: 230px;
+    animation-duration: 23s;
+  }
+
+  .orbiting-category {
+    width: 37px;
+    height: 37px;
+  }
+
+  .orbiting-category > .category-icon { font-size: 18px; }
+  .results-section { padding: 45px 20px 65px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atom-bouncer,
+  .orbiting-category,
+  .orbiting-category > .category-icon,
+  .category-name {
+    animation: none !important;
+  }
+
+  .category-name { display: none; }
+}
+
+
+/* --- Visita sequencial dos ícones ao centro --- */
+
+.orbiting-category {
+  pointer-events: none;
+  cursor: default;
+  animation: category-visit-position 30s linear infinite;
+}
+
+.orbiting-category > .category-icon {
+  animation: category-visit-counter 30s linear infinite;
+}
+
+.category-name {
+  top: calc(100% + 13px);
+  bottom: auto;
+  left: 50%;
+  padding: 7px 13px;
+  border: 1px solid #d7d5ff;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #29265a, #354d80);
+  color: white;
+  font-size: 12px;
+  box-shadow: 0 5px 22px #090b2588;
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  animation: category-visit-label 30s linear infinite;
+}
+
+.orbiting-category-1,
+.orbiting-category-1 .category-icon,
+.orbiting-category-1 .category-name { animation-delay: 0s; }
+
+.orbiting-category-2,
+.orbiting-category-2 .category-icon,
+.orbiting-category-2 .category-name { animation-delay: -5s; }
+
+.orbiting-category-3,
+.orbiting-category-3 .category-icon,
+.orbiting-category-3 .category-name { animation-delay: -10s; }
+
+.orbiting-category-4,
+.orbiting-category-4 .category-icon,
+.orbiting-category-4 .category-name { animation-delay: -15s; }
+
+.orbiting-category-5,
+.orbiting-category-5 .category-icon,
+.orbiting-category-5 .category-name { animation-delay: -20s; }
+
+.orbiting-category-6,
+.orbiting-category-6 .category-icon,
+.orbiting-category-6 .category-name { animation-delay: -25s; }
+
+@keyframes category-visit-position {
+  0%, 8% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius));
+  }
+  12% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(var(--orbit-radius));
+  }
+  16%, 22% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(0);
+  }
+  26% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(var(--orbit-radius));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius));
+  }
+}
+
+@keyframes category-visit-counter {
+  0%, 8% { transform: rotate(0deg); }
+  12%, 26% { transform: rotate(-28deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes category-visit-label {
+  0%, 15%, 23%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  17%, 21% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbiting-category,
+  .orbiting-category > .category-icon,
+  .category-name {
+    animation: none !important;
+  }
+}
+
+/* Correção da inclinação dos nomes */
+@keyframes category-visit-label {
+  0%, 15%, 23%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px) rotate(-28deg);
+  }
+  17%, 21% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotate(-28deg);
+  }
+}
+
+.category-name {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  text-align: center;
+  transform: translate(-50%, 0) rotate(-28deg);
+}
+
+@keyframes category-visit-label {
+  0%, 15%, 23%, 100% {
+    opacity: 0;
+    transform: translate(-50%, 8px) rotate(-28deg);
+  }
+  17%, 21% {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(-28deg);
+  }
+}
+
+.category-name {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: 150px;
+  text-align: center;
+  margin-left: 0;
+  transform: translateX(-50%) rotate(-28deg);
+  transform-origin: center center;
+}
+
+/* Alinhamento real do nome com o centro do emoji */
+.category-name {
+  left: calc(50% - 23px) !important;
+}
+
+/* Ajuste de alinhamento e ritmo da animação */
+.orbiting-category {
+  animation: category-visit-position 36s linear infinite;
+}
+
+.orbiting-category > .category-icon {
+  animation: category-visit-counter 36s linear infinite;
+}
+
+.category-name {
+  left: 50% !important;
+  right: auto !important;
+  width: max-content;
+  max-width: 150px;
+  text-align: center;
+  margin-left: 0;
+  animation: category-visit-label 36s linear infinite;
+}
+
+.orbiting-category-1,
+.orbiting-category-1 .category-icon,
+.orbiting-category-1 .category-name { animation-delay: 0s; }
+
+.orbiting-category-2,
+.orbiting-category-2 .category-icon,
+.orbiting-category-2 .category-name { animation-delay: -6s; }
+
+.orbiting-category-3,
+.orbiting-category-3 .category-icon,
+.orbiting-category-3 .category-name { animation-delay: -12s; }
+
+.orbiting-category-4,
+.orbiting-category-4 .category-icon,
+.orbiting-category-4 .category-name { animation-delay: -18s; }
+
+.orbiting-category-5,
+.orbiting-category-5 .category-icon,
+.orbiting-category-5 .category-name { animation-delay: -24s; }
+
+.orbiting-category-6,
+.orbiting-category-6 .category-icon,
+.orbiting-category-6 .category-name { animation-delay: -30s; }
+
+@keyframes category-visit-position {
+  0%, 12% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius));
+  }
+  16% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(var(--orbit-radius));
+  }
+  22%, 30% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(0);
+  }
+  35% {
+    transform: translate(-50%, -50%) rotate(28deg) translateX(var(--orbit-radius));
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius));
+  }
+}
+
+@keyframes category-visit-counter {
+  0%, 12% { transform: rotate(0deg); }
+  16%, 35% { transform: rotate(-28deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes category-visit-label {
+  0%, 21%, 30%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px) rotate(-28deg);
+  }
+  23%, 28% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotate(-28deg);
+  }
+}
+
+/* Centralização do quadrinho durante a aproximação */
+.category-name {
+  left: 50% !important;
+  transform: rotate(-28deg) translateX(-50%) translateY(8px);
+}
+
+@keyframes category-visit-label {
+  0%, 21%, 30%, 100% {
+    opacity: 0;
+    transform: rotate(-28deg) translateX(-50%) translateY(8px);
+  }
+  23%, 28% {
+    opacity: 1;
+    transform: rotate(-28deg) translateX(-50%) translateY(0);
+  }
+}
+
+/* Compensação da rotação de 28 graus */
+.category-name {
+  left: calc(50% + 23px) !important;
+}
+
+/* Ajuste fino da posição dos nomes */
+.category-name {
+  left: calc(50% + 28px) !important;
+  margin-top: -4px;
+}
+
+.category-name {
+  margin-top: -7px;
+}
+
+.category-name {
+  margin-top: -10px;
+}
+
+.category-name {
+  margin-top: -20px;
+}
+
+.category-name {
+  left: calc(50% + 24px) !important;
+}
+
+
+/* Central de descoberta */
+.discovery-expanded { padding-top: 48px; }
+.discovery-heading { align-items: flex-end; gap: 24px; }
+.discovery-lead { max-width: 610px; margin: 12px 0 0; color: #9baac2; font-size: 14px; line-height: 1.7; }
+.discovery-expanded .category-card { cursor: pointer; font: inherit; }
+.discovery-expanded .category-card:disabled,
+.topic-card:disabled { opacity: .6; cursor: wait; }
+.discovery-subheading { display: flex; justify-content: space-between; align-items: center; margin: 72px 0 25px; }
+.discovery-subheading h2, .research-tips h2 { margin: 10px 0 0; font: 600 28px 'Space Grotesk', sans-serif; letter-spacing: -1px; }
+.discovery-spark { color: #a9a5ff; font-size: 38px; }
+.topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.topic-card { min-height: 175px; padding: 20px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; border: 1px solid #344363; border-radius: 15px; background: radial-gradient(circle at 100% 0%, #34336a66, transparent 55%), linear-gradient(145deg, #192945, #111b30); color: #f2f5ff; cursor: pointer; transition: .25s ease; }
+.topic-card:hover { transform: translateY(-4px); border-color: #8585d9; box-shadow: 0 12px 30px #050b1b66; }
+.topic-icon { font-size: 25px; margin-bottom: 12px; }
+.topic-group { color: #9c9ce7; font-size: 9px; font-weight: 800; letter-spacing: 1.3px; }
+.topic-card strong { margin-top: 6px; font-size: 15px; }
+.topic-action { margin-top: auto; padding-top: 16px; color: #9ccee9; font-size: 11px; }
+.topic-action b { margin-left: 5px; }
+.free-discovery { margin-top: 65px; padding: 32px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 35px; border: 1px solid #344363; border-radius: 20px; background: radial-gradient(circle at 0% 100%, #263c6a88, transparent 55%), linear-gradient(125deg, #172945, #171b39); }
+.free-discovery-copy h2 { margin: 12px 0; font: 600 30px 'Space Grotesk', sans-serif; letter-spacing: -1px; }
+.free-discovery-copy p { max-width: 490px; color: #aab7cc; font-size: 13px; line-height: 1.8; }
+.free-discovery-copy button { margin-top: 13px; padding: 12px 16px; border: 0; border-radius: 9px; background: linear-gradient(100deg, #547fe0, #8564d7); color: white; font-weight: 700; cursor: pointer; }
+.free-discovery-copy button span { margin-left: 12px; }
+.free-source-list { display: flex; flex-direction: column; justify-content: center; }
+.free-source-list > div { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #ffffff12; }
+.free-source-list > div:last-child { border-bottom: 0; }
+.free-source-list > div > span { font-size: 22px; }
+.free-source-list p { flex: 1; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+.free-source-list strong { font-size: 12px; color: #eef2ff; }
+.free-source-list small { color: #929fba; font-size: 10px; }
+.free-source-list > div > b { color: #8bd9ba; font-size: 8px; letter-spacing: .7px; }
+.research-tips { margin-top: 70px; }
+.tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 28px; }
+.tips-grid > div { padding: 20px; border-left: 2px solid #7778ce; background: linear-gradient(90deg, #252c5044, transparent); }
+.tips-grid > div > span { display: block; color: #a5a0ef; font-size: 11px; font-weight: 800; }
+.tips-grid strong { display: block; margin-top: 10px; font-size: 14px; }
+.tips-grid p { margin: 7px 0 0; color: #9ba9c0; font-size: 12px; line-height: 1.7; }
+@media (max-width: 750px) {
+  .topic-grid { grid-template-columns: repeat(2, 1fr); }
+  .free-discovery { grid-template-columns: 1fr; padding: 24px; }
+  .tips-grid { grid-template-columns: 1fr; gap: 12px; }
+  .discovery-subheading { margin-top: 52px; }
+}
+@media (max-width: 450px) {
+  .topic-grid { grid-template-columns: 1fr; }
+  .discovery-heading { align-items: flex-start; }
+  .discovery-heading .section-note { display: none; }
+  .free-discovery-copy h2 { font-size: 25px; }
+}
+
+
+/* Navegação entre páginas de resultados */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 32px auto 12px;
+  padding: 18px;
+  border: 1px solid #344663;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #14243b, #1b2340);
+  max-width: 420px;
+}
+
+.pagination button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #6685b5;
+  border-radius: 12px;
+  background: #253957;
+  color: #fff;
+  font-size: 27px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.pagination button:not(:disabled):hover {
+  background: #5369bd;
+  transform: scale(1.06);
+}
+
+.pagination button:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.pagination-info strong {
+  color: #f2f5ff;
+  font-size: 14px;
+}
+
+.pagination-info span {
+  color: #9eacc5;
+  font-size: 11px;
+}
+
+
+/* ==========================================
+   NEXO — IDENTIDADE DOS DOIS TEMAS
+   ========================================== */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #8179df88;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #292858, #17445a);
+  color: #f4f4ff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px #8179df55;
+}
+
+.site[data-theme="dark"] {
+  background:
+    radial-gradient(ellipse at 15% 15%, #6544bd66, transparent 43%),
+    radial-gradient(ellipse at 85% 35%, #087fae55, transparent 43%),
+    radial-gradient(ellipse at 50% 90%, #a04fe52b, transparent 45%),
+    linear-gradient(135deg, #10152f, #211b49 48%, #102e4a);
+  color: #f7f7ff;
+}
+
+.site[data-theme="dark"] .hero-title span {
+  background: linear-gradient(90deg, #80e8ff, #b18aff, #e5c5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.site[data-theme="dark"] .search-box button {
+  background: linear-gradient(110deg, #53d8ed, #8b79f5, #bd83ef);
+}
+
+.site[data-theme="dark"] .atom-core {
+  background: radial-gradient(circle at 35% 30%, #ffffff, #8beaff 30%, #9364f5 70%, #4335a4);
+  box-shadow: 0 0 30px #70dfffcc, 0 0 75px #a16affaa, 0 0 120px #6553ff66;
+}
+
+.site[data-theme="dark"] .atom-bouncer .glow {
+  background: radial-gradient(circle, #fff, #61e6ff 35%, #a05cff 72%, transparent);
+  opacity: .58;
+}
+
+.site[data-theme="dark"] .atom-orbit { border-color: #8beaffbb; }
+.site[data-theme="dark"] .atom-orbit.orbit-two { border-color: #bd8bffcc; }
+.site[data-theme="dark"] .atom-orbit.orbit-three { border-color: #ffffffaa; }
+
+.site[data-theme="dark"] .orbiting-category {
+  border-color: #b6a4ff;
+  background: linear-gradient(145deg, #267eaa, #6846b5);
+  box-shadow: 0 5px 22px #05081788, 0 0 22px #8c7aff77;
+}
+
+.site[data-theme="dark"] .category-name {
+  border-color: #a7cfff;
+  background: linear-gradient(120deg, #25245b, #174c68);
+}
+
+.site[data-theme="dark"] .theme-toggle {
+  border-color: #8b83e8;
+  background: linear-gradient(120deg, #38316f, #14536a);
+}
+
+/* TEMA CLARO — SOLAR */
+:root[data-theme="light"] {
+  color: #512b22;
+  background: #fff7ed;
+}
+
+:root[data-theme="light"] body {
+  background: #fff7ed;
+}
+
+.site[data-theme="light"] {
+  color: #512b22;
+  background:
+    radial-gradient(ellipse at 12% 12%, #ffd36d99, transparent 38%),
+    radial-gradient(ellipse at 88% 25%, #ff987c77, transparent 40%),
+    radial-gradient(ellipse at 50% 85%, #ffb52d55, transparent 48%),
+    linear-gradient(135deg, #fffaf0, #ffe4c7 48%, #fff0dc);
+}
+
+.site[data-theme="light"] .topbar {
+  border-color: #e9a36b66;
+}
+
+.site[data-theme="light"] .brand {
+  color: #75351e;
+}
+
+.site[data-theme="light"] .brand-symbol {
+  background: linear-gradient(135deg, #ffb52e, #f06427, #df3f35);
+  color: white;
+  box-shadow: 0 4px 15px #ec782d44;
+}
+
+.site[data-theme="light"] .brand-dot {
+  color: #e65a26;
+}
+
+.site[data-theme="light"] .topbar nav a {
+  color: #92533c;
+}
+
+.site[data-theme="light"] .topbar nav a:hover {
+  color: #e34c25;
+}
+
+.site[data-theme="light"] .access-button {
+  border-color: #efad70;
+  background: #fff7edcc;
+  color: #a74624;
+}
+
+.site[data-theme="light"] .eyebrow {
+  color: #d65a25;
+}
+
+.site[data-theme="light"] .hero-title {
+  color: #71331f;
+  text-shadow: 0 4px 25px #f6a44b33;
+}
+
+.site[data-theme="light"] .hero-title span {
+  background: linear-gradient(90deg, #ed5425, #f5a623, #d83235);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.site[data-theme="light"] .hero-intro,
+.site[data-theme="light"] .hero-content > p {
+  color: #87543d;
+}
+
+.site[data-theme="light"] .search-box {
+  border-color: #edaa72;
+  background: #fffdf8;
+  box-shadow: 0 15px 45px #b65b2720;
+}
+
+.site[data-theme="light"] .search-box > span {
+  color: #e76529;
+}
+
+.site[data-theme="light"] .search-box input {
+  color: #572d23;
+}
+
+.site[data-theme="light"] .search-box input::placeholder {
+  color: #b28b75;
+}
+
+.site[data-theme="light"] .search-box button {
+  background: linear-gradient(110deg, #ffb52e, #f47727, #e84b35);
+  color: white;
+}
+
+.site[data-theme="light"] .search-hint {
+  color: #996347;
+}
+
+.site[data-theme="light"] .search-hint button {
+  border-color: #efc18f;
+  background: #fff9ef;
+  color: #9a4d2d;
+}
+
+.site[data-theme="light"] .glow {
+  background: #ff8d24;
+  opacity: .65;
+}
+
+.site[data-theme="light"] .atom-bouncer {
+  filter: drop-shadow(0 0 25px #f18b3155);
+}
+
+.site[data-theme="light"] .atom-core {
+  border: 2px solid #fff5c5;
+  background: radial-gradient(circle at 35% 30%, #fffde0 0%, #ffe65a 27%, #ff9d20 62%, #ef542c 100%);
+  box-shadow: 0 0 25px #ffc52dcc, 0 0 65px #ff8d38aa, 0 0 110px #ff633b66;
+}
+
+.site[data-theme="light"] .atom-bouncer .glow {
+  background: radial-gradient(circle, #fffde5, #ffdb50 38%, #ff842e 72%, transparent);
+  opacity: .8;
+  filter: blur(16px);
+}
+
+.site[data-theme="light"] .atom-orbit {
+  border-color: #e77a3bbb;
+}
+
+.site[data-theme="light"] .atom-orbit.orbit-two {
+  border-color: #e4a52dcc;
+}
+
+.site[data-theme="light"] .atom-orbit.orbit-three {
+  border-color: #d94d3caa;
+}
+
+.site[data-theme="light"] .orbiting-category {
+  border-color: #fff0bd;
+  background: linear-gradient(145deg, #ffbd39, #ed6330, #d94742);
+  box-shadow: 0 5px 22px #a9432533, 0 0 18px #ffb53b77;
+}
+
+.site[data-theme="light"] .orbiting-category:hover {
+  background: linear-gradient(145deg, #ffe16b, #ff8738);
+  box-shadow: 0 0 25px #ff9d42aa;
+}
+
+.site[data-theme="light"] .category-name {
+  border-color: #ed9b57;
+  background: linear-gradient(120deg, #fff3d9, #ffdfb0);
+  color: #81391f;
+  box-shadow: 0 5px 22px #a34e2433;
+}
+
+.site[data-theme="light"] .discovery,
+.site[data-theme="light"] .results-section {
+  border-color: #e7a36b66;
+}
+
+.site[data-theme="light"] .section-note,
+.site[data-theme="light"] .discovery-lead {
+  color: #98634a;
+}
+
+.site[data-theme="light"] .category-card,
+.site[data-theme="light"] .result-card {
+  border-color: #edc094;
+  background: linear-gradient(145deg, #fffdf8, #ffebd8);
+  color: #653621;
+  box-shadow: 0 8px 25px #a9502510;
+}
+
+.site[data-theme="light"] .category-card:hover,
+.site[data-theme="light"] .topic-card:hover {
+  border-color: #e87838;
+  box-shadow: 0 12px 30px #d76c3022;
+}
+
+.site[data-theme="light"] .category-card small {
+  color: #a16e53;
+}
+
+.site[data-theme="light"] .card-arrow,
+.site[data-theme="light"] .discovery-spark {
+  color: #e45d2a;
+}
+
+.site[data-theme="light"] .topic-card {
+  border-color: #edbd91;
+  background:
+    radial-gradient(circle at 100% 0%, #ffc45d88, transparent 55%),
+    linear-gradient(145deg, #fffaf0, #ffe5d2);
+  color: #693a29;
+}
+
+.site[data-theme="light"] .topic-group {
+  color: #d35c2c;
+}
+
+.site[data-theme="light"] .topic-action {
+  color: #c14c2c;
+}
+
+.site[data-theme="light"] .free-discovery {
+  border-color: #efa96f;
+  background:
+    radial-gradient(circle at 0% 100%, #ffd46b99, transparent 55%),
+    linear-gradient(125deg, #fff5df, #ffe0ca 60%, #ffebc6);
+}
+
+.site[data-theme="light"] .free-discovery-copy p,
+.site[data-theme="light"] .free-source-list small,
+.site[data-theme="light"] .tips-grid p {
+  color: #936149;
+}
+
+.site[data-theme="light"] .free-discovery-copy button {
+  background: linear-gradient(100deg, #ffb52e, #f47727, #e84b35);
+  color: white;
+}
+
+.site[data-theme="light"] .free-source-list strong {
+  color: #713b27;
+}
+
+.site[data-theme="light"] .free-source-list > div {
+  border-color: #e8b88e;
+}
+
+.site[data-theme="light"] .free-source-list > div > b {
+  color: #36845a;
+}
+
+.site[data-theme="light"] .tips-grid > div {
+  border-color: #e76d37;
+  background: linear-gradient(90deg, #ffcf8b77, transparent);
+}
+
+.site[data-theme="light"] .tips-grid > div > span {
+  color: #d65a2c;
+}
+
+.site[data-theme="light"] .results-heading h2,
+.site[data-theme="light"] .discovery h2,
+.site[data-theme="light"] .research-tips h2 {
+  color: #71351f;
+}
+
+.site[data-theme="light"] .results-heading p,
+.site[data-theme="light"] .result-author,
+.site[data-theme="light"] .result-year,
+.site[data-theme="light"] .result-genre {
+  color: #98664d;
+}
+
+.site[data-theme="light"] .interpretation {
+  border-color: #efbd8d;
+  background: #fff2df;
+  color: #86523a;
+}
+
+.site[data-theme="light"] .interpretation strong {
+  color: #d65a2c;
+}
+
+.site[data-theme="light"] .source-status {
+  color: #936b53;
+}
+
+.site[data-theme="light"] .filter-row button {
+  border-color: #e9bd96;
+  background: #fff8ee;
+  color: #90543a;
+}
+
+.site[data-theme="light"] .filter-row button.active {
+  border-color: #e66c32;
+  background: linear-gradient(110deg, #ffdda0, #ffd0ad);
+  color: #a43f20;
+}
+
+.site[data-theme="light"] .result-cover {
+  background: linear-gradient(145deg, #ffe2b0, #ffd0bb);
+  color: #d85c2d;
+}
+
+.site[data-theme="light"] .result-meta {
+  color: #c45a31;
+}
+
+.site[data-theme="light"] .result-body h3 {
+  color: #683722;
+}
+
+.site[data-theme="light"] .result-description {
+  color: #91664f;
+}
+
+.site[data-theme="light"] .result-footer {
+  color: #89583f;
+}
+
+.site[data-theme="light"] .result-footer .free-access {
+  color: #32845b;
+}
+
+.site[data-theme="light"] .result-footer a {
+  color: #d4512b;
+}
+
+.site[data-theme="light"] .result-source {
+  color: #a17b65;
+}
+
+.site[data-theme="light"] .relevance-high {
+  background: #d9f2df;
+  color: #28714b;
+}
+
+.site[data-theme="light"] .relevance-mid {
+  background: #dceeff;
+  color: #285d91;
+}
+
+.site[data-theme="light"] .relevance-low {
+  background: #eee1ff;
+  color: #7046a1;
+}
+
+.site[data-theme="light"] .empty-results {
+  border-color: #e6b58d;
+  color: #94634a;
+}
+
+.site[data-theme="light"] .pagination {
+  border-color: #edbd91;
+  background: linear-gradient(120deg, #fff2dd, #ffe2cf);
+}
+
+.site[data-theme="light"] .pagination button {
+  border-color: #e9a36b;
+  background: linear-gradient(120deg, #ffbd43, #ed7136);
+  color: white;
+}
+
+.site[data-theme="light"] .pagination-info strong {
+  color: #713b27;
+}
+
+.site[data-theme="light"] .pagination-info span {
+  color: #98664d;
+}
+
+.site[data-theme="light"] footer {
+  border-color: #e8ae7b;
+  color: #98634a;
+}
+
+.site[data-theme="light"] .footer-brand {
+  color: #b94b28;
+}
+
+.site[data-theme="light"] .theme-toggle {
+  border-color: #e78a43;
+  background: linear-gradient(120deg, #ffca50, #f47730, #df4937);
+  color: white;
+}
+
+.site[data-theme="light"] .search-error {
+  color: #c32f35 !important;
+}
+
+.site[data-theme="light"] .loading-message {
+  color: #b85a27 !important;
+}
+
+.site[data-theme="light"] .category-card:focus-visible,
+.site[data-theme="light"] .filter-row button:focus-visible,
+.site[data-theme="light"] .search-box button:focus-visible,
+.site[data-theme="light"] .theme-toggle:focus-visible {
+  outline: 2px solid #e45c2d;
+  outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+  .theme-toggle {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .theme-toggle > span:last-child {
+    display: none;
+  }
+
+  .topbar {
+    gap: 10px;
+  }
+}
+
+/* Plataformas de filmes e séries */
+.result-providers {
+  margin-top: 12px;
+  min-width: 0;
+}
+.result-providers-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #aebbd0;
+  font-size: 10px;
+  font-weight: 700;
+}
+.result-provider-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.result-provider {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
+  border: 1px solid #34445e;
+  border-radius: 8px;
+  background: #17243a;
+  color: #dce7f7;
+  font-size: 10px;
+}
+.result-provider img {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.result-provider small {
+  color: #91a5c0;
+  font-size: 9px;
+}
+.result-providers-source {
+  display: inline-block;
+  margin-top: 7px;
+  color: #8bd8ee;
+  font-size: 10px;
+  text-decoration: none;
+}
+.site[data-theme="light"] .result-providers-label {
+  color: #89583f;
+}
+.site[data-theme="light"] .result-provider {
+  border-color: #ead5c4;
+  background: #fff8f0;
+  color: #68442f;
+}
+.site[data-theme="light"] .result-provider small {
+  color: #9a765f;
+}
+.site[data-theme="light"] .result-providers-source {
+  color: #d4512b;
+}
+
+
+/* Botão para limpar a pesquisa */
+.search-box .search-clear {
+  flex: 0 0 auto;
+  width: auto;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid #52617d;
+  border-radius: 9px;
+  background: #ffffff08;
+  color: #b9c8df;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-box .search-clear:hover {
+  border-color: #80d7ed;
+  color: #80d7ed;
+}
+
+.site[data-theme="light"] .search-box .search-clear {
+  border-color: #efb68d;
+  background: #fff7ed;
+  color: #a34d2b;
+}
+
+.site[data-theme="light"] .search-box .search-clear:hover {
+  border-color: #e65a26;
+  color: #e65a26;
+}
+
+
+/* Idioma da obra e acesso direto a PDF */
+.result-language {
+  display: inline-block;
+  margin: 5px 6px 0 0;
+  padding: 4px 8px;
+  border: 1px solid #657da0;
+  border-radius: 20px;
+  color: #b9cce8;
+  font-size: 11px;
+}
+
+.result-pdf-link {
+  color: #72d6b0 !important;
+  font-weight: 700;
+}
+
+.site[data-theme="light"] .result-language {
+  color: #38516f;
+  border-color: #bdcce0;
+}
+
+.site[data-theme="light"] .result-pdf-link {
+  color: #087c55 !important;
+}
+
+
+/* --- Constelações sequenciais do NEXO --- */
+.constellation-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: .68;
+}
+
+.constellation-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.constellation-group {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+  cursor: pointer;
+  outline: none;
+  animation: constellation-cycle 72s linear infinite;
+}
+
+.constellation-group.is-selected,
+.constellation-group:focus-visible {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 9px var(--constellation-glow));
+  pointer-events: auto;
+}
+
+.constellation-lines {
+  stroke: var(--constellation-line);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: constellation-draw 72s linear infinite;
+}
+
+.constellation-stars {
+  fill: var(--constellation-star);
+  animation: constellation-appear 72s linear infinite;
+}
+
+.constellation-star {
+  stroke: var(--constellation-halo);
+  stroke-width: 5;
+  paint-order: stroke fill;
+  vector-effect: non-scaling-stroke;
+}
+
+.constellation-tooltip {
+  pointer-events: none;
+  filter: drop-shadow(0 3px 12px var(--constellation-glow));
+}
+
+.constellation-tooltip rect {
+  fill: var(--constellation-label-bg);
+  stroke: var(--constellation-line);
+  stroke-width: 1;
+}
+
+.constellation-tooltip text {
+  font-family: 'DM Sans', sans-serif;
+  fill: var(--constellation-label-text);
+}
+
+.constellation-tooltip .tooltip-name {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.constellation-tooltip .tooltip-note {
+  font-size: 7px;
+}
+
+@keyframes constellation-cycle {
+  0%, 1.5%, 15%, 100% { opacity: 0; visibility: hidden; }
+  2.5%, 13.5% { opacity: .78; visibility: visible; }
+}
+
+@keyframes constellation-draw {
+  0%, 1.5% { stroke-dashoffset: 280; }
+  5% { stroke-dashoffset: 0; }
+  13.5% { stroke-dashoffset: 0; }
+  15% , 100% { stroke-dashoffset: 280; }
+}
+
+@keyframes constellation-appear {
+  0%, 2% { opacity: 0; }
+  4% , 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+.site {
+  position: relative;
+  isolation: isolate;
+}
+
+.site > :not(.constellation-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.site[data-theme="dark"] {
+  --constellation-star: #e5faff;
+  --constellation-halo: #73dfff;
+  --constellation-line: #83dfff99;
+  --constellation-glow: #6edfff99;
+  --constellation-label-bg: #101c39ed;
+  --constellation-label-text: #f0faff;
+}
+
+.site[data-theme="light"] {
+  --constellation-star: #173b69;
+  --constellation-halo: #d9a94d;
+  --constellation-line: #315b8c99;
+  --constellation-glow: #d9a94d88;
+  --constellation-label-bg: #fff8e9f2;
+  --constellation-label-text: #19385d;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer { opacity: .48; }
+  .constellation-tooltip rect { width: 205px; }
+  .constellation-tooltip .tooltip-note { font-size: 6.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .constellation-group,
+  .constellation-lines,
+  .constellation-stars {
+    animation: none !important;
+  }
+
+  .constellation-group {
+    opacity: .35;
+  }
+
+  .constellation-lines {
+    stroke-dashoffset: 0;
+  }
+
+  .constellation-stars {
+    opacity: 1;
+  }
+}
+
+
+/* --- Céu mais vivo e formação progressiva das constelações --- */
+.constellation-layer {
+  opacity: .88;
+}
+
+.background-stars {
+  pointer-events: none;
+  fill: var(--ambient-star);
+}
+
+.background-stars circle {
+  opacity: .25;
+  filter: drop-shadow(0 0 4px var(--ambient-glow));
+  animation: ambient-twinkle 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-twinkle {
+  from { opacity: .18; }
+  to { opacity: .95; }
+}
+
+.constellation-lines {
+  animation: none !important;
+}
+
+.constellation-lines line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke-width: 1.9;
+  animation: constellation-line-cycle 72s linear infinite;
+}
+
+@keyframes constellation-line-cycle {
+  0%, 1.5% { stroke-dashoffset: 100; opacity: 0; }
+  2.5% { opacity: 1; }
+  6.5%, 13.5% { stroke-dashoffset: 0; opacity: 1; }
+  15%, 100% { stroke-dashoffset: 100; opacity: 0; }
+}
+
+.constellation-stars {
+  animation: none !important;
+}
+
+.constellation-star {
+  opacity: 0;
+  stroke-width: 7;
+  filter: drop-shadow(0 0 5px var(--constellation-glow));
+  animation: constellation-star-cycle 72s linear infinite;
+}
+
+@keyframes constellation-star-cycle {
+  0%, 1.5% { opacity: 0; }
+  3%, 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+.site[data-theme="dark"] {
+  --ambient-star: #e8faff;
+  --ambient-glow: #73dfff;
+  --constellation-star: #f3fdff;
+  --constellation-halo: #72dfff;
+  --constellation-line: #75dfff;
+  --constellation-glow: #55cfff;
+}
+
+.site[data-theme="light"] {
+  --ambient-star: #bd8127;
+  --ambient-glow: #e8ad43;
+  --constellation-star: #173b69;
+  --constellation-halo: #e5a936;
+  --constellation-line: #28578b;
+  --constellation-glow: #d89b32;
+}
+
+.site[data-theme="light"] .constellation-layer {
+  opacity: .82;
+}
+
+.site[data-theme="light"] .constellation-star {
+  stroke-width: 8;
+}
+
+.site[data-theme="light"] .background-stars circle {
+  opacity: .48;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer { opacity: .72; }
+  .site[data-theme="light"] .constellation-layer { opacity: .68; }
+}
+
+
+/* --- Interação das constelações e identidade do tema claro --- */
+.constellation-layer {
+  z-index: 2;
+}
+
+.constellation-layer svg {
+  pointer-events: none;
+}
+
+.constellation-group {
+  pointer-events: visiblePainted;
+}
+
+.constellation-group.is-selected,
+.constellation-group:focus-visible {
+  pointer-events: visiblePainted;
+  opacity: 1 !important;
+}
+
+.constellation-tooltip {
+  opacity: 1;
+}
+
+/* Tema claro: observatório solar, sem constelações em formação */
+.site[data-theme="light"] .constellation-group {
+  display: none;
+}
+
+.site[data-theme="light"] .constellation-layer {
+  opacity: 1;
+  background:
+    radial-gradient(ellipse at 82% 17%, #fff5c6a8 0%, #ffe6a333 22%, transparent 43%),
+    radial-gradient(ellipse at 15% 78%, #ffd88b35 0%, transparent 42%);
+}
+
+.site[data-theme="light"] .constellation-layer::before,
+.site[data-theme="light"] .constellation-layer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 78vw;
+  height: 29vw;
+  border: 1px solid #c18a3b35;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  pointer-events: none;
+}
+
+.site[data-theme="light"] .constellation-layer::after {
+  width: 58vw;
+  height: 42vw;
+  transform: translate(-50%, -50%) rotate(28deg);
+  border-color: #52749a30;
+}
+
+.site[data-theme="light"] .background-stars circle {
+  fill: #c28a35;
+  opacity: .55;
+  filter: drop-shadow(0 0 4px #e7b75b);
+}
+
+.site[data-theme="light"] .constellation-layer svg {
+  opacity: .85;
+}
+
+@media (max-width: 650px) {
+  .site[data-theme="light"] .constellation-layer::before {
+    width: 125vw;
+    height: 55vw;
+  }
+
+  .site[data-theme="light"] .constellation-layer::after {
+    width: 105vw;
+    height: 70vw;
+  }
+}
+
+
+/* --- Ajuste de enquadramento e formação completa --- */
+.constellation-layer {
+  overflow: hidden;
+}
+
+.constellation-layer svg {
+  overflow: visible;
+}
+
+.constellation-group {
+  transform-box: view-box;
+}
+
+.constellation-lines line {
+  stroke-dasharray: 300 !important;
+  stroke-dashoffset: 300;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+@keyframes constellation-line-cycle {
+  0%, 1.5% { stroke-dashoffset: 300; opacity: 0; }
+  2.5% { opacity: 1; }
+  6.5%, 13.5% { stroke-dashoffset: 0; opacity: 1; }
+  15%, 100% { stroke-dashoffset: 300; opacity: 0; }
+}
+
+.constellation-star {
+  filter: drop-shadow(0 0 6px var(--constellation-glow));
+}
+
+.constellation-tooltip {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .constellation-tooltip rect {
+    width: 205px;
+  }
+}
+
+/* Ajustes finais: quadros completos e legíveis */
+.constellation-layer {
+  overflow: hidden;
+}
+
+.constellation-layer svg {
+  overflow: hidden;
+}
+
+.constellation-tooltip {
+  opacity: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 12px var(--constellation-glow));
+}
+
+.constellation-tooltip rect {
+  width: 270px;
+  height: 64px;
+  fill: var(--constellation-label-bg);
+  stroke: var(--constellation-line);
+  stroke-width: 1.2;
+}
+
+.constellation-tooltip .tooltip-name {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.constellation-tooltip .tooltip-note {
+  font-size: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 650px) {
+  .constellation-tooltip rect {
+    width: 250px;
+    height: 64px;
+  }
+
+  .constellation-tooltip .tooltip-name {
+    font-size: 12px;
+  }
+
+  .constellation-tooltip .tooltip-note {
+    font-size: 7.5px;
+  }
+}
+
+
+/* NEXO: efeitos espaciais aprimorados v2 */
+
+.background-stars circle {
+  animation: nexo-star-twinkle-v2 3.5s ease-in-out infinite alternate;
+}
+
+.nexo-space-event {
+  pointer-events: none;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: translate, opacity;
+}
+
+.nexo-space-event.meteor {
+  animation: nexo-meteor-travel-v2 linear forwards;
+}
+
+.nexo-meteor-streak {
+  animation: nexo-streak-glow 1.4s ease-in-out infinite alternate;
+}
+
+.nexo-meteor-tail {
+  stroke: url(#nexoMeteorGradient);
+  stroke: rgba(180, 218, 255, 0.8);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px #83c8ff) drop-shadow(0 0 12px #83c8ff);
+}
+
+.nexo-meteor-head {
+  fill: #fff;
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px #8dccff);
+}
+
+.nexo-space-event.asteroid {
+  animation: nexo-asteroid-travel-v2 ease-in-out forwards;
+}
+
+.nexo-asteroid-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nexo-asteroid-spin-v2 7s linear infinite;
+  filter: drop-shadow(0 0 7px rgba(175, 190, 220, 0.35));
+}
+
+.nexo-asteroid-shape {
+  fill: #747987;
+  stroke: #c1c7d2;
+  stroke-width: 1.2;
+}
+
+.nexo-asteroid-facet.light {
+  fill: #aeb4c0;
+  opacity: 0.8;
+}
+
+.nexo-asteroid-facet.dark {
+  fill: #414653;
+  opacity: 0.9;
+}
+
+.nexo-asteroid-facet.mid {
+  fill: #626978;
+}
+
+.nexo-asteroid-crater {
+  fill: #414653;
+  stroke: #a4aab7;
+  stroke-width: 0.8;
+}
+
+.nexo-asteroid-detail {
+  fill: none;
+  stroke: #3d4350;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.nexo-space-event.collision {
+  animation: nexo-collision-life 3s ease-out forwards;
+}
+
+.nexo-collision-rock {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.nexo-collision-rock.rock-left {
+  animation: nexo-rock-left 650ms ease-in forwards;
+}
+
+.nexo-collision-rock.rock-right {
+  animation: nexo-rock-right 650ms ease-in forwards;
+}
+
+.nexo-collision-burst {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nexo-burst-v2 2.3s ease-out 550ms forwards;
+}
+
+.nexo-explosion-core {
+  fill: #fff1bc;
+  filter: drop-shadow(0 0 7px #ffbd62) drop-shadow(0 0 20px #ff783d);
+}
+
+.nexo-debris {
+  fill: #ffca80;
+  filter: drop-shadow(0 0 4px #ff9c53);
+  animation: nexo-debris-fade 1.8s ease-out forwards;
+}
+
+.nexo-dust {
+  fill: #aeb9cc;
+  opacity: 0;
+  animation: nexo-dust-fade 2s ease-out 450ms forwards;
+}
+
+@keyframes nexo-star-twinkle-v2 {
+  from { opacity: 0.3; }
+  to { opacity: 0.95; }
+}
+
+@keyframes nexo-meteor-travel-v2 {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 1; }
+  72% { opacity: 0.95; }
+  100% { opacity: 0; translate: 1200px 230px; }
+}
+
+@keyframes nexo-streak-glow {
+  from { opacity: 0.65; }
+  to { opacity: 1; }
+}
+
+@keyframes nexo-asteroid-travel-v2 {
+  0% { opacity: 0; translate: 0 0; }
+  12% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { opacity: 0; translate: 1200px -100px; }
+}
+
+@keyframes nexo-asteroid-spin-v2 {
+  from { rotate: -12deg; }
+  to { rotate: 348deg; }
+}
+
+@keyframes nexo-collision-life {
+  0%, 15% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes nexo-rock-left {
+  from { translate: -48px 0; }
+  to { translate: 0 0; }
+}
+
+@keyframes nexo-rock-right {
+  from { translate: 48px 0; }
+  to { translate: 0 0; }
+}
+
+@keyframes nexo-burst-v2 {
+  0% { opacity: 0; scale: 0.2; }
+  15% { opacity: 1; scale: 0.8; }
+  45% { opacity: 0.9; scale: 1.5; }
+  100% { opacity: 0; scale: 2.8; }
+}
+
+@keyframes nexo-debris-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes nexo-dust-fade {
+  0% { opacity: 0; }
+  25% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+html[data-theme="light"] .nexo-space-event {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-stars circle,
+  .nexo-space-event,
+  .nexo-asteroid-body,
+  .nexo-collision-rock,
+  .nexo-collision-burst {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO: efeitos espaciais aprimorados v3 */
+
+.constellation-lines line.is-secondary {
+  opacity: .52;
+  stroke-width: 1.15;
+}
+
+.nexo-space-event.meteor {
+  animation: nexo-event-fade-v3 linear forwards;
+}
+
+.nexo-meteor-streak {
+  animation: none;
+}
+
+.nexo-meteor-tail {
+  fill: none;
+  stroke: rgba(180, 218, 255, .88);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  filter: drop-shadow(0 0 5px #83c8ff) drop-shadow(0 0 13px #83c8ff);
+  animation: nexo-meteor-draw-v3 2.2s ease-out forwards;
+}
+
+.nexo-meteor-head {
+  fill: #fff;
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 13px #8dccff);
+}
+
+.nexo-asteroid-shape {
+  fill: #687181;
+  stroke: #c4ccd8;
+  stroke-width: 1.15;
+  stroke-linejoin: bevel;
+}
+
+.nexo-asteroid-facet.light {
+  fill: #c0c7d2;
+  opacity: .82;
+}
+
+.nexo-asteroid-facet.dark {
+  fill: #343b49;
+  opacity: .96;
+}
+
+.nexo-asteroid-facet.mid {
+  fill: #747d8c;
+}
+
+.nexo-asteroid-crater {
+  fill: #343b49;
+  stroke: #aab4c3;
+  stroke-width: .85;
+}
+
+.nexo-asteroid-detail {
+  fill: none;
+  stroke: #343b49;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nexo-asteroid-highlight {
+  fill: none;
+  stroke: rgba(224, 231, 242, .55);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.nexo-debris,
+.nexo-dust {
+  animation: none !important;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.nexo-debris {
+  fill: #ffca80;
+  filter: drop-shadow(0 0 4px #ff9c53);
+}
+
+.nexo-dust {
+  fill: #c2cde0;
+  opacity: 0;
+  filter: drop-shadow(0 0 3px #9eb9df);
+}
+
+@keyframes nexo-event-fade-v3 {
+  0% { opacity: 0; }
+  9% { opacity: 1; }
+  76% { opacity: .95; }
+  100% { opacity: 0; }
+}
+
+@keyframes nexo-meteor-draw-v3 {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  12% { opacity: 1; }
+  78% {
+    stroke-dashoffset: 0;
+    opacity: .9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+html[data-theme="light"] .nexo-space-event {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nexo-space-event,
+  .nexo-meteor-tail,
+  .nexo-asteroid-body,
+  .nexo-collision-rock,
+  .nexo-collision-burst,
+  .nexo-debris,
+  .nexo-dust {
+    animation: none !important;
+  }
+}
+
+
+
+/* NEXO: composição celeste refinada */
+
+/* Composição fixa: o movimento fica nos astros, não no conjunto inteiro. */
+.atom-bouncer {
+  --atom-size: clamp(360px, 43vw, 530px);
+  position: absolute;
+  top: 50% !important;
+  left: 72% !important;
+  right: auto !important;
+  width: var(--atom-size);
+  height: var(--atom-size);
+  margin: 0 !important;
+  transform: translate(-50%, -50%);
+  animation: none !important;
+  filter: none;
+  isolation: isolate;
+}
+
+.atom-orbit {
+  width: 69%;
+  height: 69%;
+  border: 1px solid #a9c8e844;
+  box-shadow: 0 0 16px #8ab8e51c;
+}
+
+.atom-orbit.orbit-two {
+  width: 86%;
+  height: 86%;
+  border-color: #b5a5ed44;
+}
+
+.atom-orbit.orbit-three {
+  width: 100%;
+  height: 58%;
+  border-color: #ffffff38;
+}
+
+/* O brilho atmosférico muda conforme o tema. */
+.atom-bouncer .glow {
+  position: absolute;
+  width: 76%;
+  height: 76%;
+  top: 12%;
+  left: 12%;
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* SOL — fotosfera, granulação, manchas e coroa. */
+.site[data-theme="light"] .atom-bouncer .glow {
+  background: radial-gradient(
+    circle,
+    #fff9d5 0%,
+    #ffd66c 28%,
+    #ff9d32 49%,
+    #f47728 64%,
+    transparent 75%
+  );
+  opacity: .9;
+  filter: blur(34px);
+  animation: nexo-sun-atmosphere 7s ease-in-out infinite;
+}
+
+.site[data-theme="light"] .atom-core {
+  width: 43%;
+  height: 43%;
+  overflow: visible;
+  border: 1px solid #fff4b7;
+  border-radius: 50%;
+  position: absolute;
+  background:
+    radial-gradient(ellipse at 34% 26%, #fffde0 0%, #fff4a7 13%, transparent 34%),
+    radial-gradient(ellipse at 63% 68%, #e87920 0%, transparent 32%),
+    radial-gradient(circle at 42% 39%, #fff4a1 0%, #ffd34f 32%, #ff9b24 65%, #e65b17 100%);
+  box-shadow:
+    inset -13px -15px 25px #a83d1688,
+    inset 7px 7px 18px #fff9c5cc,
+    0 0 20px #fff1a8,
+    0 0 48px #ffb52e,
+    0 0 95px #ff8b26bb,
+    0 0 160px #ff8b265e;
+  z-index: 4;
+  animation: nexo-sun-pulse 5s ease-in-out infinite;
+}
+
+/* Raios longos e irregulares da coroa solar. */
+.site[data-theme="light"] .atom-core::before {
+  content: "";
+  position: absolute;
+  inset: -34%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 4deg,
+    transparent 0deg 5deg,
+    #ffb52caa 6deg 7deg,
+    transparent 8deg 16deg,
+    #fff0a6cc 17deg 18deg,
+    transparent 19deg 31deg,
+    #ff9b27aa 32deg 34deg,
+    transparent 35deg 48deg,
+    #ffe18a99 49deg 50deg,
+    transparent 51deg 66deg,
+    #ff9b27aa 67deg 69deg,
+    transparent 70deg 85deg,
+    #fff0a6bb 86deg 87deg,
+    transparent 88deg 104deg,
+    #ffad2eaa 105deg 107deg,
+    transparent 108deg 126deg,
+    #ffe18a99 127deg 128deg,
+    transparent 129deg 145deg,
+    #ff9b27aa 146deg 148deg,
+    transparent 149deg 166deg,
+    #fff0a6bb 167deg 168deg,
+    transparent 169deg 185deg,
+    #ffad2eaa 186deg 188deg,
+    transparent 189deg 205deg,
+    #ffe18a99 206deg 207deg,
+    transparent 208deg 226deg,
+    #ff9b27aa 227deg 229deg,
+    transparent 230deg 247deg,
+    #fff0a6bb 248deg 249deg,
+    transparent 250deg 267deg,
+    #ffad2eaa 268deg 270deg,
+    transparent 271deg 288deg,
+    #ffe18a99 289deg 290deg,
+    transparent 291deg 307deg,
+    #ff9b27aa 308deg 310deg,
+    transparent 311deg 328deg,
+    #fff0a6bb 329deg 330deg,
+    transparent 331deg 360deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 48%, #000 54% 68%, transparent 78%);
+  mask: radial-gradient(circle, transparent 0 48%, #000 54% 68%, transparent 78%);
+  filter: drop-shadow(0 0 9px #ffad32);
+  animation: nexo-solar-rays 75s linear infinite;
+  z-index: 0;
+}
+
+/* Textura luminosa da superfície. */
+.site[data-theme="light"] .atom-core::after {
+  content: "";
+  position: absolute;
+  inset: 3%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 24% 36%, #fff6b877 0 4%, transparent 13%),
+    radial-gradient(ellipse at 69% 27%, #e8751b88 0 5%, transparent 15%),
+    radial-gradient(ellipse at 61% 71%, #e66b1c77 0 7%, transparent 17%),
+    radial-gradient(ellipse at 31% 76%, #fff0a855 0 5%, transparent 13%),
+    radial-gradient(ellipse at 50% 48%, #fff8c533, transparent 55%);
+  box-shadow: inset -9px -8px 16px #a8441a55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes nexo-sun-pulse {
+  0%, 100% { filter: brightness(1) saturate(1.04); }
+  50% { filter: brightness(1.12) saturate(1.16); }
+}
+
+@keyframes nexo-sun-atmosphere {
+  0%, 100% { opacity: .78; transform: scale(.97); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+@keyframes nexo-solar-rays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* PLANETAS — corpos esféricos, sem as antigas molduras de ícones. */
+.orbiting-category {
+  --orbit-radius: calc(var(--atom-size) * .42);
+  --planet-size: 19px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  z-index: 5;
+  animation: nexo-planet-orbit var(--orbit-duration, 36s) linear infinite !important;
+}
+
+.orbiting-category > .category-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--planet-size);
+  height: var(--planet-size);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  font-size: 0;
+  animation: none !important;
+}
+
+.orbiting-category > .category-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  background: var(--planet-surface);
+  box-shadow:
+    inset -5px -4px 7px #17202d66,
+    inset 2px 2px 4px #ffffff88,
+    0 0 12px var(--planet-halo);
+}
+
+/* Mercúrio */
+.site[data-theme="light"] .orbiting-category-1 {
+  --orbit-radius: calc(var(--atom-size) * .29);
+  --planet-size: 13px;
+  --orbit-duration: 19s;
+  --planet-surface: radial-gradient(circle at 31% 27%, #e8e2d7, #9d968b 57%, #514d4a);
+  --planet-halo: #d1c4ad66;
+}
+
+/* Vênus */
+.site[data-theme="light"] .orbiting-category-2 {
+  --orbit-radius: calc(var(--atom-size) * .36);
+  --planet-size: 20px;
+  --orbit-duration: 27s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #fff0bd, #d9a45d 52%, #986039);
+  --planet-halo: #e6b66b77;
+}
+
+/* Terra */
+.site[data-theme="light"] .orbiting-category-3 {
+  --orbit-radius: calc(var(--atom-size) * .43);
+  --planet-size: 22px;
+  --orbit-duration: 36s;
+  --planet-surface:
+    radial-gradient(ellipse at 34% 40%, #72c68b 0 12%, transparent 13%),
+    radial-gradient(ellipse at 68% 62%, #72b978 0 17%, transparent 18%),
+    radial-gradient(circle at 30% 25%, #b4ecf5, #348dc8 56%, #153d78);
+  --planet-halo: #5cb9ff88;
+}
+
+/* Marte */
+.site[data-theme="light"] .orbiting-category-4 {
+  --orbit-radius: calc(var(--atom-size) * .49);
+  --planet-size: 17px;
+  --orbit-duration: 43s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #ffc19a, #d45c42 56%, #6e302b);
+  --planet-halo: #e8795b66;
+}
+
+/* Júpiter */
+.site[data-theme="light"] .orbiting-category-5 {
+  --orbit-radius: calc(var(--atom-size) * .55);
+  --planet-size: 34px;
+  --orbit-duration: 55s;
+  --planet-surface:
+    repeating-linear-gradient(0deg, transparent 0 4px, #9b644b99 5px 7px, #f0d2a6 8px 11px),
+    radial-gradient(circle at 30% 25%, #f7e2bd, #c58d61 65%, #80513c);
+  --planet-halo: #d6a57866;
+}
+
+/* Saturno */
+.site[data-theme="light"] .orbiting-category-6 {
+  --orbit-radius: calc(var(--atom-size) * .61);
+  --planet-size: 26px;
+  --orbit-duration: 68s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #fff0b9, #d8ae69 58%, #8d633b);
+  --planet-halo: #e5c17d66;
+}
+
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 43px;
+  height: 13px;
+  border: 3px solid #c39a5e;
+  border-left-color: #f2d8a2;
+  border-right-color: #f2d8a2;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-23deg);
+  box-shadow: 0 0 5px #b78b4d66;
+}
+
+/* Urano */
+.site[data-theme="light"] .orbiting-category-7 {
+  --orbit-radius: calc(var(--atom-size) * .67);
+  --planet-size: 23px;
+  --orbit-duration: 79s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #e0ffff, #78c9d0 58%, #347e9c);
+  --planet-halo: #8ce9ed77;
+}
+
+/* Netuno */
+.site[data-theme="light"] .orbiting-category-8 {
+  --orbit-radius: calc(var(--atom-size) * .72);
+  --planet-size: 22px;
+  --orbit-duration: 91s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #9bcaff, #356fc5 58%, #172e78);
+  --planet-halo: #648fff88;
+}
+
+@keyframes nexo-planet-orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius)); }
+  to { transform: rotate(360deg) translateX(var(--orbit-radius)); }
+}
+
+.site[data-theme="light"] .category-name {
+  display: none;
+}
+
+/* LUA — maior, serena, com relevo e sombra de terminador. */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(390px, 45vw, 550px);
+  left: 70% !important;
+}
+
+.site[data-theme="dark"] .atom-bouncer .glow {
+  width: 82%;
+  height: 82%;
+  top: 9%;
+  left: 9%;
+  background: radial-gradient(
+    circle,
+    #dceaff55 0%,
+    #9bbce844 37%,
+    #6287bd22 60%,
+    transparent 74%
+  );
+  filter: blur(38px);
+  opacity: .78;
+  animation: nexo-moon-breath 11s ease-in-out infinite;
+}
+
+.site[data-theme="dark"] .atom-core {
+  width: 45%;
+  height: 45%;
+  overflow: hidden;
+  border: 1px solid #e4edf5aa;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 28% 24%, #f7f8f7 0%, #d8dfe5 20%, transparent 47%),
+    radial-gradient(circle at 38% 35%, #cbd2d9 0%, #aeb9c6 48%, #65758b 82%, #3a485f 100%);
+  box-shadow:
+    inset -22px -14px 30px #101d32b8,
+    inset 7px 6px 17px #ffffff77,
+    0 0 24px #d4e7ff55,
+    0 0 65px #9dbce944,
+    0 0 125px #7199d322;
+  z-index: 4;
+  animation: none;
+}
+
+/* Crateras com bordas iluminadas e fundos em relevo. */
+.site[data-theme="dark"] .atom-core::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 27% 27%, #66748788 0 3.5%, #f2f5f755 4% 5.2%, transparent 6%),
+    radial-gradient(ellipse at 65% 23%, #68788c77 0 6%, #edf2f655 6.8% 8%, transparent 9%),
+    radial-gradient(ellipse at 55% 57%, #65758a99 0 9%, #e9edf055 10% 11%, transparent 12%),
+    radial-gradient(ellipse at 25% 69%, #68778a88 0 5%, #f4f6f655 6% 7%, transparent 8%),
+    radial-gradient(ellipse at 76% 74%, #4e607788 0 4%, #e5ebf044 5% 6%, transparent 7%),
+    radial-gradient(ellipse at 42% 43%, #7e8b9b88 0 2.5%, transparent 4%),
+    radial-gradient(ellipse at 79% 43%, #56677b88 0 3%, transparent 4.5%),
+    radial-gradient(ellipse at 39% 83%, #65758a77 0 5%, transparent 6%),
+    radial-gradient(circle at 32% 30%, #ffffff44, transparent 45%);
+  opacity: .9;
+}
+
+/* Sombra suave na borda: simula a transição entre luz e noite. */
+.site[data-theme="dark"] .atom-core::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent 38%, #1a2940aa 100%),
+    radial-gradient(ellipse at 80% 50%, #15223866, transparent 58%);
+  box-shadow: inset -15px 0 20px #17243a77;
+  pointer-events: none;
+}
+
+@keyframes nexo-moon-breath {
+  0%, 100% { opacity: .62; transform: scale(.98); }
+  50% { opacity: .82; transform: scale(1.025); }
+}
+
+/* Estrelas: pontos luminosos discretos, sem placas ou molduras. */
+.site[data-theme="dark"] .orbiting-category {
+  --orbit-radius: calc(var(--atom-size) * .48);
+  --orbit-duration: 72s;
+  z-index: 5;
+}
+
+.site[data-theme="dark"] .orbiting-category > .category-icon {
+  width: var(--star-size, 8px);
+  height: var(--star-size, 8px);
+}
+
+.site[data-theme="dark"] .orbiting-category > .category-icon::before {
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0 17%, #e4f4ff 38%, #91caff 72%, #5b8edb);
+  box-shadow:
+    0 0 5px #ffffff,
+    0 0 12px #a9d9ff,
+    0 0 23px #76baff99;
+  animation: nexo-star-twinkle 4.5s ease-in-out infinite alternate;
+}
+
+.site[data-theme="dark"] .orbiting-category-1 {
+  --orbit-radius: calc(var(--atom-size) * .31);
+  --star-size: 7px;
+  --orbit-duration: 48s;
+}
+
+.site[data-theme="dark"] .orbiting-category-2 {
+  --orbit-radius: calc(var(--atom-size) * .39);
+  --star-size: 11px;
+  --orbit-duration: 65s;
+}
+
+.site[data-theme="dark"] .orbiting-category-3 {
+  --orbit-radius: calc(var(--atom-size) * .47);
+  --star-size: 6px;
+  --orbit-duration: 77s;
+}
+
+.site[data-theme="dark"] .orbiting-category-4 {
+  --orbit-radius: calc(var(--atom-size) * .55);
+  --star-size: 9px;
+  --orbit-duration: 89s;
+}
+
+.site[data-theme="dark"] .orbiting-category-5 {
+  --orbit-radius: calc(var(--atom-size) * .63);
+  --star-size: 12px;
+  --orbit-duration: 103s;
+}
+
+.site[data-theme="dark"] .orbiting-category-6 {
+  --orbit-radius: calc(var(--atom-size) * .70);
+  --star-size: 7px;
+  --orbit-duration: 117s;
+}
+
+.site[data-theme="dark"] .orbiting-category-7 {
+  --orbit-radius: calc(var(--atom-size) * .76);
+  --star-size: 5px;
+  --orbit-duration: 129s;
+}
+
+.site[data-theme="dark"] .orbiting-category-8 {
+  --orbit-radius: calc(var(--atom-size) * .82);
+  --star-size: 9px;
+  --orbit-duration: 143s;
+}
+
+.site[data-theme="dark"] .category-name {
+  display: none;
+}
+
+@keyframes nexo-star-twinkle {
+  from { opacity: .65; filter: brightness(.9); }
+  to { opacity: 1; filter: brightness(1.35); }
+}
+
+/* Ajustes para não encobrir o texto nem cortar os astros. */
+@media (max-width: 1100px) {
+  .atom-bouncer {
+    left: 76% !important;
+    --atom-size: clamp(330px, 42vw, 440px);
+  }
+}
+
+@media (max-width: 750px) {
+  .atom-bouncer,
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 310px;
+    left: 72% !important;
+    top: 68% !important;
+    opacity: .9;
+  }
+
+  .site[data-theme="light"] .atom-core {
+    width: 40%;
+    height: 40%;
+  }
+
+  .site[data-theme="dark"] .atom-core {
+    width: 44%;
+    height: 44%;
+  }
+}
+
+@media (max-width: 450px) {
+  .atom-bouncer,
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 270px;
+    left: 70% !important;
+    top: 72% !important;
+    opacity: .82;
+  }
+
+  .site[data-theme="light"] .orbiting-category-5 {
+    --planet-size: 27px;
+  }
+
+  .site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+    width: 35px;
+    height: 11px;
+  }
+}
+
+/* Respeita a preferência do sistema por movimento reduzido. */
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core,
+  .site[data-theme="light"] .atom-core::before,
+  .site[data-theme="light"] .atom-bouncer .glow,
+  .site[data-theme="dark"] .atom-bouncer .glow,
+  .orbiting-category,
+  .orbiting-category > .category-icon::before {
+    animation: none !important;
+  }
+}
+
+
+
+/* NEXO: visitas interativas às categorias */
+
+/* Composição: Sol à direita, Lua à esquerda. */
+.site[data-theme="light"] .atom-bouncer {
+  left: 79% !important;
+  top: 51% !important;
+}
+
+.site[data-theme="dark"] .atom-bouncer {
+  left: 21% !important;
+  top: 51% !important;
+}
+
+/* Órbitas com posições iniciais distribuídas. */
+.orbiting-category {
+  --orbit-radius: calc(var(--atom-size) * .43);
+  --orbit-angle: 0deg;
+  transform: rotate(var(--orbit-angle)) translateX(var(--orbit-radius));
+  animation: nexo-category-orbit 42s linear infinite !important;
+  will-change: transform;
+}
+
+.orbiting-category-1 { --orbit-angle: 0deg; }
+.orbiting-category-2 { --orbit-angle: 60deg; }
+.orbiting-category-3 { --orbit-angle: 120deg; }
+.orbiting-category-4 { --orbit-angle: 180deg; }
+.orbiting-category-5 { --orbit-angle: 240deg; }
+.orbiting-category-6 { --orbit-angle: 300deg; }
+
+@keyframes nexo-category-orbit {
+  from { transform: rotate(var(--orbit-angle)) translateX(var(--orbit-radius)); }
+  to { transform: rotate(calc(var(--orbit-angle) + 360deg)) translateX(var(--orbit-radius)); }
+}
+
+/* Um único visitante percorre a órbita e chega ao centro. */
+.orbiting-category.is-visiting {
+  animation: nexo-category-visit 5.4s cubic-bezier(.45,0,.2,1) both !important;
+  z-index: 12;
+}
+
+@keyframes nexo-category-visit {
+  0% {
+    transform: rotate(var(--orbit-angle)) translateX(var(--orbit-radius)) scale(1);
+  }
+  30% {
+    transform: rotate(var(--orbit-angle)) translateX(0) scale(1.25);
+  }
+  67% {
+    transform: rotate(var(--orbit-angle)) translateX(0) scale(1.25);
+  }
+  100% {
+    transform: rotate(var(--orbit-angle)) translateX(var(--orbit-radius)) scale(1);
+  }
+}
+
+/* Painel de identificação acompanha o visitante no centro. */
+.orbiting-category .category-name {
+  display: none !important;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  width: min(220px, 54vw);
+  padding: 11px 14px;
+  border: 1px solid #ffffff55;
+  border-radius: 13px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(145deg, #17243deF, #263b5bea);
+  box-shadow: 0 8px 30px #050b1b55, 0 0 20px #9dcaff22;
+  transform: translateX(-50%);
+  gap: 4px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.orbiting-category.is-visiting .category-name {
+  display: grid !important;
+  animation: nexo-category-label 5.4s ease both;
+}
+
+.category-name strong {
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.category-name small {
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #d7e6f8;
+}
+
+@keyframes nexo-category-label {
+  0%, 25%, 72%, 100% { opacity: 0; }
+  34%, 65% { opacity: 1; }
+}
+
+/* Planetas: volume, contraste e detalhes individuais. */
+.site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .30); }
+.site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .39); }
+.site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .47); }
+.site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .55); }
+.site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .64); }
+.site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .72); }
+
+.site[data-theme="light"] .orbiting-category-5 .category-icon::before {
+  background:
+    repeating-linear-gradient(0deg, #c18b68 0 3px, #f0d2a6 4px 7px, #a96d50 8px 9px),
+    radial-gradient(circle at 30% 25%, #f7e2bd, #80513c);
+}
+
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  width: 175%;
+  height: 48%;
+  border-width: 3px;
+  box-shadow: 0 0 9px #d8b87888;
+}
+
+/* Superfície solar: mais variação de luz e textura. */
+.site[data-theme="light"] .atom-core {
+  background:
+    radial-gradient(ellipse at 27% 35%, #fffde0 0 4%, transparent 23%),
+    radial-gradient(ellipse at 67% 28%, #e77c25aa 0 5%, transparent 17%),
+    radial-gradient(ellipse at 43% 69%, #f18a25bb 0 7%, transparent 22%),
+    radial-gradient(ellipse at 74% 73%, #ffdc6b 0 5%, transparent 18%),
+    radial-gradient(circle at 38% 35%, #fff9c8 0%, #ffdf72 30%, #ffad36 61%, #d95c1c 100%);
+}
+
+/* Lua: luz lateral e relevo mais definido. */
+.site[data-theme="dark"] .atom-core {
+  background:
+    radial-gradient(circle at 28% 25%, #f5f7f8 0%, #d9e0e6 23%, #aab6c4 58%, #5a687c 100%);
+  box-shadow:
+    inset -25px -8px 34px #101a2dbb,
+    inset 7px 5px 15px #ffffff88,
+    0 0 30px #c8e0ff66,
+    0 0 95px #91b7ed33;
+}
+
+/* No modo escuro, os visitantes são estrelas, não planetas. */
+.site[data-theme="dark"] .orbiting-category .category-icon::before {
+  background: radial-gradient(circle, #fff 0 12%, #e8f5ff 35%, #9dceff 70%, #5b8edb);
+  box-shadow: 0 0 7px #fff, 0 0 17px #a9d9ff, 0 0 30px #76baffaa;
+}
+
+/* Posição e escala responsivas. */
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    left: 79% !important;
+    top: 72% !important;
+    --atom-size: 290px;
+  }
+
+  .site[data-theme="dark"] .atom-bouncer {
+    left: 21% !important;
+    top: 72% !important;
+    --atom-size: 290px;
+  }
+
+  .orbiting-category .category-name {
+    width: min(190px, 52vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbiting-category,
+  .orbiting-category.is-visiting,
+  .orbiting-category.is-visiting .category-name {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO: sistema solar cinematográfico */
+
+/* ---------- MODO CLARO: SISTEMA SOLAR ---------- */
+
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(500px, 55vw, 660px);
+  position: absolute;
+  top: 50% !important;
+  left: auto !important;
+  right: clamp(-45px, 2vw, 28px) !important;
+  width: var(--atom-size);
+  height: var(--atom-size);
+  transform: translateY(-50%) !important;
+  animation: none !important;
+  opacity: 1;
+  filter: none;
+  isolation: isolate;
+}
+
+/* O Sol substitui os antigos raios artificiais por uma coroa suave. */
+.site[data-theme="light"] .atom-bouncer .glow {
+  inset: 3%;
+  width: 94%;
+  height: 94%;
+  background:
+    radial-gradient(circle, #fff5c8 0%, #ffc75a 27%, #ff8c32 42%, #f15b25 55%, transparent 73%);
+  filter: blur(42px);
+  opacity: .66;
+  animation: nexo-solar-corona 12s ease-in-out infinite;
+}
+
+.site[data-theme="light"] .atom-core {
+  width: 43%;
+  height: 43%;
+  overflow: hidden;
+  border: 1px solid #ffd58b99;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 28% 24%, #fffbd7 0%, #fff1a8 9%, transparent 32%),
+    radial-gradient(ellipse at 70% 29%, #c94b1d 0%, transparent 17%),
+    radial-gradient(ellipse at 35% 72%, #e75d1d 0%, transparent 24%),
+    radial-gradient(ellipse at 75% 72%, #ffcf5d 0%, transparent 19%),
+    radial-gradient(circle at 42% 38%, #fff4a5 0%, #ffdc64 27%, #ff9c32 57%, #d84b1b 100%);
+  box-shadow:
+    inset -24px -18px 32px #9f351d88,
+    inset 9px 8px 22px #fff8c9bb,
+    0 0 22px #ffd56d,
+    0 0 58px #ff9b38aa,
+    0 0 115px #f16b2b77,
+    0 0 190px #f16b2b44;
+  animation: nexo-sun-surface 16s ease-in-out infinite alternate;
+}
+
+/* Granulação, manchas e células de convecção da fotosfera. */
+.site[data-theme="light"] .atom-core::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 22% 31%, #b94b2388 0 2%, transparent 5%),
+    radial-gradient(ellipse at 68% 23%, #b94b2388 0 1.8%, transparent 5%),
+    radial-gradient(ellipse at 73% 68%, #a83b1e88 0 2.4%, transparent 6%),
+    radial-gradient(ellipse at 38% 77%, #a83b1e77 0 1.5%, transparent 5%),
+    radial-gradient(circle at 24% 55%, #fff4ad77 0 2%, transparent 9%),
+    radial-gradient(circle at 58% 42%, #fff4ad66 0 3%, transparent 11%),
+    radial-gradient(circle at 48% 18%, #fff5bd66 0 2%, transparent 8%),
+    repeating-radial-gradient(circle at 48% 48%,
+      #fff4a00a 0 1px, #a83c1b0b 2px 3px, transparent 4px 6px);
+  mix-blend-mode: soft-light;
+  opacity: .92;
+}
+
+/* Plasma e textura atmosférica, sem raios pontiagudos. */
+.site[data-theme="light"] .atom-core::after {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 12% 48%, #fff2a544, transparent 24%),
+    radial-gradient(ellipse at 83% 38%, #ffb04c55, transparent 27%),
+    radial-gradient(ellipse at 54% 88%, #c94c2355, transparent 25%);
+  filter: blur(7px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes nexo-solar-corona {
+  0%, 100% { opacity: .55; transform: scale(.97); }
+  50% { opacity: .76; transform: scale(1.035); }
+}
+
+@keyframes nexo-sun-surface {
+  from { filter: brightness(1) saturate(1.02); }
+  to { filter: brightness(1.07) saturate(1.1); }
+}
+
+/* Órbitas discretas e concêntricas. */
+.site[data-theme="light"] .atom-orbit {
+  display: block;
+  width: 57%;
+  height: 57%;
+  border: 1px solid #b88d5c30;
+  box-shadow: 0 0 9px #e7a85b12;
+}
+
+.site[data-theme="light"] .atom-orbit.orbit-two {
+  width: 77%;
+  height: 77%;
+  border-color: #b88d5c2b;
+}
+
+.site[data-theme="light"] .atom-orbit.orbit-three {
+  width: 98%;
+  height: 62%;
+  border-color: #b88d5c25;
+}
+
+/* Planetas: órbitas individuais e velocidades distintas. */
+.site[data-theme="light"] .orbiting-category {
+  --orbit-radius: calc(var(--atom-size) * .25);
+  --planet-size: 11px;
+  --orbit-duration: 18s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: nexo-solar-orbit var(--orbit-duration) linear infinite !important;
+  z-index: 6;
+  will-change: transform;
+}
+
+@keyframes nexo-solar-orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius)); }
+  to { transform: rotate(360deg) translateX(var(--orbit-radius)); }
+}
+
+.site[data-theme="light"] .orbiting-category > .category-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--planet-size);
+  height: var(--planet-size);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  font-size: 0;
+  animation: none !important;
+  filter: drop-shadow(0 2px 4px #34251b66);
+}
+
+.site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  background: var(--planet-surface);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  box-shadow:
+    inset -4px -3px 6px #10152288,
+    inset 2px 2px 4px #ffffff99,
+    0 0 8px var(--planet-halo);
+  animation: nexo-planet-axial var(--axial-duration, 24s) linear infinite;
+}
+
+/* Mercúrio */
+.site[data-theme="light"] .orbiting-category-1 {
+  --orbit-radius: calc(var(--atom-size) * .25);
+  --planet-size: 10px;
+  --orbit-duration: 13s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #e5e0d7 0%, #aaa49a 48%, #625e59 100%);
+  --planet-halo: #c8b9a366;
+}
+
+/* Vênus */
+.site[data-theme="light"] .orbiting-category-2 {
+  --orbit-radius: calc(var(--atom-size) * .32);
+  --planet-size: 17px;
+  --orbit-duration: 20s;
+  --planet-surface: radial-gradient(circle at 32% 25%, #fff0c1 0%, #d9a65f 48%, #94613b 100%);
+  --planet-halo: #e6b66b66;
+}
+
+/* Terra */
+.site[data-theme="light"] .orbiting-category-3 {
+  --orbit-radius: calc(var(--atom-size) * .40);
+  --planet-size: 19px;
+  --orbit-duration: 27s;
+  --planet-surface:
+    radial-gradient(ellipse at 30% 35%, #75bd72 0 15%, transparent 16%),
+    radial-gradient(ellipse at 66% 65%, #8acb79 0 17%, transparent 18%),
+    radial-gradient(circle at 30% 25%, #d8f4ff 0%, #368dc7 52%, #102f68 100%);
+  --planet-halo: #59baff77;
+}
+
+/* Marte */
+.site[data-theme="light"] .orbiting-category-4 {
+  --orbit-radius: calc(var(--atom-size) * .48);
+  --planet-size: 14px;
+  --orbit-duration: 35s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #ffc49d 0%, #d36b4c 50%, #71372e 100%);
+  --planet-halo: #df795766;
+}
+
+/* Júpiter */
+.site[data-theme="light"] .orbiting-category-5 {
+  --orbit-radius: calc(var(--atom-size) * .57);
+  --planet-size: 36px;
+  --orbit-duration: 49s;
+  --planet-surface:
+    repeating-linear-gradient(0deg, #a76e4c 0 3px, #e8c9a0 4px 7px, #c18d68 8px 10px, #f0d8b3 11px 14px),
+    radial-gradient(circle at 30% 25%, #f4dfbd, #87583e);
+  --planet-halo: #d6a57866;
+}
+
+/* Grande Mancha Vermelha de Júpiter. */
+.site[data-theme="light"] .orbiting-category-5 .category-icon::after {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 12%;
+  left: 55%;
+  top: 56%;
+  border-radius: 50%;
+  background: #a94e36;
+  box-shadow: 0 0 3px #a94e36;
+}
+
+/* Saturno */
+.site[data-theme="light"] .orbiting-category-6 {
+  --orbit-radius: calc(var(--atom-size) * .66);
+  --planet-size: 29px;
+  --orbit-duration: 62s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #fff0c5 0%, #d7b476 54%, #87613e 100%);
+  --planet-halo: #e5c17d66;
+}
+
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 175%;
+  height: 43%;
+  border: 4px solid #c9a66f;
+  border-left-color: #f3dfb5;
+  border-right-color: #a17b4c;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-24deg);
+  box-shadow: 0 0 5px #9d754b77;
+}
+
+/* Urano */
+.site[data-theme="light"] .orbiting-category-7 {
+  --orbit-radius: calc(var(--atom-size) * .75);
+  --planet-size: 23px;
+  --orbit-duration: 78s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #e3ffff 0%, #83d2d5 53%, #347b91 100%);
+  --planet-halo: #8ce9ed66;
+}
+
+/* Netuno */
+.site[data-theme="light"] .orbiting-category-8 {
+  --orbit-radius: calc(var(--atom-size) * .84);
+  --planet-size: 22px;
+  --orbit-duration: 95s;
+  --planet-surface: radial-gradient(circle at 30% 25%, #a8d1ff 0%, #376fc4 54%, #172d70 100%);
+  --planet-halo: #648fff77;
+}
+
+/* Nada de nomes, cartões ou visitas ao Sol. */
+.site[data-theme="light"] .category-name {
+  display: none !important;
+}
+
+/* ---------- MODO ESCURO: LUA ISOLADA ---------- */
+
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(350px, 43vw, 500px);
+  top: 50% !important;
+  left: clamp(-100px, 1vw, 25px) !important;
+  right: auto !important;
+  transform: translateY(-50%) !important;
+  animation: none !important;
+}
+
+/* Elimina todos os fios e órbitas de átomo na Lua. */
+.site[data-theme="dark"] .atom-orbit {
+  display: none !important;
+}
+
+.site[data-theme="dark"] .orbiting-category {
+  display: none !important;
+}
+
+/* Rotação lenta da superfície lunar, sem deslocar a Lua. */
+.site[data-theme="dark"] .atom-core {
+  animation: nexo-moon-rotation 180s linear infinite !important;
+  transform-origin: center;
+}
+
+@keyframes nexo-moon-rotation {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+
+@media (max-width: 1100px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: 470px;
+    right: -75px !important;
+  }
+
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 390px;
+    left: -90px !important;
+  }
+}
+
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: 390px;
+    top: 76% !important;
+    right: -155px !important;
+    opacity: .94;
+  }
+
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 300px;
+    top: 75% !important;
+    left: -115px !important;
+    opacity: .9;
+  }
+
+  .site[data-theme="light"] .orbiting-category-5 { --planet-size: 28px; }
+  .site[data-theme="light"] .orbiting-category-6 { --planet-size: 23px; }
+}
+
+@media (max-width: 450px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: 330px;
+    right: -160px !important;
+    top: 78% !important;
+  }
+
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 260px;
+    left: -115px !important;
+    top: 76% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core,
+  .site[data-theme="light"] .atom-bouncer .glow,
+  .site[data-theme="light"] .orbiting-category,
+  .site[data-theme="dark"] .atom-core {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO: refinamento celeste mobile e interativo */
+
+/* Os elementos orbitais são controles acessíveis, não bloqueiam a pesquisa. */
+.orbiting-category {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  outline-offset: 5px;
+}
+
+.orbiting-category:focus-visible {
+  outline: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+/* Órbitas mais lentas e distribuição completa dos oito planetas. */
+.site[data-theme="light"] .orbiting-category-1 { --orbit-duration: 17s; }
+.site[data-theme="light"] .orbiting-category-2 { --orbit-duration: 26s; }
+.site[data-theme="light"] .orbiting-category-3 { --orbit-duration: 35s; }
+.site[data-theme="light"] .orbiting-category-4 { --orbit-duration: 46s; }
+.site[data-theme="light"] .orbiting-category-5 { --orbit-duration: 64s; }
+.site[data-theme="light"] .orbiting-category-6 { --orbit-duration: 81s; }
+.site[data-theme="light"] .orbiting-category-7 { --orbit-duration: 101s; }
+.site[data-theme="light"] .orbiting-category-8 { --orbit-duration: 124s; }
+
+/* Sol: corona mais profunda e brilho atmosférico suave. */
+.site[data-theme="light"] .atom-bouncer .glow {
+  opacity: .76;
+  filter: blur(34px);
+}
+
+.site[data-theme="light"] .atom-core {
+  box-shadow:
+    inset -24px -18px 32px #9f351d88,
+    inset 9px 8px 22px #fff8c9bb,
+    0 0 24px #ffd56d,
+    0 0 68px #ff9b38bb,
+    0 0 130px #f16b2b88,
+    0 0 205px #f16b2b44;
+}
+
+/* Cartão informativo do planeta, inserido no fluxo da página. */
+.planet-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(100%, 520px);
+  margin: 18px auto 0;
+  padding: 14px 16px;
+  border: 1px solid #e6a94c66;
+  border-radius: 16px;
+  color: #3e3023;
+  text-align: left;
+  background: linear-gradient(135deg, #fffaf0f2, #fff0d9ee);
+  box-shadow: 0 12px 34px #9b5a1920;
+  position: relative;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+}
+
+.planet-info strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #a94e1e;
+  font-size: 14px;
+}
+
+.planet-info p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.planet-info button {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  color: #75421e;
+  background: #f2d8b5;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Meteoros: cauda curta e luminosa que se desloca com o núcleo. */
+.nexo-space-event.meteor {
+  animation: nexo-event-fade-v3 linear forwards;
+}
+
+.nexo-meteor-streak {
+  animation: nexo-streak-glow 1.1s ease-in-out infinite alternate;
+}
+
+.nexo-meteor-tail {
+  fill: none;
+  stroke: url(#nexoMeteorGradient);
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  animation: none !important;
+  opacity: .92;
+  filter: drop-shadow(0 0 5px #83c8ff) drop-shadow(0 0 12px #83c8ff);
+}
+
+.nexo-meteor-head {
+  fill: #fff;
+  filter:
+    drop-shadow(0 0 4px #fff)
+    drop-shadow(0 0 10px #a9dcff)
+    drop-shadow(0 0 18px #69baff);
+}
+
+/* Asteroides: deslocamento mais rápido, sem colisões. */
+.nexo-space-event.asteroid {
+  animation: nexo-asteroid-travel-v2 linear forwards;
+}
+
+/* Posicionamento desktop: todo o sistema permanece dentro da área visível. */
+@media (min-width: 751px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(390px, 40vw, 470px);
+    left: auto !important;
+    right: clamp(170px, 16vw, 250px) !important;
+  }
+
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(340px, 35vw, 430px);
+    left: clamp(120px, 18vw, 260px) !important;
+  }
+}
+
+/* Mobile: escala reduzida para não cortar planetas nem encobrir a busca. */
+@media (max-width: 750px) {
+  .hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .search-box input {
+    min-width: 0;
+  }
+
+  .search-hint {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .site[data-theme="light"] .atom-bouncer,
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(185px, 56vw, 220px);
+    left: 50% !important;
+    right: auto !important;
+    top: 80% !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: .86;
+  }
+
+  .site[data-theme="dark"] .orbiting-category {
+    --orbit-radius: calc(var(--atom-size) * .43);
+  }
+
+  .site[data-theme="light"] .orbiting-category-5 .category-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .site[data-theme="light"] .orbiting-category-6 .category-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .planet-info {
+    margin-top: 14px;
+    padding: 12px 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .site[data-theme="light"] .atom-bouncer,
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 185px;
+  }
+
+  .site[data-theme="dark"] .orbiting-category .category-name {
+    width: min(175px, 54vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nexo-space-event,
+  .nexo-meteor-streak,
+  .nexo-meteor-tail,
+  .site[data-theme="dark"] .orbiting-category,
+  .site[data-theme="light"] .orbiting-category {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO: rotação axial independente das órbitas planetárias. */
+@keyframes nexo-planet-axial {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+.site[data-theme="light"] .orbiting-category {
+  pointer-events: auto;
+}
+
+.site[data-theme="light"] .orbiting-category-1 {
+  --axial-duration: 58s;
+}
+
+.site[data-theme="light"] .orbiting-category-2 {
+  --axial-duration: 243s;
+}
+
+.site[data-theme="light"] .orbiting-category-2 .planet-surface {
+  animation-direction: reverse;
+}
+
+.site[data-theme="light"] .orbiting-category-3 {
+  --axial-duration: 24s;
+}
+
+.site[data-theme="light"] .orbiting-category-4 {
+  --axial-duration: 25s;
+}
+
+.site[data-theme="light"] .orbiting-category-5 {
+  --axial-duration: 10s;
+}
+
+.site[data-theme="light"] .orbiting-category-6 {
+  --axial-duration: 11s;
+}
+
+.site[data-theme="light"] .orbiting-category-7 {
+  --axial-duration: 17s;
+}
+
+.site[data-theme="light"] .orbiting-category-8 {
+  --axial-duration: 16s;
+}
+
+/* Botão discreto para retornar à visão geral. */
+.site[data-theme="light"] .planet-info button {
+  flex: 0 0 auto;
+  width: auto;
+  min-height: 32px;
+  height: auto;
+  padding: 0 13px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.site[data-theme="light"] .planet-info button:focus-visible {
+  outline: 2px solid #a94e1e;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .planet-surface {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO: troca orbital planeta-sol */
+.site[data-theme="light"] .planet-exchange-hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.site[data-theme="light"] .orbiting-category.planet-exchange-hidden {
+  animation-play-state: paused !important;
+}
+
+.site[data-theme="light"] .planet-exchange-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site[data-theme="light"] .planet-projection,
+.site[data-theme="light"] .sun-projection {
+  position: absolute;
+  left: var(--from-x);
+  top: var(--from-y);
+  width: var(--from-size);
+  height: var(--from-size);
+  transform: translate(-50%, -50%);
+  animation: nexo-planet-sun-exchange 1100ms cubic-bezier(.22,.75,.2,1) both;
+  pointer-events: none;
+  will-change: left, top, width, height;
+}
+
+.site[data-theme="light"] .planet-projection .category-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.site[data-theme="light"] .planet-projection .planet-surface {
+  width: 100%;
+  height: 100%;
+}
+
+.site[data-theme="light"] .sun-projection {
+  z-index: 2;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.site[data-theme="light"] .sun-projection .sun-projection-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.site[data-theme="light"] .planet-projection.reverse,
+.site[data-theme="light"] .sun-projection.reverse {
+  animation-direction: reverse;
+}
+
+@keyframes nexo-planet-sun-exchange {
+  from {
+    left: var(--from-x);
+    top: var(--from-y);
+    width: var(--from-size);
+    height: var(--from-size);
+  }
+  to {
+    left: var(--to-x);
+    top: var(--to-y);
+    width: var(--to-size);
+    height: var(--to-size);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .planet-projection,
+  .site[data-theme="light"] .sun-projection {
+    animation-duration: 1ms;
+  }
+}
