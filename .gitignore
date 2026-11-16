@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.wrangler/
+
+# Arquivos locais com credenciais do Worker
+.dev.vars
+.dev.vars.*
