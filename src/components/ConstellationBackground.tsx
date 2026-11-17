@@ -229,7 +229,7 @@ export default function ConstellationBackground() {
         }
 
         scheduleVehicle()
-      }, randomBetween(7000, 9000))
+      }, randomBetween(12000, 15000))
       cleanupTimers.push(timer)
     }
 
