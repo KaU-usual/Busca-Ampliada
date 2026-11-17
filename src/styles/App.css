@@ -4499,3 +4499,128 @@ html[data-theme="light"] .nexo-space-event {
   z-index: 25 !important;
   pointer-events: auto !important;
 }
+
+
+/* NEXO — Lua ampliada à esquerda e Terra parcialmente visível à direita (modo escuro). */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(500px, 48vw, 650px) !important;
+  left: clamp(70px, 13vw, 185px) !important;
+  right: auto !important;
+  top: 50% !important;
+}
+
+.site[data-theme="dark"] .atom-core {
+  width: 54% !important;
+  height: 54% !important;
+}
+
+/* A Terra fica ancorada na borda direita: metade do disco permanece à vista.
+   A textura gira continuamente para revelar novas regiões do globo. */
+.site[data-theme="dark"] .earth-planet {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: clamp(-390px, -25vw, -260px);
+  width: clamp(620px, 66vw, 820px);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 29% 27%, #b8f3ff 0%, #4b9ecb 24%, #14517f 56%, #071b3a 82%);
+  box-shadow:
+    inset 30px 8px 55px #b8edff55,
+    inset -55px -12px 85px #020b24ee,
+    0 0 55px #3c9bdb55,
+    0 0 130px #2474bd33;
+}
+
+.site[data-theme="dark"] .earth-surface {
+  position: absolute;
+  inset: -2%;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 20% 30%, #a8d27b 0 5%, transparent 13%),
+    radial-gradient(ellipse at 37% 22%, #78b85f 0 7%, transparent 16%),
+    radial-gradient(ellipse at 47% 42%, #9bc96b 0 8%, transparent 18%),
+    radial-gradient(ellipse at 28% 57%, #6cae59 0 7%, transparent 17%),
+    radial-gradient(ellipse at 63% 64%, #83bd62 0 9%, transparent 18%),
+    radial-gradient(ellipse at 74% 34%, #6ca95b 0 6%, transparent 14%),
+    radial-gradient(ellipse at 53% 78%, #b2d47a 0 5%, transparent 12%),
+    repeating-linear-gradient(0deg, transparent 0 23px, #a8e1ff0a 24px 25px),
+    linear-gradient(90deg, #2d8dba, #164e83 48%, #0a2b57);
+  background-size: 200% 100%;
+  background-repeat: repeat-x;
+  animation: nexo-earth-surface-turn 48s linear infinite;
+  filter: saturate(1.12);
+  opacity: .96;
+}
+
+.site[data-theme="dark"] .earth-clouds {
+  position: absolute;
+  inset: -2%;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 28% 34%, #e9f8ff88 0 1.2%, transparent 5%),
+    radial-gradient(ellipse at 42% 58%, #e9f8ff66 0 1.5%, transparent 6%),
+    radial-gradient(ellipse at 66% 42%, #e9f8ff77 0 1%, transparent 5%),
+    radial-gradient(ellipse at 75% 70%, #e9f8ff55 0 1.3%, transparent 5%);
+  background-size: 200% 100%;
+  background-repeat: repeat-x;
+  mix-blend-mode: screen;
+  opacity: .55;
+  animation: nexo-earth-surface-turn 65s linear infinite reverse;
+}
+
+@keyframes nexo-earth-surface-turn {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(430px, 52vw, 540px) !important;
+    left: clamp(30px, 9vw, 105px) !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 620px;
+    right: -310px;
+  }
+}
+
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 330px !important;
+    left: 22px !important;
+    top: 76% !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 420px;
+    right: -210px;
+    top: 78%;
+    opacity: .82;
+  }
+}
+
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 285px !important;
+    left: 8px !important;
+    top: 77% !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 340px;
+    right: -170px;
+    top: 82%;
+    opacity: .72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="dark"] .earth-surface,
+  .site[data-theme="dark"] .earth-clouds {
+    animation: none !important;
+  }
+}
