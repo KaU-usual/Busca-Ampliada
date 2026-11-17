@@ -5743,3 +5743,43 @@ html[data-theme="light"] .nexo-space-event {
     text-align: left !important;
   }
 }
+
+
+/* NEXO — mostrar apenas uma constelação por vez, em sequência. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  animation: constellation-cycle 72s linear infinite !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected,
+.site[data-theme="dark"] .constellation-layer .constellation-group:focus-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: constellation-line-cycle 72s linear infinite !important;
+  stroke-dasharray: 300 !important;
+  stroke-dashoffset: 300 !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: constellation-star-cycle 72s linear infinite !important;
+}
+@keyframes constellation-star-cycle {
+  0%, 1.5% { opacity: 0; }
+  3%, 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+/* Modo escuro: desloca a Lua um pouco para a direita, longe do texto. */
+.site[data-theme="dark"] .atom-bouncer {
+  left: clamp(40px, 8vw, 130px) !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+@media (max-width: 900px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    left: 5vw !important;
+  }
+}
