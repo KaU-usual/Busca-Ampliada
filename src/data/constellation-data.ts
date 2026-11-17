@@ -159,7 +159,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 3.65
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 6,
           "to": 7,
@@ -280,7 +280,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 14,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     "code": "Ori",
@@ -425,7 +425,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 4.64
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 8,
           "to": 0,
@@ -521,7 +521,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 5,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     "code": "Cas",
@@ -568,7 +568,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.28
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 4,
           "to": 3,
@@ -589,7 +589,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 0,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     "code": "Sco",
@@ -692,7 +692,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.56
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 12,
           "to": 10,
@@ -738,7 +738,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 1,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     "code": "Cru",
@@ -778,7 +778,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.79
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 1,
           "to": 0,
@@ -794,7 +794,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 3,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     "code": "Leo",
@@ -869,7 +869,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.97
       }
     ],
-    "lines": [[
+    "lines": [
         {
           "from": 2,
           "to": 3,
@@ -930,7 +930,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 3,
           "thin": false
         }
-      ]]
+      ]
   }
 ,
   {
@@ -947,7 +947,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 75097, name: "Pherkad", ra: 15.3455, dec: 71.8339, mag: 3.05 },
       { hip: 72607, name: "Kochab", ra: 14.8451, dec: 74.1555, mag: 2.08 }
     ],
-    lines: [[
+    lines: [
         {
           "from": 0,
           "to": 1,
@@ -983,7 +983,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 3,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     code: "CMa",
@@ -999,7 +999,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 35904, name: "Aludra", ra: 7.4016, dec: -29.3031, mag: 2.45 },
       { hip: 30122, name: "Furud", ra: 6.3385, dec: -30.0634, mag: 3.02 }
     ],
-    lines: [[
+    lines: [
         {
           "from": 1,
           "to": 0,
@@ -1030,7 +1030,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 2,
           "thin": false
         }
-      ]]
+      ]
   },
   {
     code: "And",
@@ -1045,7 +1045,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 7607, name: "Nu And", ra: 1.6332, dec: 41.4055, mag: 4.53 },
       { hip: 116631, name: "51 And", ra: 23.6631, dec: 48.6282, mag: 3.57 }
     ],
-    lines: [[
+    lines: [
         {
           "from": 0,
           "to": 3,
@@ -1061,6 +1061,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "to": 2,
           "thin": false
         }
-      ]]
+      ]
   }
 ];
