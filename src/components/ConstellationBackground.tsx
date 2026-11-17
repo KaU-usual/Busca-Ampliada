@@ -285,7 +285,7 @@ export default function ConstellationBackground() {
         })
 
         scheduleNext()
-      }, randomBetween(10000, 30000))
+      }, randomBetween(7000, 13000))
     }
 
     const demoTimer = window.setTimeout(() => {
