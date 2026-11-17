@@ -175,6 +175,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
   const [hovered, setHovered] = useState<string | null>(null)
   const [activeConstellation, setActiveConstellation] = useState(0)
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
+  const selectedConstellation = constellations.find(item => item.name === selected)
   useEffect(() => {
     if (theme !== 'dark' || constellations.length < 2) return
     const cycle = window.setInterval(() => {
@@ -484,28 +485,27 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
                 ))}
               </g>
 
-              {active && (
-                <g
-                  className="constellation-tooltip"
-                  transform={`translate(${tooltip.x} ${tooltip.y})`}
-                >
-                  <rect width="270" height="64" rx="10" />
-                  <text x="12" y="21" className="tooltip-name">{item.name}</text>
-                  <text x="12" y="40" className="tooltip-note">
-                    {noteLines.map((line, lineIndex) => (
-                      <tspan key={lineIndex} x="12" dy={lineIndex === 0 ? 0 : 11}>
-                        {line}
-                      </tspan>
-                    ))}
-                  </text>
-                </g>
-              )}
             </g>
           )
         })}
       </svg>
 
       </div>
+      {selectedConstellation && (
+        <section className="constellation-info-card" aria-live="polite">
+          <button
+            type="button"
+            className="constellation-info-close"
+            onClick={() => setSelected(null)}
+            aria-label="Fechar descrição da constelação"
+          >
+            ×
+          </button>
+          <span className="constellation-info-eyebrow">CONSTELAÇÃO</span>
+          <h3>{selectedConstellation.name}</h3>
+          <p>{selectedConstellation.note}</p>
+        </section>
+      )}
     </>
   )
 }
