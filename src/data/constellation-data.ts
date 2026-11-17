@@ -917,4 +917,73 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ]
   }
+,
+  {
+    code: "UMi",
+    name: "Ursa Menor",
+    note: "A Ursa Menor abriga Polaris, a Estrela do Norte, próxima ao polo celeste norte.",
+    position: [770, 65],
+    stars: [
+      { hip: 11767, name: "Polaris", ra: 2.5303, dec: 89.2641, mag: 1.98 },
+      { hip: 85822, name: "Yildun", ra: 17.5369, dec: 86.5863, mag: 4.35 },
+      { hip: 82080, name: "Epsilon UMi", ra: 16.7662, dec: 82.0373, mag: 4.21 },
+      { hip: 77055, name: "Eta UMi", ra: 15.7343, dec: 77.7945, mag: 4.95 },
+      { hip: 79822, name: "Zeta UMi", ra: 16.2942, dec: 75.7553, mag: 4.32 },
+      { hip: 75097, name: "Pherkad", ra: 15.3455, dec: 71.8339, mag: 3.05 },
+      { hip: 72607, name: "Kochab", ra: 14.8451, dec: 74.1555, mag: 2.08 }
+    ],
+    lines: [
+      { from: 0, to: 1, thin: false },
+      { from: 1, to: 2, thin: false },
+      { from: 2, to: 3, thin: false },
+      { from: 3, to: 4, thin: false },
+      { from: 4, to: 5, thin: false },
+      { from: 5, to: 6, thin: false },
+      { from: 6, to: 0, thin: false }
+    ]
+  },
+  {
+    code: "CMa",
+    name: "Cão Maior",
+    note: "Cão Maior reúne Sirius, a estrela mais brilhante do céu noturno, e forma a figura de um cão.",
+    position: [690, 545],
+    stars: [
+      { hip: 32349, name: "Sirius", ra: 6.7525, dec: -16.7161, mag: -1.46 },
+      { hip: 30324, name: "Mirzam", ra: 6.3783, dec: -17.9559, mag: 1.98 },
+      { hip: 31592, name: "Muliphein", ra: 6.6114, dec: -16.0313, mag: 4.12 },
+      { hip: 33579, name: "Adhara", ra: 6.9771, dec: -28.9721, mag: 1.50 },
+      { hip: 34444, name: "Wezen", ra: 7.1399, dec: -26.3932, mag: 1.84 },
+      { hip: 35904, name: "Aludra", ra: 7.4016, dec: -29.3031, mag: 2.45 },
+      { hip: 30122, name: "Furud", ra: 6.3385, dec: -30.0634, mag: 3.02 }
+    ],
+    lines: [
+      { from: 1, to: 0, thin: false },
+      { from: 0, to: 2, thin: false },
+      { from: 0, to: 4, thin: false },
+      { from: 4, to: 3, thin: false },
+      { from: 3, to: 5, thin: false },
+      { from: 3, to: 6, thin: true }
+    ]
+  },
+  {
+    code: "And",
+    name: "Andrômeda",
+    note: "Andrômeda é marcada por uma longa cadeia de estrelas e dá nome à famosa galáxia vizinha da Via Láctea.",
+    position: [260, 85],
+    stars: [
+      { hip: 677, name: "Alpheratz", ra: 0.1398, dec: 29.0904, mag: 2.06 },
+      { hip: 5447, name: "Mirach", ra: 1.1622, dec: 35.6206, mag: 2.05 },
+      { hip: 9640, name: "Almach", ra: 2.0649, dec: 42.3297, mag: 2.10 },
+      { hip: 3092, name: "Delta And", ra: 0.6555, dec: 30.8610, mag: 3.27 },
+      { hip: 7607, name: "Nu And", ra: 1.6332, dec: 41.4055, mag: 4.53 },
+      { hip: 116631, name: "51 And", ra: 23.6631, dec: 48.6282, mag: 3.57 }
+    ],
+    lines: [
+      { from: 0, to: 3, thin: true },
+      { from: 3, to: 1, thin: false },
+      { from: 1, to: 4, thin: true },
+      { from: 4, to: 2, thin: false },
+      { from: 2, to: 5, thin: true }
+    ]
+  }
 ];
