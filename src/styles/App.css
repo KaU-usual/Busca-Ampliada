@@ -5360,27 +5360,21 @@ html[data-theme="light"] .nexo-space-event {
   --planet-halo: rgba(191,185,173,.5) !important;
 }
 .site[data-theme="light"] .orbiting-category-1 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.18), transparent 34%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_mercury.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_mercury.jpg") !important;
 }
 /* Vênus: atmosfera dourada */
 .site[data-theme="light"] .orbiting-category-2 {
   --planet-halo: rgba(245,190,104,.58) !important;
 }
 .site[data-theme="light"] .orbiting-category-2 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,246,213,.24), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_venus_surface.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_venus_surface.jpg") !important;
 }
 /* Terra: oceanos, continentes e nuvens */
 .site[data-theme="light"] .orbiting-category-3 {
   --planet-halo: rgba(81,174,255,.72) !important;
 }
 .site[data-theme="light"] .orbiting-category-3 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_earth_daymap.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_earth_daymap.jpg") !important;
 }
 /* Marte */
 .site[data-theme="light"] .orbiting-category-4 {
@@ -5396,18 +5390,14 @@ html[data-theme="light"] .nexo-space-event {
   --planet-halo: rgba(222,179,132,.58) !important;
 }
 .site[data-theme="light"] .orbiting-category-5 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_jupiter.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_jupiter.jpg") !important;
 }
 /* Saturno: atmosfera e anéis */
 .site[data-theme="light"] .orbiting-category-6 {
   --planet-halo: rgba(231,201,151,.58) !important;
 }
 .site[data-theme="light"] .orbiting-category-6 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_saturn.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_saturn.jpg") !important;
 }
 .site[data-theme="light"] .orbiting-category-6 .category-icon::after {
   width: 190% !important;
@@ -5421,18 +5411,14 @@ html[data-theme="light"] .nexo-space-event {
   --planet-halo: rgba(126,220,232,.6) !important;
 }
 .site[data-theme="light"] .orbiting-category-7 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_uranus.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_uranus.jpg") !important;
 }
 /* Netuno */
 .site[data-theme="light"] .orbiting-category-8 {
   --planet-halo: rgba(74,115,255,.65) !important;
 }
 .site[data-theme="light"] .orbiting-category-8 .planet-surface {
-  background-image:
-    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
-    url("https://inove2.solarsystemscope.com/textures/download/2k_neptune.jpg") !important;
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_neptune.jpg") !important;
 }
 
 /* Em telas intermediárias, o Sol continua proporcional sem invadir a busca. */
