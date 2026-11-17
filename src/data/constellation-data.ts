@@ -159,103 +159,128 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 3.65
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 1,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 3,
-        "thin": false
-      },
-      {
-        "from": 3,
-        "to": 4,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 5,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 6,
-        "thin": false
-      },
-      {
-        "from": 6,
-        "to": 3,
-        "thin": false
-      },
-      {
-        "from": 6,
-        "to": 7,
-        "thin": true
-      },
-      {
-        "from": 7,
-        "to": 8,
-        "thin": true
-      },
-      {
-        "from": 8,
-        "to": 9,
-        "thin": true
-      },
-      {
-        "from": 8,
-        "to": 10,
-        "thin": true
-      },
-      {
-        "from": 5,
-        "to": 11,
-        "thin": true
-      },
-      {
-        "from": 11,
-        "to": 12,
-        "thin": true
-      },
-      {
-        "from": 12,
-        "to": 13,
-        "thin": true
-      },
-      {
-        "from": 12,
-        "to": 14,
-        "thin": true
-      },
-      {
-        "from": 11,
-        "to": 15,
-        "thin": true
-      },
-      {
-        "from": 15,
-        "to": 16,
-        "thin": true
-      },
-      {
-        "from": 16,
-        "to": 17,
-        "thin": true
-      },
-      {
-        "from": 17,
-        "to": 4,
-        "thin": true
-      }
-    ]
+    "lines": [[
+        {
+          "from": 6,
+          "to": 7,
+          "thin": false
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "thin": false
+        },
+        {
+          "from": 10,
+          "to": 9,
+          "thin": false
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "thin": false
+        },
+        {
+          "from": 10,
+          "to": 8,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 7,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "thin": false
+        },
+        {
+          "from": 6,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 17,
+          "thin": false
+        },
+        {
+          "from": 17,
+          "to": 15,
+          "thin": false
+        },
+        {
+          "from": 15,
+          "to": 17,
+          "thin": false
+        },
+        {
+          "from": 17,
+          "to": 16,
+          "thin": false
+        },
+        {
+          "from": 16,
+          "to": 15,
+          "thin": false
+        },
+        {
+          "from": 15,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 5,
+          "to": 15,
+          "thin": false
+        },
+        {
+          "from": 15,
+          "to": 12,
+          "thin": false
+        },
+        {
+          "from": 12,
+          "to": 13,
+          "thin": false
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "thin": false
+        }
+      ]]
   },
   {
     "code": "Ori",
@@ -400,113 +425,103 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 4.64
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 1,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 3,
-        "to": 4,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 5,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 6,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 7,
-        "thin": false
-      },
-      {
-        "from": 7,
-        "to": 8,
-        "thin": false
-      },
-      {
-        "from": 8,
-        "to": 0,
-        "thin": false
-      },
-      {
-        "from": 0,
-        "to": 9,
-        "thin": false
-      },
-      {
-        "from": 9,
-        "to": 10,
-        "thin": false
-      },
-      {
-        "from": 10,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 11,
-        "thin": false
-      },
-      {
-        "from": 11,
-        "to": 12,
-        "thin": false
-      },
-      {
-        "from": 12,
-        "to": 8,
-        "thin": false
-      },
-      {
-        "from": 11,
-        "to": 13,
-        "thin": false
-      },
-      {
-        "from": 13,
-        "to": 14,
-        "thin": false
-      },
-      {
-        "from": 14,
-        "to": 15,
-        "thin": false
-      },
-      {
-        "from": 15,
-        "to": 16,
-        "thin": false
-      },
-      {
-        "from": 13,
-        "to": 17,
-        "thin": false
-      },
-      {
-        "from": 17,
-        "to": 18,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 7,
-        "thin": false
-      }
-    ]
+    "lines": [[
+        {
+          "from": 8,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 0,
+          "to": 9,
+          "thin": false
+        },
+        {
+          "from": 9,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 0,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 11,
+          "thin": false
+        },
+        {
+          "from": 11,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 11,
+          "thin": false
+        },
+        {
+          "from": 11,
+          "to": 12,
+          "thin": false
+        },
+        {
+          "from": 12,
+          "to": 12,
+          "thin": false
+        },
+        {
+          "from": 12,
+          "to": 8,
+          "thin": false
+        },
+        {
+          "from": 18,
+          "to": 17,
+          "thin": false
+        },
+        {
+          "from": 17,
+          "to": 13,
+          "thin": false
+        },
+        {
+          "from": 13,
+          "to": 11,
+          "thin": false
+        },
+        {
+          "from": 11,
+          "to": 13,
+          "thin": false
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 7,
+          "thin": false
+        },
+        {
+          "from": 7,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 6,
+          "to": 5,
+          "thin": false
+        }
+      ]]
   },
   {
     "code": "Cas",
@@ -553,28 +568,28 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.28
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 1,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 3,
-        "thin": false
-      },
-      {
-        "from": 3,
-        "to": 4,
-        "thin": false
-      }
-    ]
+    "lines": [[
+        {
+          "from": 4,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 0,
+          "thin": false
+        }
+      ]]
   },
   {
     "code": "Sco",
@@ -677,68 +692,53 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.56
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 1,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 3,
-        "thin": false
-      },
-      {
-        "from": 3,
-        "to": 4,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 5,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 6,
-        "thin": false
-      },
-      {
-        "from": 6,
-        "to": 7,
-        "thin": false
-      },
-      {
-        "from": 7,
-        "to": 8,
-        "thin": false
-      },
-      {
-        "from": 8,
-        "to": 9,
-        "thin": false
-      },
-      {
-        "from": 9,
-        "to": 10,
-        "thin": false
-      },
-      {
-        "from": 9,
-        "to": 11,
-        "thin": false
-      },
-      {
-        "from": 9,
-        "to": 12,
-        "thin": false
-      }
-    ]
+    "lines": [[
+        {
+          "from": 12,
+          "to": 10,
+          "thin": false
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "thin": false
+        },
+        {
+          "from": 11,
+          "to": 10,
+          "thin": false
+        },
+        {
+          "from": 9,
+          "to": 8,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 7,
+          "thin": false
+        },
+        {
+          "from": 7,
+          "to": 6,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "thin": false
+        }
+      ]]
   },
   {
     "code": "Cru",
@@ -778,18 +778,23 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.79
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 3,
-        "thin": false
-      }
-    ]
+    "lines": [[
+        {
+          "from": 1,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "thin": false
+        }
+      ]]
   },
   {
     "code": "Leo",
@@ -864,58 +869,68 @@ export const constellationCatalog: ConstellationDefinition[] = [
         "mag": 2.97
       }
     ],
-    "lines": [
-      {
-        "from": 0,
-        "to": 1,
-        "thin": false
-      },
-      {
-        "from": 1,
-        "to": 2,
-        "thin": false
-      },
-      {
-        "from": 2,
-        "to": 3,
-        "thin": false
-      },
-      {
-        "from": 3,
-        "to": 4,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 5,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 0,
-        "thin": false
-      },
-      {
-        "from": 4,
-        "to": 6,
-        "thin": false
-      },
-      {
-        "from": 6,
-        "to": 7,
-        "thin": false
-      },
-      {
-        "from": 7,
-        "to": 8,
-        "thin": false
-      },
-      {
-        "from": 5,
-        "to": 1,
-        "thin": false
-      }
-    ]
+    "lines": [[
+        {
+          "from": 2,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 6,
+          "thin": false
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "thin": false
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 5,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 0,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 5,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 8,
+          "to": 3,
+          "thin": false
+        }
+      ]]
   }
 ,
   {
@@ -932,15 +947,43 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 75097, name: "Pherkad", ra: 15.3455, dec: 71.8339, mag: 3.05 },
       { hip: 72607, name: "Kochab", ra: 14.8451, dec: 74.1555, mag: 2.08 }
     ],
-    lines: [
-      { from: 0, to: 1, thin: false },
-      { from: 1, to: 2, thin: false },
-      { from: 2, to: 3, thin: false },
-      { from: 3, to: 4, thin: false },
-      { from: 4, to: 5, thin: false },
-      { from: 5, to: 6, thin: false },
-      { from: 6, to: 0, thin: false }
-    ]
+    lines: [[
+        {
+          "from": 0,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "thin": false
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "thin": false
+        },
+        {
+          "from": 6,
+          "to": 3,
+          "thin": false
+        }
+      ]]
   },
   {
     code: "CMa",
@@ -956,14 +999,38 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 35904, name: "Aludra", ra: 7.4016, dec: -29.3031, mag: 2.45 },
       { hip: 30122, name: "Furud", ra: 6.3385, dec: -30.0634, mag: 3.02 }
     ],
-    lines: [
-      { from: 1, to: 0, thin: false },
-      { from: 0, to: 2, thin: false },
-      { from: 0, to: 4, thin: false },
-      { from: 4, to: 3, thin: false },
-      { from: 3, to: 5, thin: false },
-      { from: 3, to: 6, thin: true }
-    ]
+    lines: [[
+        {
+          "from": 1,
+          "to": 0,
+          "thin": false
+        },
+        {
+          "from": 0,
+          "to": 4,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "thin": false
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "thin": false
+        }
+      ]]
   },
   {
     code: "And",
@@ -978,12 +1045,22 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 7607, name: "Nu And", ra: 1.6332, dec: 41.4055, mag: 4.53 },
       { hip: 116631, name: "51 And", ra: 23.6631, dec: 48.6282, mag: 3.57 }
     ],
-    lines: [
-      { from: 0, to: 3, thin: true },
-      { from: 3, to: 1, thin: false },
-      { from: 1, to: 4, thin: true },
-      { from: 4, to: 2, thin: false },
-      { from: 2, to: 5, thin: true }
-    ]
+    lines: [[
+        {
+          "from": 0,
+          "to": 3,
+          "thin": false
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "thin": false
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "thin": false
+        }
+      ]]
   }
 ];
