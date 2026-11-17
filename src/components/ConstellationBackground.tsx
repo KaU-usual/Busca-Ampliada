@@ -115,7 +115,7 @@ const backgroundStars = createBackgroundStars()
 
 type SpaceEvent = {
   id: number
-  kind: 'meteor' | 'asteroid' | 'ship' | 'rocket'
+  kind: 'meteor' | 'ship' | 'rocket'
   x: number
   y: number
   angle: number
@@ -186,55 +186,29 @@ export default function ConstellationBackground() {
       Math.random() * (max - min) + min
 
     const createEvent = (
-      kind: SpaceEvent['kind'],
+      _kind: 'meteor',
       index: number,
       delay: number
     ): SpaceEvent => {
-      const duration = kind === 'meteor'
-        ? randomBetween(1700, 2300)
-        : randomBetween(2600, 4400)
-
-      let x: number
-      let y = randomBetween(90, 680)
-      let path: string
-
-      if (kind === 'asteroid') {
-        // Cada asteroide cruza a área inteira, de um canto ao oposto.
-        const reverse = Math.random() < 0.5
-        x = reverse ? 1100 : -120
-        y = reverse ? -90 : 850
-
-        const endX = reverse ? -120 : 1120
-        const endY = reverse ? 850 : -90
-        const dx = endX - x
-        const dy = endY - y
-        const curve = randomBetween(-130, 130)
-
-        path =
-          `M 0 0 C ${dx * 0.28} ${dy * 0.28 + curve} ` +
-          `${dx * 0.7} ${dy * 0.7 - curve} ${dx} ${dy}`
-      } else {
-        x = -140
-        const travelX = 1250
-        const travelY = randomBetween(-260, 260)
-        const curve = randomBetween(-45, 45)
-
-        path =
-          `M 0 0 C ${travelX * 0.28} ${curve} ` +
-          `${travelX * 0.7} ${travelY - curve * 0.25} ` +
-          `${travelX} ${travelY}`
-      }
+      const duration = randomBetween(1900, 2600)
+      const x = -140
+      const y = randomBetween(90, 680)
+      const travelX = 1250
+      const travelY = randomBetween(-220, 220)
+      const curve = randomBetween(-65, 65)
+      const path =
+        `M 0 0 C ${travelX * 0.28} ${curve} ` +
+        `${travelX * 0.7} ${travelY - curve * 0.25} ` +
+        `${travelX} ${travelY}`
 
       return {
         id: Date.now() + Math.random() * 100000 + index,
-        kind,
+        kind: 'meteor',
         x,
         y,
         angle: randomBetween(-8, 8),
         duration,
-        scale: kind === 'meteor'
-          ? randomBetween(1.05, 1.45)
-          : randomBetween(0.58, 0.9),
+        scale: randomBetween(1.15, 1.55),
         path,
         delay,
       }
@@ -296,15 +270,7 @@ export default function ConstellationBackground() {
           return
         }
 
-        const isMeteor = Math.random() < 0.65
-        const events: SpaceEvent[] = []
-
-        if (isMeteor) {
-          events.push(createEvent('meteor', 0, 0))
-        } else {
-          // Apenas um asteroide por passagem, atravessando o céu.
-          events.push(createEvent('asteroid', 0, 0))
-        }
+        const events: SpaceEvent[] = [createEvent('meteor', 0, 0)]
 
         setSpaceEvents(current => [...current, ...events])
 
@@ -338,14 +304,13 @@ export default function ConstellationBackground() {
           y: 165,
           path: 'M 0 0 C 180 -45 390 35 690 190',
         },
-        {
-          ...createEvent('asteroid', 1, 0),
-          x: 470,
-          y: 490,
-          path: 'M 0 0 C 100 -85 270 -115 430 -65',
-        },
         // Uma nave aparece no primeiro ciclo para validar desenho e deslocamento.
-        createVehicleEvent(),
+        {
+          ...createVehicleEvent(),
+          x: 90,
+          y: 205,
+          path: 'M 0 0 C 220 -35 520 35 900 0',
+        },
       ]
 
       setSpaceEvents(current => [...current, ...demoEvents])
@@ -400,15 +365,13 @@ export default function ConstellationBackground() {
           >
             <g
               className={`nexo-space-event ${event.kind}`}
-              style={{ animationDuration: `${event.duration}ms` }}
+              style={{ animationDuration: `${event.duration}ms`, opacity: event.kind === 'ship' || event.kind === 'rocket' ? 1 : undefined }}
             >
               {event.kind === 'meteor' && (
                 <g className="nexo-meteor-streak">
-                  <path
-                    d="M -180 34 Q -85 17 0 0"
-                    className="nexo-meteor-tail"
-                    style={{ animationDuration: `${event.duration}ms` }}
-                  />
+                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-halo" style={{ animationDuration: `${event.duration}ms` }} />
+                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-tail" style={{ animationDuration: `${event.duration}ms` }} />
+                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-core" style={{ animationDuration: `${event.duration}ms` }} />
                   <circle cx="0" cy="0" r="3.8" className="nexo-meteor-head" />
                 </g>
               )}
@@ -480,50 +443,13 @@ export default function ConstellationBackground() {
                       <circle className="nexo-rocket-window" cx="20" cy="0" r="3.2" />
                     </g>
                   )}
+                  <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
                 </g>
-                <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
                 </>
               )}
 
-              {event.kind === 'asteroid' && (
-                <>
-                <g className="nexo-asteroid-body">
-                  <polygon
-                    points="-24,-7 -19,-20 -5,-25 12,-20 25,-7 22,11 10,23 -9,22 -23,10"
-                    className="nexo-asteroid-shape"
-                  />
-                  <polygon points="-19,-8 -5,-22 3,-13 -4,2 -20,5" className="nexo-asteroid-facet light" />
-                  <polygon points="3,-13 12,-18 23,-7 13,2" className="nexo-asteroid-facet dark" />
-                  <polygon points="-4,2 13,2 10,20 -9,19" className="nexo-asteroid-facet mid" />
-                  <circle cx="-11" cy="-5" r="4.2" className="nexo-asteroid-crater" />
-                  <circle cx="10" cy="9" r="5" className="nexo-asteroid-crater" />
-                  <circle cx="8" cy="-11" r="2.5" className="nexo-asteroid-crater" />
-                  <path d="M-17 12 L-7 8 L1 15 L13 13 M-16 -2 L-8 -10 L-1 -7 L4 -15 M5 4 L13 1 L18 8" className="nexo-asteroid-detail" />
-                  <path d="M-2 -21 L2 -14 M16 -3 L11 2 M-20 7 L-13 4" className="nexo-asteroid-highlight" />
-                </g>
-                <animateMotion
-                  begin={`${event.delay}ms`}
-                  dur={`${event.duration}ms`}
-                  path={event.path}
-                  rotate="auto"
-                  calcMode="linear"
-                  fill="freeze"
-                />
-                </>
-              )}
 
-              {event.kind === 'meteor' && (
-                <animateTransform
-                  attributeName="transform"
-                  type="translate"
-                  from="0 0"
-                  to="1250 180"
-                  dur={`${event.duration}ms`}
-                  begin={`${event.delay}ms`}
-                  calcMode="linear"
-                  fill="freeze"
-                />
-              )}
+
             </g>
           </g>
         ))}
