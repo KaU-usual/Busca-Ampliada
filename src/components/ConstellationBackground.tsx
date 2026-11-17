@@ -219,8 +219,8 @@ export default function ConstellationBackground() {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
         if (isDark && !reducedMotion) {
-          // Cada passagem traz uma pequena formação, em vez de uma nave isolada.
-          const waveSize = Math.random() < 0.35 ? 3 : 2
+          // Formações mais frequentes e variadas, com entradas escalonadas.
+          const waveSize = Math.random() < 0.45 ? 4 : 3
           for (let index = 0; index < waveSize; index++) {
             const launch = window.setTimeout(() => {
               if (cancelled) return
@@ -230,13 +230,13 @@ export default function ConstellationBackground() {
                 setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
               }, vehicle.duration + 500)
               cleanupTimers.push(cleanup)
-            }, index * 1350)
+            }, index * 850)
             cleanupTimers.push(launch)
           }
         }
 
         scheduleVehicle()
-      }, randomBetween(10000, 15000))
+      }, randomBetween(4500, 6500))
       cleanupTimers.push(timer)
     }
 
