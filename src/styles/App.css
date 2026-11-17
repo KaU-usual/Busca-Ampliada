@@ -1779,7 +1779,7 @@ body {
   --constellation-halo: #73dfff;
   --constellation-line: #83dfff99;
   --constellation-glow: #6edfff99;
-  --constellation-label-bg: #101c39ed;
+  --constellation-label-bg: #101c39b8;
   --constellation-label-text: #f0faff;
 }
 
@@ -1788,7 +1788,7 @@ body {
   --constellation-halo: #d9a94d;
   --constellation-line: #315b8c99;
   --constellation-glow: #d9a94d88;
-  --constellation-label-bg: #fff8e9f2;
+  --constellation-label-bg: #fff8e9c9;
   --constellation-label-text: #19385d;
 }
 
@@ -2755,9 +2755,9 @@ html[data-theme="light"] .nexo-space-event {
   animation: nexo-moon-breath 11s ease-in-out infinite;
 }
 
-.site[data-theme="dark"] .atom-core {
-  width: 45%;
-  height: 45%;
+ .site[data-theme="dark"] .atom-core {
+  width: 49%;
+  height: 49%;
   overflow: hidden;
   border: 1px solid #e4edf5aa;
   border-radius: 50%;
@@ -3837,77 +3837,13 @@ html[data-theme="light"] .nexo-space-event {
   }
 }
 
-/* O painel usa pixels reais, não as coordenadas reduzidas do SVG. */
-.constellation-info-card {
-  display: none;
-}
-
+/* A descrição agora acompanha a própria constelação. */
 @media (max-width: 650px) {
-  .constellation-layer {
-    z-index: 20;
-  }
-
   .constellation-tooltip {
-    display: none !important;
-  }
-
-  .constellation-info-card {
-    display: block;
-    position: fixed;
-    z-index: 25;
-    left: 16px;
-    right: 16px;
-    bottom: max(16px, env(safe-area-inset-bottom));
-    width: auto;
-    box-sizing: border-box;
-    padding: 17px 48px 17px 18px;
-    border: 1px solid rgba(117, 217, 255, .42);
-    border-radius: 16px;
-    background: rgba(8, 19, 42, .96);
-    color: #f0faff;
-    box-shadow:
-      0 12px 36px rgba(0, 0, 0, .42),
-      0 0 24px rgba(83, 190, 255, .12);
-    backdrop-filter: blur(16px);
-    pointer-events: auto;
-  }
-
-  .constellation-info-eyebrow {
-    display: block;
-    margin-bottom: 5px;
-    color: #83dfff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-  }
-
-  .constellation-info-card h3 {
-    margin: 0 0 7px;
-    color: #fff;
-    font-size: 18px;
-    line-height: 1.25;
-  }
-
-  .constellation-info-card p {
-    margin: 0;
-    color: #d5e7f5;
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  .constellation-info-close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    width: 34px;
-    height: 34px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .08);
-    color: #fff;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
+    display: inline !important;
+    transform: scale(1.65);
+    transform-box: fill-box;
+    transform-origin: center;
   }
 }
 
@@ -3962,4 +3898,1976 @@ html[data-theme="light"] .nexo-space-event {
   animation-name: nexo-meteor-travel-v2 !important;
   animation-timing-function: linear !important;
   animation-fill-mode: forwards !important;
+}
+
+/* NEXO — naves e foguetes ocasionais, exclusivos do céu noturno. */
+.site[data-theme="dark"] .nexo-space-event.ship,
+.site[data-theme="dark"] .nexo-space-event.rocket {
+  opacity: 1 !important;
+}
+
+.site[data-theme="light"] .nexo-space-event.ship,
+.site[data-theme="light"] .nexo-space-event.rocket {
+  display: none !important;
+}
+
+.nexo-vehicle-art {
+  overflow: visible;
+  filter: drop-shadow(0 0 5px rgba(92, 205, 255, .55))
+          drop-shadow(0 0 12px rgba(88, 134, 255, .28));
+}
+
+.nexo-ship-hull path,
+.nexo-rocket-hull path {
+  fill: #9fb8d2;
+  stroke: #e1f4ff;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+}
+
+.nexo-ship-hull path:nth-child(2n),
+.nexo-rocket-hull path:nth-child(2n) {
+  fill: #526e91;
+  stroke: #a8d9f5;
+}
+
+.nexo-ship-hull .nexo-ship-cockpit,
+.nexo-rocket-window {
+  fill: #b9f3ff;
+  stroke: #ffffff;
+  stroke-width: 1;
+  filter: drop-shadow(0 0 5px #73dfff);
+}
+
+.nexo-ship-highlight {
+  fill: none;
+  stroke: #f1fbff;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: .85;
+}
+
+.nexo-vehicle-engine-glow {
+  fill: #4abfff;
+  opacity: .32;
+  filter: blur(4px);
+}
+
+.nexo-vehicle-engine-flame {
+  fill: #b8f4ff;
+  filter: drop-shadow(0 0 4px #69dfff) drop-shadow(0 0 9px #4b9dff);
+  transform-origin: -18px 0;
+  animation: nexo-engine-flicker .18s ease-in-out infinite alternate;
+}
+
+.nexo-vehicle-art.rocket .nexo-rocket-hull path:first-child {
+  fill: #d7e3ef;
+}
+
+.nexo-vehicle-art.variant-1 .nexo-ship-hull path:first-child {
+  fill: #a8a1c9;
+}
+
+.nexo-vehicle-art.variant-2 .nexo-ship-hull path:first-child {
+  fill: #819fb4;
+}
+
+.nexo-vehicle-art.variant-3 .nexo-ship-hull path:first-child {
+  fill: #c2b89d;
+}
+
+@keyframes nexo-engine-flicker {
+  from { opacity: .72; transform: scaleX(.82); }
+  to { opacity: 1; transform: scaleX(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nexo-vehicle-art,
+  .nexo-vehicle-engine-flame {
+    animation: none !important;
+  }
+
+  .nexo-space-event.ship,
+  .nexo-space-event.rocket {
+    display: none !important;
+  }
+}
+
+
+
+/* NEXO — acabamento cinematográfico das naves e propulsão. */
+.nexo-vehicle-art.ship {
+  filter:
+    drop-shadow(0 0 5px rgba(112, 207, 255, .72))
+    drop-shadow(0 0 13px rgba(65, 145, 255, .48))
+    drop-shadow(0 0 24px rgba(87, 116, 255, .22));
+}
+
+.nexo-ship-hull {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .7));
+}
+
+.nexo-ship-hull path {
+  fill: #b9d0e3;
+  stroke: #effaff;
+  stroke-width: 1.35;
+  stroke-linejoin: round;
+}
+
+.nexo-ship-hull path:nth-child(2n) {
+  fill: #526f91;
+  stroke: #b8e7ff;
+}
+
+.nexo-ship-hull .nexo-ship-armor {
+  fill: #203c5e;
+  stroke: #75c9f4;
+  stroke-width: 1;
+}
+
+.nexo-ship-hull .nexo-ship-cockpit {
+  fill: #d9fbff;
+  stroke: #fff;
+  stroke-width: 1.1;
+  filter:
+    drop-shadow(0 0 4px #8beaff)
+    drop-shadow(0 0 10px #4abfff);
+}
+
+.nexo-ship-highlight {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  opacity: .92;
+}
+
+.nexo-vehicle-engine-glow {
+  fill: #39bfff;
+  opacity: .5;
+  filter: blur(6px);
+}
+
+.nexo-vehicle-engine-flame {
+  fill: #d8fbff;
+  filter:
+    drop-shadow(0 0 5px #b8f7ff)
+    drop-shadow(0 0 12px #50caff)
+    drop-shadow(0 0 22px #397dff);
+}
+
+
+/* NEXO — refinamento do céu: camadas seguras, Lua e eventos mais legíveis. */
+.constellation-layer {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.constellation-layer svg {
+  pointer-events: auto !important;
+}
+
+.site > :not(.constellation-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Aumenta discretamente a Lua sem alterar sua posição na composição. */
+.site[data-theme="dark"] .atom-core {
+  width: 49% !important;
+  height: 49% !important;
+}
+
+/* Estrelas cadentes: cauda mais longa, espessa e luminosa. */
+.nexo-meteor-tail {
+  stroke-width: 5 !important;
+  stroke-dasharray: 190 !important;
+  stroke-dashoffset: 190 !important;
+  filter:
+    drop-shadow(0 0 7px #c7eaff)
+    drop-shadow(0 0 16px #78c8ff)
+    drop-shadow(0 0 27px #4c9dff) !important;
+}
+
+.nexo-meteor-head {
+  r: 5.2px;
+  filter:
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 14px #a9dcff)
+    drop-shadow(0 0 25px #69baff) !important;
+}
+
+.nexo-meteor-streak {
+  opacity: 1 !important;
+}
+
+/* Naves com silhuetas variadas e acabamento metálico cinematográfico. */
+.nexo-vehicle-art {
+  opacity: .96;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.nexo-vehicle-art.variant-1 .nexo-ship-hull path:first-child { fill: #b6a7d8; }
+.nexo-vehicle-art.variant-2 .nexo-ship-hull path:first-child { fill: #8fb9c9; }
+.nexo-vehicle-art.variant-3 .nexo-ship-hull path:first-child { fill: #d2c49f; }
+.nexo-vehicle-art.variant-4 .nexo-ship-hull path:first-child { fill: #c4ccd8; }
+.nexo-vehicle-art.variant-5 .nexo-ship-hull path:first-child { fill: #a9c6b6; }
+.nexo-vehicle-art.variant-6 .nexo-ship-hull path:first-child { fill: #c5a995; }
+.nexo-vehicle-art.variant-7 .nexo-ship-hull path:first-child { fill: #9daed0; }
+
+.nexo-vehicle-art.variant-4 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-5 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-6 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-7 .nexo-ship-hull path:nth-child(2) {
+  fill: #344c70;
+  stroke: #b9e7ff;
+}
+
+.nexo-space-event.ship,
+.nexo-space-event.rocket {
+  pointer-events: none !important;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer {
+    z-index: 0 !important;
+  }
+}
+
+
+/* NEXO — remove por completo a exibição de asteroides no céu. */
+.site[data-theme="dark"] .nexo-space-event.asteroid,
+.nexo-space-event.asteroid,
+.nexo-asteroid-body {
+  display: none !important;
+}
+
+/* NEXO — estrelas cadentes com rastro luminoso real. */
+.site[data-theme="dark"] .nexo-space-event.meteor {
+  opacity: 1;
+  animation-name: nexo-meteor-travel-v2 !important;
+  animation-timing-function: linear !important;
+  animation-fill-mode: forwards !important;
+}
+.site[data-theme="dark"] .nexo-meteor-streak {
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 12px rgba(102, 190, 255, .8));
+}
+.site[data-theme="dark"] .nexo-meteor-halo,
+.site[data-theme="dark"] .nexo-meteor-tail,
+.site[data-theme="dark"] .nexo-meteor-core {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 190;
+  stroke-dashoffset: 190;
+  animation-name: nexo-meteor-trail-natural !important;
+  animation-timing-function: ease-out !important;
+  animation-fill-mode: forwards !important;
+}
+.site[data-theme="dark"] .nexo-meteor-halo {
+  stroke: #4aaeff;
+  stroke-width: 15;
+  opacity: .8;
+  filter: blur(5px) drop-shadow(0 0 18px #4aaeff);
+}
+.site[data-theme="dark"] .nexo-meteor-tail {
+  stroke: #72caff !important;
+  stroke-width: 7 !important;
+  opacity: 1;
+  filter: drop-shadow(0 0 7px #d8f1ff) drop-shadow(0 0 16px #69baff) drop-shadow(0 0 30px #398dff) !important;
+}
+.site[data-theme="dark"] .nexo-meteor-core {
+  stroke: #f4fcff;
+  stroke-width: 2.4;
+  opacity: 1;
+  filter: drop-shadow(0 0 7px #fff);
+}
+.site[data-theme="dark"] .nexo-meteor-head {
+  r: 6.5px;
+  fill: #fff;
+  filter: drop-shadow(0 0 7px #fff) drop-shadow(0 0 17px #a9dcff) drop-shadow(0 0 30px #69baff) !important;
+}
+@keyframes nexo-meteor-trail-natural {
+  0% { stroke-dashoffset: 190; opacity: 0; }
+  12% { opacity: 1; }
+  68% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+/* NEXO — nave visível e em movimento apenas no modo escuro. */
+.site[data-theme="dark"] .nexo-space-event.ship,
+.site[data-theme="dark"] .nexo-space-event.rocket {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .nexo-vehicle-art {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="light"] .nexo-space-event.ship,
+.site[data-theme="light"] .nexo-space-event.rocket {
+  display: none !important;
+}
+
+
+/* NEXO — estrelas cadentes removidas definitivamente do visual. */
+.nexo-space-event.meteor,
+.nexo-meteor-streak,
+.nexo-meteor-halo,
+.nexo-meteor-tail,
+.nexo-meteor-core,
+.nexo-meteor-head {
+  display: none !important;
+}
+
+/* NEXO — movimento contínuo aplicado ao grupo inteiro da nave/foguete. */
+.site[data-theme="dark"] .nexo-space-event.ship,
+.site[data-theme="dark"] .nexo-space-event.rocket {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .nexo-vehicle-art {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+/* NEXO — paletas variadas para cada nave e foguete. */
+.nexo-vehicle-art.variant-0 { --nexo-hull: #78b7d8; --nexo-panel: #315c83; --nexo-edge: #b9e9ff; --nexo-engine: #39c5ff; --nexo-flame: #d8f8ff; --nexo-window: #c9fbff; }
+.nexo-vehicle-art.variant-1 { --nexo-hull: #b49ae8; --nexo-panel: #59427f; --nexo-edge: #e0caff; --nexo-engine: #b47cff; --nexo-flame: #f1dfff; --nexo-window: #f1dcff; }
+.nexo-vehicle-art.variant-2 { --nexo-hull: #56c7c0; --nexo-panel: #236b70; --nexo-edge: #b3fff0; --nexo-engine: #31e0c8; --nexo-flame: #d3fff6; --nexo-window: #d3fff7; }
+.nexo-vehicle-art.variant-3 { --nexo-hull: #e0b65f; --nexo-panel: #805528; --nexo-edge: #ffe5a6; --nexo-engine: #ff9d38; --nexo-flame: #fff0c4; --nexo-window: #fff2c9; }
+.nexo-vehicle-art.variant-4 { --nexo-hull: #e17c91; --nexo-panel: #783b59; --nexo-edge: #ffc1d0; --nexo-engine: #ff668f; --nexo-flame: #ffe0e9; --nexo-window: #ffe2ec; }
+.nexo-vehicle-art.variant-5 { --nexo-hull: #91bd78; --nexo-panel: #42643b; --nexo-edge: #d8f5b8; --nexo-engine: #8be35c; --nexo-flame: #edffd9; --nexo-window: #eaffd8; }
+.nexo-vehicle-art.variant-6 { --nexo-hull: #d28e63; --nexo-panel: #75432f; --nexo-edge: #ffd0a7; --nexo-engine: #ff874d; --nexo-flame: #ffe2cd; --nexo-window: #ffe7d5; }
+.nexo-vehicle-art.variant-7 { --nexo-hull: #829ee0; --nexo-panel: #3e4e87; --nexo-edge: #c5d5ff; --nexo-engine: #6d91ff; --nexo-flame: #e0eaff; --nexo-window: #e0ebff; }
+
+.nexo-vehicle-art[class*="variant-"] .nexo-ship-hull path:first-child,
+.nexo-vehicle-art[class*="variant-"] .nexo-rocket-hull path:first-child {
+  fill: var(--nexo-hull) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art[class*="variant-"] .nexo-ship-hull path:nth-child(2n),
+.nexo-vehicle-art[class*="variant-"] .nexo-rocket-hull path:nth-child(2n) {
+  fill: var(--nexo-panel) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art .nexo-ship-hull .nexo-ship-armor {
+  fill: var(--nexo-panel) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art .nexo-ship-cockpit,
+.nexo-vehicle-art .nexo-rocket-window {
+  fill: var(--nexo-window) !important;
+  filter: drop-shadow(0 0 5px var(--nexo-window)) !important;
+}
+.nexo-vehicle-art .nexo-vehicle-engine-glow {
+  fill: var(--nexo-engine) !important;
+}
+.nexo-vehicle-art .nexo-vehicle-engine-flame {
+  fill: var(--nexo-flame) !important;
+  filter: drop-shadow(0 0 5px var(--nexo-engine)) drop-shadow(0 0 12px var(--nexo-engine)) !important;
+}
+
+/* A trajetória é animada no grupo externo, sem competir com transforms do desenho. */
+.site[data-theme="dark"] .nexo-space-event {
+  transform: none;
+  will-change: opacity;
+}
+
+
+/* NEXO — interação e descrições completas das constelações. */
+.constellation-layer svg { pointer-events: auto !important; }
+.constellation-group { pointer-events: visiblePainted !important; }
+.constellation-info-card { pointer-events: auto !important; }
+
+/* Silhuetas originais inspiradas em caças e cargueiros espaciais de ficção científica. */
+.nexo-model-tie .nexo-ship-cockpit {
+  fill: #d6eaff !important;
+  stroke: #fff !important;
+  filter: drop-shadow(0 0 7px #9edaff) !important;
+}
+.nexo-model-tie path:not(.nexo-ship-cockpit) {
+  stroke-width: 1.5;
+}
+.nexo-model-falcon {
+  filter: drop-shadow(0 0 7px rgba(255, 220, 150, .7)) !important;
+}
+.nexo-model-dish {
+  fill: none;
+  stroke: var(--nexo-edge, #e5f3ff);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+.nexo-model-cannon {
+  fill: none;
+  stroke: var(--nexo-edge, #e5f3ff);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.nexo-model-destroyer {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, .28));
+}
+
+
+/* NEXO — correção definitiva da camada de interação das constelações.
+   A camada fica acima do conteúdo, mas só os desenhos recebem cliques.
+   Isso mantém a interface utilizável e permite abrir o cartão de descrição. */
+.site .constellation-layer {
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site .constellation-layer .constellation-group {
+  pointer-events: visiblePainted !important;
+  cursor: pointer;
+}
+.site .constellation-layer .constellation-info-card {
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
+
+
+/* NEXO — constelações acessíveis durante todo o ciclo visual.
+   A opacidade continua animada; a visibilidade e a área de interação
+   permanecem disponíveis para abrir as descrições a qualquer momento. */
+.site .constellation-layer .constellation-group {
+  visibility: visible !important;
+  pointer-events: all !important;
+}
+
+
+/* NEXO — naves como cenário: sempre atrás da pesquisa e dos controles. */
+.site .nexo-space-layer {
+  position: fixed !important;
+  inset: 0;
+  z-index: 0 !important;
+  overflow: hidden;
+  pointer-events: none !important;
+}
+
+.site .nexo-space-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none !important;
+}
+
+.site .constellation-layer {
+  z-index: 2 !important;
+}
+
+
+/* NEXO — constelações como cenário, sem cobrir pesquisa e funcionalidades.
+   O cartão de detalhes permanece fora da camada para continuar acessível. */
+.site .constellation-layer {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site .constellation-layer .constellation-group {
+  pointer-events: all !important;
+  cursor: pointer;
+}
+.site .constellation-layer .constellation-tooltip {
+  pointer-events: none !important;
+}
+.site .constellation-info-card {
+  position: fixed !important;
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
+
+
+/* NEXO — Lua ampliada à esquerda e Terra com textura realista (modo escuro). */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(500px, 48vw, 650px) !important;
+  left: clamp(70px, 13vw, 185px) !important;
+  right: auto !important;
+  top: 50% !important;
+}
+
+.site[data-theme="dark"] .atom-core {
+  width: 54% !important;
+  height: 54% !important;
+}
+
+/* Exibe somente cerca de 1/3 do globo. A textura e as nuvens deslizam
+   em velocidades diferentes para simular a rotação de uma esfera. */
+.site[data-theme="dark"] .earth-planet {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 0;
+  width: clamp(620px, 66vw, 820px);
+  aspect-ratio: 1;
+  transform: translate(66.6667%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  background: #061b38;
+  box-shadow:
+    0 0 0 2px rgba(112, 190, 255, .24),
+    0 0 28px 5px rgba(67, 164, 255, .26),
+    0 0 95px 18px rgba(35, 112, 220, .18),
+    inset 22px 8px 42px rgba(184, 235, 255, .2),
+    inset -70px -12px 100px rgba(0, 5, 25, .94);
+}
+
+.site[data-theme="dark"] .earth-surface {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("https://unpkg.com/three@0.160.0/examples/textures/planets/earth_atmos_2048.jpg");
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  background-repeat: repeat-x;
+  animation: nexo-earth-surface-turn 105s linear infinite;
+  filter: saturate(1.18) contrast(1.06) brightness(.9);
+}
+
+.site[data-theme="dark"] .earth-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 27% 28%, rgba(255,255,255,.2), transparent 34%),
+    radial-gradient(ellipse at 72% 58%, transparent 28%, rgba(0,8,30,.25) 62%, rgba(0,4,20,.82) 100%);
+  box-shadow:
+    inset 18px 0 32px rgba(210, 244, 255, .16),
+    inset -85px -8px 105px rgba(0, 5, 24, .92);
+}
+
+.site[data-theme="dark"] .earth-clouds {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("https://unpkg.com/three@0.160.0/examples/textures/planets/earth_clouds_1024.png");
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  background-repeat: repeat-x;
+  mix-blend-mode: screen;
+  opacity: .42;
+  filter: brightness(1.12);
+  animation: nexo-earth-clouds-turn 132s linear infinite;
+}
+
+@keyframes nexo-earth-surface-turn {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes nexo-earth-clouds-turn {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(430px, 52vw, 540px) !important;
+    left: clamp(30px, 9vw, 105px) !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 620px;
+    transform: translate(66.6667%, -50%);
+  }
+}
+
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 330px !important;
+    left: 22px !important;
+    top: 76% !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 420px;
+    top: 78%;
+    transform: translate(66.6667%, -50%);
+    opacity: .9;
+  }
+}
+
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 285px !important;
+    left: 8px !important;
+    top: 77% !important;
+  }
+  .site[data-theme="dark"] .earth-planet {
+    width: 340px;
+    top: 82%;
+    transform: translate(66.6667%, -50%);
+    opacity: .82;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="dark"] .earth-surface,
+  .site[data-theme="dark"] .earth-clouds {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO — ajuste de desempenho, Terra menor e textura corrigida. */
+.site[data-theme="dark"] .earth-planet {
+  width: 480px !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translate(82%, -50%) !important;
+  opacity: .96 !important;
+  box-shadow:
+    0 0 0 1px rgba(112, 190, 255, .28),
+    0 0 22px 4px rgba(67, 164, 255, .22),
+    inset 12px 4px 28px rgba(184, 235, 255, .12),
+    inset -42px -8px 58px rgba(0, 5, 25, .42) !important;
+}
+.site[data-theme="dark"] .earth-surface {
+  background-image: url("https://cdn.apewebapps.com/threejs/160/examples/textures/planets/earth_atmos_2048.jpg") !important;
+  background-size: 200% 100% !important;
+  filter: saturate(1.25) contrast(1.04) brightness(1.18) !important;
+  animation-duration: 160s !important;
+}
+.site[data-theme="dark"] .earth-clouds {
+  display: none !important;
+}
+.site[data-theme="dark"] .earth-surface::after {
+  background:
+    radial-gradient(ellipse at 28% 28%, rgba(255,255,255,.12), transparent 38%),
+    radial-gradient(ellipse at 72% 58%, transparent 36%, rgba(0,8,30,.12) 78%) !important;
+  box-shadow: inset 12px 0 24px rgba(210,244,255,.1) !important;
+}
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 390px !important;
+    transform: translate(82%, -50%) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 300px !important;
+    top: 78% !important;
+    transform: translate(82%, -50%) !important;
+    opacity: .78 !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 240px !important;
+    top: 82% !important;
+    transform: translate(82%, -50%) !important;
+    opacity: .68 !important;
+  }
+}
+
+/* As estrelas de fundo ficam estáticas: menos trabalho contínuo para a GPU. */
+.site .constellation-layer .background-stars circle {
+  animation: none !important;
+}
+
+/* Só os traços/estrelas das constelações recebem interação; a camada fica
+   sobre o fundo, sem bloquear campos, botões ou a pesquisa. */
+.site .constellation-layer {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: auto !important;
+}
+.site .constellation-layer .constellation-group {
+  visibility: visible !important;
+  pointer-events: visiblePainted !important;
+  cursor: pointer !important;
+}
+.site .constellation-layer .constellation-tooltip {
+  pointer-events: none !important;
+}
+.site .constellation-info-card {
+  position: fixed !important;
+  z-index: 30 !important;
+  pointer-events: auto !important;
+}
+
+
+/* NEXO — contraste dos oceanos e equilíbrio visual entre Terra e Lua. */
+.site[data-theme="dark"] .earth-planet {
+  width: 520px !important;
+  transform: translate(82%, -50%) !important;
+  box-shadow:
+    0 0 0 1px rgba(132, 205, 255, .42),
+    0 0 28px 6px rgba(49, 151, 255, .32),
+    0 0 62px 10px rgba(30, 104, 220, .18),
+    inset 12px 4px 24px rgba(210, 244, 255, .18),
+    inset -36px -6px 48px rgba(0, 5, 25, .22) !important;
+}
+.site[data-theme="dark"] .earth-surface {
+  filter: saturate(1.8) contrast(1.24) brightness(1.12) !important;
+}
+.site[data-theme="dark"] .earth-surface::after {
+  background:
+    radial-gradient(ellipse at 28% 28%, rgba(255,255,255,.16), transparent 38%),
+    radial-gradient(ellipse at 72% 58%, transparent 40%, rgba(0,8,30,.08) 82%) !important;
+  box-shadow:
+    inset 12px 0 24px rgba(210,244,255,.14),
+    inset -38px -4px 48px rgba(0, 8, 28, .18) !important;
+}
+
+/* Lua ligeiramente menor para dar mais espaço visual à Terra. */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(450px, 44vw, 580px) !important;
+}
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 410px !important;
+    transform: translate(82%, -50%) !important;
+  }
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(390px, 48vw, 500px) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 315px !important;
+  }
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 310px !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 250px !important;
+  }
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 270px !important;
+  }
+}
+
+
+/* NEXO — Lua um pouco menor, preservando sua aparência atual. */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(390px, 38vw, 500px) !important;
+}
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(340px, 43vw, 430px) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 275px !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 240px !important;
+  }
+}
+
+
+/* NEXO — acabamento astronômico unificado, com animações leves. */
+
+/* LUA: mapa real de crateras, relevo tonal e sombra esférica. */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(350px, 34vw, 450px) !important;
+}
+.site[data-theme="dark"] .atom-core {
+  width: 49% !important;
+  height: 49% !important;
+  background-image:
+    radial-gradient(ellipse at 30% 24%, rgba(255,255,255,.2), transparent 36%),
+    radial-gradient(ellipse at 70% 72%, rgba(7,16,30,.12), transparent 58%),
+    url("https://cdn.apewebapps.com/threejs/163/examples/textures/planets/moon_1024.jpg") !important;
+  background-size: 100% 100%, 100% 100%, 200% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  box-shadow:
+    inset -24px -12px 30px rgba(4,12,25,.72),
+    inset 7px 5px 14px rgba(255,255,255,.28),
+    0 0 24px rgba(198,218,245,.18) !important;
+  animation:
+    nexo-moon-rotation 180s linear infinite,
+    nexo-moon-texture-turn 180s linear infinite !important;
+}
+@keyframes nexo-moon-texture-turn {
+  from { background-position: center, center, 0% 50%; }
+  to { background-position: center, center, 100% 50%; }
+}
+
+/* SOL: fotosfera mais definida, com granulação e manchas discretas. */
+.site[data-theme="light"] .atom-core {
+  background:
+    radial-gradient(ellipse at 26% 28%, rgba(255,255,220,.95) 0 5%, transparent 25%),
+    radial-gradient(ellipse at 68% 62%, rgba(205,69,22,.5) 0 3%, transparent 17%),
+    radial-gradient(ellipse at 38% 72%, rgba(255,239,160,.5) 0 2%, transparent 15%),
+    radial-gradient(circle at 38% 34%, #fff4b2 0%, #ffd45b 34%, #ff9b2e 68%, #d94e1c 100%) !important;
+  animation: none !important;
+}
+.site[data-theme="light"] .atom-core::before {
+  opacity: .48;
+  filter: none !important;
+  animation: none !important;
+}
+.site[data-theme="light"] .atom-bouncer .glow {
+  animation: none !important;
+  opacity: .72;
+}
+
+/* PLANETAS: mais relevo, faixas atmosféricas e sombras direcionais. */
+.site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+  box-shadow:
+    inset -6px -4px 8px rgba(5,12,26,.68),
+    inset 2px 2px 5px rgba(255,255,255,.48),
+    0 0 7px var(--planet-halo) !important;
+  filter: saturate(1.16) contrast(1.08);
+}
+.site[data-theme="light"] .orbiting-category-1 {
+  --planet-surface:
+    radial-gradient(circle at 34% 27%, #f0ece1 0 7%, transparent 29%),
+    radial-gradient(ellipse at 62% 65%, #8a8379 0 12%, transparent 28%),
+    radial-gradient(circle at 30% 25%, #d7d0c4 0%, #999186 48%, #403e3d 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-2 {
+  --planet-surface:
+    radial-gradient(ellipse at 35% 24%, rgba(255,246,207,.8), transparent 35%),
+    repeating-linear-gradient(155deg, transparent 0 7px, rgba(166,103,48,.22) 8px 11px, transparent 13px 19px),
+    radial-gradient(circle at 30% 25%, #fff0c4 0%, #d9a45f 52%, #70452e 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-3 {
+  --planet-surface:
+    radial-gradient(ellipse at 31% 55%, #78bd65 0 12%, transparent 14%),
+    radial-gradient(ellipse at 67% 35%, #a3c96f 0 10%, transparent 12%),
+    radial-gradient(ellipse at 62% 72%, #4d985b 0 13%, transparent 15%),
+    radial-gradient(circle at 30% 25%, #c8efff 0%, #3288c8 52%, #102d68 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-4 {
+  --planet-surface:
+    radial-gradient(ellipse at 63% 58%, rgba(105,43,31,.62) 0 9%, transparent 22%),
+    radial-gradient(ellipse at 30% 28%, #ffc59c 0%, #d76b4a 49%, #592923 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-5 {
+  --planet-surface:
+    radial-gradient(ellipse at 62% 58%, #a94e35 0 7%, transparent 9%),
+    repeating-linear-gradient(0deg, #a86f50 0 3px, #e8c9a0 4px 7px, #c18d68 8px 10px, #f0d8b3 11px 14px),
+    radial-gradient(circle at 30% 25%, #f4dfbd, #805039) !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .planet-surface {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(151,112,65,.16) 6px 8px),
+    radial-gradient(circle at 30% 25%, #fff0c5 0%, #d7b476 54%, #795235 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-7 {
+  --planet-surface:
+    radial-gradient(ellipse at 34% 26%, rgba(235,255,255,.8), transparent 32%),
+    repeating-linear-gradient(165deg, transparent 0 9px, rgba(36,126,151,.18) 10px 12px),
+    radial-gradient(circle at 30% 25%, #e3ffff 0%, #83d2d5 53%, #28677f 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-8 {
+  --planet-surface:
+    radial-gradient(ellipse at 34% 25%, rgba(200,226,255,.85), transparent 30%),
+    repeating-linear-gradient(155deg, transparent 0 10px, rgba(10,35,105,.2) 11px 13px),
+    radial-gradient(circle at 30% 25%, #a8d1ff 0%, #376fc4 54%, #101e5b 100%) !important;
+}
+
+/* Naves e foguetes: acabamento metálico, sem cintilação rápida e custosa. */
+.nexo-ship-hull path,
+.nexo-rocket-hull path {
+  stroke-width: 1.45 !important;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+.nexo-ship-hull .nexo-ship-armor {
+  filter: drop-shadow(0 0 2px rgba(95,190,255,.2));
+}
+.nexo-ship-highlight {
+  stroke-width: 1.45 !important;
+  opacity: .96 !important;
+}
+.nexo-vehicle-engine-flame {
+  animation: none !important;
+  opacity: .92;
+  filter:
+    drop-shadow(0 0 4px var(--nexo-engine, #55cfff))
+    drop-shadow(0 0 9px var(--nexo-engine, #55cfff)) !important;
+}
+.nexo-vehicle-engine-glow {
+  filter: none !important;
+  opacity: .34 !important;
+}
+
+/* Evita reservar camadas de GPU para cada planeta o tempo todo. */
+.site[data-theme="light"] .orbiting-category {
+  will-change: auto !important;
+}
+.site[data-theme="light"] .atom-core,
+.site[data-theme="light"] .atom-bouncer .glow {
+  will-change: auto !important;
+}
+
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(315px, 38vw, 400px) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 255px !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 225px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="dark"] .atom-core {
+    animation: none !important;
+  }
+}
+
+
+/* CORREÇÃO — o SVG de constelações não pode cobrir os controles do cabeçalho. */
+.site .topbar {
+  position: relative !important;
+  z-index: 50 !important;
+}
+.site .constellation-layer {
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site .constellation-layer .constellation-group {
+  pointer-events: visiblePainted !important;
+}
+
+
+/* NEXO — refinamento de alta definição da Lua e dos astros no tema claro. */
+
+/* Textura lunar 3.840 × 1.920 px: Solar System Scope, baseada em dados NASA.
+   Licença CC BY 4.0: https://creativecommons.org/licenses/by/4.0/ */
+.site[data-theme="dark"] .atom-core {
+  background-image:
+    radial-gradient(ellipse at 31% 23%, rgba(255,255,255,.18), transparent 38%),
+    radial-gradient(ellipse at 72% 76%, rgba(0,7,18,.28), transparent 58%),
+    url("https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Solarsystemscope_texture_8k_moon.jpg/3840px-Solarsystemscope_texture_8k_moon.jpg?utm_campaign=index&utm_content=thumbnail&utm_source=commons.wikimedia.org") !important;
+  background-size: 100% 100%, 100% 100%, 200% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  filter: contrast(1.12) saturate(.68) brightness(.94);
+  box-shadow:
+    inset -28px -13px 34px rgba(3,9,18,.76),
+    inset 8px 6px 16px rgba(255,255,255,.3),
+    0 0 28px rgba(198,218,245,.22) !important;
+}
+.site[data-theme="dark"] .atom-core::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 24% 34%, transparent 0 2.1%, rgba(8,15,24,.34) 2.4%, transparent 3.5%),
+    radial-gradient(circle at 67% 26%, transparent 0 3.2%, rgba(8,15,24,.3) 3.5%, transparent 4.6%),
+    radial-gradient(circle at 57% 66%, transparent 0 2.4%, rgba(8,15,24,.28) 2.7%, transparent 3.8%),
+    radial-gradient(circle at 34% 73%, transparent 0 1.5%, rgba(8,15,24,.3) 1.8%, transparent 2.8%),
+    radial-gradient(circle at 78% 52%, transparent 0 1.8%, rgba(8,15,24,.26) 2.1%, transparent 3.1%);
+  opacity: .48;
+}
+.site[data-theme="dark"] .atom-core::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 34% 30%, transparent 38%, rgba(0,5,16,.08) 66%, rgba(0,4,15,.72) 100%);
+  box-shadow: inset -22px -8px 28px rgba(0,4,16,.4);
+}
+
+/* Sol: granulação mais rica e contraste controlado, sem animação pesada. */
+.site[data-theme="light"] .atom-core {
+  filter: contrast(1.1) saturate(1.12);
+  box-shadow:
+    inset -15px -17px 25px rgba(151,53,15,.48),
+    inset 8px 7px 18px rgba(255,255,211,.82),
+    0 0 26px rgba(255,220,112,.86),
+    0 0 62px rgba(255,143,43,.62),
+    0 0 118px rgba(255,103,35,.34) !important;
+}
+.site[data-theme="light"] .atom-core::after {
+  background:
+    radial-gradient(ellipse at 24% 36%, rgba(255,248,188,.78) 0 3%, transparent 13%),
+    radial-gradient(ellipse at 69% 27%, rgba(196,68,22,.52) 0 4%, transparent 15%),
+    radial-gradient(ellipse at 61% 71%, rgba(222,91,20,.48) 0 5%, transparent 18%),
+    radial-gradient(ellipse at 31% 76%, rgba(255,235,150,.58) 0 4%, transparent 14%),
+    repeating-conic-gradient(from 8deg at 48% 48%, rgba(255,246,177,.1) 0deg 5deg, transparent 6deg 13deg),
+    radial-gradient(ellipse at 50% 48%, rgba(255,250,204,.28), transparent 58%) !important;
+  mix-blend-mode: screen;
+  opacity: .82;
+}
+
+/* Planetas: superfícies com mais relevo e características visuais próprias. */
+.site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+  background-size: 230% 100% !important;
+  background-repeat: repeat-x !important;
+  box-shadow:
+    inset -7px -5px 9px rgba(4,10,22,.7),
+    inset 2px 2px 5px rgba(255,255,255,.58),
+    0 0 9px var(--planet-halo) !important;
+  filter: saturate(1.2) contrast(1.12);
+}
+.site[data-theme="light"] .orbiting-category-1 {
+  --planet-surface:
+    radial-gradient(circle at 25% 32%, rgba(255,255,255,.72) 0 5%, transparent 8%),
+    radial-gradient(circle at 68% 63%, rgba(45,43,41,.72) 0 8%, transparent 11%),
+    radial-gradient(circle at 46% 48%, rgba(72,68,63,.58) 0 5%, transparent 8%),
+    radial-gradient(circle at 30% 25%, #e5dfd3 0%, #aaa195 48%, #494642 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-2 {
+  --planet-surface:
+    repeating-linear-gradient(165deg, transparent 0 5px, rgba(164,105,49,.2) 6px 8px, transparent 9px 14px),
+    radial-gradient(ellipse at 34% 24%, rgba(255,250,220,.9), transparent 36%),
+    radial-gradient(circle at 30% 25%, #fff0c8 0%, #dca968 52%, #81502f 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-3 {
+  --planet-surface:
+    radial-gradient(ellipse at 24% 35%, rgba(255,255,255,.7) 0 9%, transparent 24%),
+    radial-gradient(ellipse at 35% 55%, #6da85b 0 13%, transparent 15%),
+    radial-gradient(ellipse at 68% 37%, #9dbd69 0 12%, transparent 15%),
+    radial-gradient(ellipse at 63% 74%, #4e8e55 0 12%, transparent 15%),
+    radial-gradient(circle at 30% 25%, #c9edfa 0%, #398bc3 53%, #102d68 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-4 {
+  --planet-surface:
+    radial-gradient(ellipse at 63% 58%, rgba(111,42,28,.72) 0 9%, transparent 22%),
+    radial-gradient(circle at 28% 34%, rgba(255,206,158,.72) 0 5%, transparent 18%),
+    repeating-linear-gradient(145deg, transparent 0 8px, rgba(96,40,29,.16) 9px 11px, transparent 12px 17px),
+    radial-gradient(circle at 30% 25%, #ffc49d 0%, #d66a4c 50%, #612d28 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-5 {
+  --planet-surface:
+    radial-gradient(ellipse at 69% 56%, #a94e35 0 7%, transparent 9%),
+    repeating-linear-gradient(0deg, #a66d4e 0 3px, #ead2ae 4px 7px, #c18b66 8px 10px, #f1dfc1 11px 14px),
+    radial-gradient(circle at 30% 25%, #f6e5c8, #80513b) !important;
+}
+.site[data-theme="light"] .orbiting-category-6 {
+  --planet-surface:
+    repeating-linear-gradient(0deg, rgba(139,105,63,.22) 0 2px, transparent 3px 6px, rgba(255,245,211,.48) 7px 9px),
+    radial-gradient(circle at 30% 25%, #fff0c5 0%, #d7b476 54%, #795235 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-7 {
+  --planet-surface:
+    repeating-linear-gradient(165deg, transparent 0 8px, rgba(36,126,151,.16) 9px 11px, transparent 12px 17px),
+    radial-gradient(ellipse at 34% 26%, rgba(235,255,255,.86), transparent 34%),
+    radial-gradient(circle at 30% 25%, #e3ffff 0%, #83d2d5 53%, #28677f 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-8 {
+  --planet-surface:
+    radial-gradient(ellipse at 66% 60%, rgba(15,40,112,.56) 0 8%, transparent 16%),
+    repeating-linear-gradient(155deg, transparent 0 8px, rgba(10,35,105,.22) 9px 12px, transparent 13px 19px),
+    radial-gradient(circle at 30% 25%, #a8d1ff 0%, #376fc4 54%, #101e5b 100%) !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  border-width: 4px !important;
+  box-shadow: 0 0 7px rgba(177,135,74,.55), inset 0 0 4px rgba(255,245,215,.45) !important;
+}
+
+
+/* NEXO — Sol imponente com textura solar real e planetas proporcionais. */
+/* Mapa solar de 4.096 × 2.048 px, Solar System Scope, CC BY 4.0.
+   Textura baseada em dados e imagens NASA; licença e créditos:
+   https://commons.wikimedia.org/wiki/File:Solarsystemscope_texture_8k_sun.jpg */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(420px, 43vw, 560px) !important;
+}
+
+/* O disco cresce de 43% para 55% do conjunto e ganha uma fotosfera detalhada. */
+.site[data-theme="light"] .atom-core {
+  width: 55% !important;
+  height: 55% !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,239,174,.9) !important;
+  background-image:
+    radial-gradient(circle at 32% 28%, rgba(255,255,225,.2), transparent 42%),
+    radial-gradient(ellipse at 70% 75%, rgba(104,24,5,.24), transparent 62%),
+    url("https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Solarsystemscope_texture_8k_sun.jpg/3840px-Solarsystemscope_texture_8k_sun.jpg?utm_campaign=index&utm_content=thumbnail&utm_source=commons.wikimedia.org") !important;
+  background-size: 100% 100%, 100% 100%, 220% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  filter: saturate(1.12) contrast(1.12) brightness(1.02);
+  box-shadow:
+    inset -24px -18px 30px rgba(111,34,8,.58),
+    inset 10px 8px 20px rgba(255,250,206,.5),
+    0 0 22px rgba(255,222,123,.95),
+    0 0 58px rgba(255,155,49,.86),
+    0 0 112px rgba(255,111,35,.62),
+    0 0 180px rgba(255,91,24,.34) !important;
+  animation: nexo-sun-texture-drift 110s linear infinite !important;
+}
+@keyframes nexo-sun-texture-drift {
+  from { background-position: center, center, 0% 50%; }
+  to { background-position: center, center, 100% 50%; }
+}
+
+/* Granulação e regiões ativas sobre a fotosfera, sem os antigos raios pontudos. */
+.site[data-theme="light"] .atom-core::before {
+  inset: -13% !important;
+  opacity: .42 !important;
+  filter: drop-shadow(0 0 10px rgba(255,171,52,.65)) !important;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 8deg,
+      rgba(255,226,143,.5) 9deg 10deg,
+      transparent 11deg 28deg,
+      rgba(255,151,42,.48) 29deg 31deg,
+      transparent 32deg 52deg,
+      rgba(255,235,168,.44) 53deg 54deg,
+      transparent 55deg 82deg,
+      rgba(255,151,42,.42) 83deg 85deg,
+      transparent 86deg 112deg,
+      rgba(255,226,143,.48) 113deg 114deg,
+      transparent 115deg 144deg,
+      rgba(255,151,42,.42) 145deg 147deg,
+      transparent 148deg 180deg,
+      rgba(255,235,168,.44) 181deg 182deg,
+      transparent 183deg 214deg,
+      rgba(255,151,42,.42) 215deg 217deg,
+      transparent 218deg 250deg,
+      rgba(255,226,143,.48) 251deg 252deg,
+      transparent 253deg 286deg,
+      rgba(255,151,42,.42) 287deg 289deg,
+      transparent 290deg 322deg,
+      rgba(255,235,168,.44) 323deg 324deg,
+      transparent 325deg 360deg
+    );
+  -webkit-mask: radial-gradient(circle, transparent 0 48%, #000 55% 67%, transparent 78%) !important;
+  mask: radial-gradient(circle, transparent 0 48%, #000 55% 67%, transparent 78%) !important;
+  animation: nexo-solar-rays 95s linear infinite !important;
+}
+.site[data-theme="light"] .atom-core::after {
+  inset: 0 !important;
+  opacity: .48 !important;
+  background:
+    radial-gradient(ellipse at 24% 38%, rgba(255,250,204,.65) 0 2.5%, transparent 10%),
+    radial-gradient(ellipse at 68% 29%, rgba(107,27,9,.6) 0 3.5%, transparent 11%),
+    radial-gradient(ellipse at 59% 69%, rgba(128,33,8,.52) 0 4%, transparent 13%),
+    radial-gradient(ellipse at 34% 76%, rgba(255,233,156,.56) 0 3%, transparent 11%),
+    radial-gradient(ellipse at 50% 48%, rgba(255,244,184,.14), transparent 62%) !important;
+  mix-blend-mode: screen;
+  box-shadow: inset -20px -12px 26px rgba(103,26,5,.35) !important;
+}
+
+/* Coroa mais larga e suave, para o Sol parecer luminoso sem virar uma bola chapada. */
+.site[data-theme="light"] .atom-bouncer .glow {
+  width: 96% !important;
+  height: 96% !important;
+  top: 2% !important;
+  left: 2% !important;
+  opacity: .92 !important;
+  filter: blur(42px) !important;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,222,.9) 0 18%,
+    rgba(255,210,91,.78) 34%,
+    rgba(255,139,40,.55) 55%,
+    rgba(246,89,25,.2) 68%,
+    transparent 78%
+  ) !important;
+}
+
+/* Planetas crescem junto com o conjunto; órbitas já usam --atom-size. */
+.site[data-theme="light"] .orbiting-category-1 { --planet-size: 16px !important; }
+.site[data-theme="light"] .orbiting-category-2 { --planet-size: 24px !important; }
+.site[data-theme="light"] .orbiting-category-3 { --planet-size: 27px !important; }
+.site[data-theme="light"] .orbiting-category-4 { --planet-size: 21px !important; }
+.site[data-theme="light"] .orbiting-category-5 { --planet-size: 42px !important; }
+.site[data-theme="light"] .orbiting-category-6 { --planet-size: 33px !important; }
+.site[data-theme="light"] .orbiting-category-7 { --planet-size: 28px !important; }
+.site[data-theme="light"] .orbiting-category-8 { --planet-size: 27px !important; }
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  width: 175% !important;
+  height: 46% !important;
+  border-width: 4px !important;
+}
+
+/* Em telas pequenas, mantemos a composição compacta e evitamos cobrir a busca. */
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(185px, 56vw, 220px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 48% !important;
+    height: 48% !important;
+  }
+  .site[data-theme="light"] .orbiting-category-1 { --planet-size: 11px !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --planet-size: 15px !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --planet-size: 13px !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --planet-size: 27px !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --planet-size: 22px !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --planet-size: 17px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO — segunda etapa: texturas reais de alta resolução e Sol maior.
+   Mapas Solar System Scope baseados em imagens/dados NASA, CC BY 4.0:
+   https://www.solarsystemscope.com/textures/ */
+
+/* Sol maior, com fotosfera 8K e iluminação volumétrica mais natural. */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(480px, 48vw, 600px) !important;
+}
+.site[data-theme="light"] .atom-core {
+  width: 64% !important;
+  height: 64% !important;
+  border: 1px solid rgba(255,239,185,.72) !important;
+  background-image:
+    radial-gradient(circle at 29% 24%, rgba(255,255,225,.12), transparent 38%),
+    radial-gradient(ellipse at 74% 78%, rgba(82,18,2,.28), transparent 60%),
+    url("https://inove2.solarsystemscope.com/textures/download/8k_sun.jpg") !important;
+  background-size: 100% 100%, 100% 100%, 220% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  filter: saturate(1.2) contrast(1.2) brightness(1.03) !important;
+  box-shadow:
+    inset -30px -24px 38px rgba(91,24,4,.62),
+    inset 12px 9px 24px rgba(255,251,207,.48),
+    0 0 28px rgba(255,225,142,.98),
+    0 0 72px rgba(255,157,48,.9),
+    0 0 138px rgba(255,104,28,.66),
+    0 0 205px rgba(255,76,17,.38) !important;
+  animation: nexo-sun-texture-drift 105s linear infinite !important;
+}
+
+/* A textura já contém granulação solar; removemos os raios artificiais
+   e usamos apenas um halo fino na borda do disco. */
+.site[data-theme="light"] .atom-core::before {
+  inset: -2% !important;
+  opacity: .5 !important;
+  background: radial-gradient(
+    circle,
+    transparent 0 70%,
+    rgba(255,230,157,.08) 76%,
+    rgba(255,173,62,.3) 88%,
+    transparent 100%
+  ) !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  animation: none !important;
+}
+.site[data-theme="light"] .atom-core::after {
+  inset: 0 !important;
+  opacity: .52 !important;
+  background:
+    radial-gradient(ellipse at 24% 37%, rgba(255,248,196,.24) 0 2%, transparent 9%),
+    radial-gradient(ellipse at 69% 29%, rgba(104,25,4,.42) 0 3.5%, transparent 10%),
+    radial-gradient(ellipse at 58% 70%, rgba(111,27,3,.34) 0 4%, transparent 12%),
+    radial-gradient(circle at 50% 48%, transparent 54%, rgba(76,16,1,.18) 83%, rgba(43,8,0,.46) 100%) !important;
+  mix-blend-mode: multiply !important;
+  box-shadow: inset -22px -16px 28px rgba(75,17,2,.3) !important;
+}
+.site[data-theme="light"] .atom-bouncer .glow {
+  width: 112% !important;
+  height: 112% !important;
+  top: -6% !important;
+  left: -6% !important;
+  filter: blur(48px) !important;
+  opacity: .9 !important;
+}
+
+/* Os tamanhos definidos em --planet-size passam a controlar os discos.
+   Cada planeta recebe seu próprio mapa equiretangular em 2K. */
+.site[data-theme="light"] .orbiting-category {
+  width: var(--planet-size, 24px) !important;
+  height: var(--planet-size, 24px) !important;
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.site[data-theme="light"] .orbiting-category:hover {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: 0 0 18px var(--planet-halo, rgba(255,255,255,.42)) !important;
+  transform: scale(1.08);
+}
+.site[data-theme="light"] .orbiting-category > .category-icon {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  position: relative !important;
+}
+.site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background-size: 220% 100% !important;
+  background-position: 0% 50% !important;
+  background-repeat: repeat-x !important;
+  box-shadow:
+    inset -7px -5px 10px rgba(0,0,0,.72),
+    inset 2px 2px 5px rgba(255,255,255,.48),
+    0 0 8px var(--planet-halo, rgba(255,255,255,.25)) !important;
+  animation: nexo-planet-turn 48s linear infinite !important;
+}
+@keyframes nexo-planet-turn {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* Mercúrio */
+.site[data-theme="light"] .orbiting-category-1 {
+  --planet-halo: rgba(191,185,173,.5) !important;
+}
+.site[data-theme="light"] .orbiting-category-1 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_mercury.jpg") !important;
+}
+/* Vênus: atmosfera dourada */
+.site[data-theme="light"] .orbiting-category-2 {
+  --planet-halo: rgba(245,190,104,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-2 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_venus_surface.jpg") !important;
+}
+/* Terra: oceanos, continentes e nuvens */
+.site[data-theme="light"] .orbiting-category-3 {
+  --planet-halo: rgba(81,174,255,.72) !important;
+}
+.site[data-theme="light"] .orbiting-category-3 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_earth_daymap.jpg") !important;
+}
+/* Marte */
+.site[data-theme="light"] .orbiting-category-4 {
+  --planet-halo: rgba(232,111,75,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-4 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,235,211,.18), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_mars.jpg") !important;
+}
+/* Júpiter: faixas atmosféricas e Grande Mancha Vermelha */
+.site[data-theme="light"] .orbiting-category-5 {
+  --planet-halo: rgba(222,179,132,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-5 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_jupiter.jpg") !important;
+}
+/* Saturno: atmosfera e anéis */
+.site[data-theme="light"] .orbiting-category-6 {
+  --planet-halo: rgba(231,201,151,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_saturn.jpg") !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  width: 190% !important;
+  height: 48% !important;
+  border: 3px solid rgba(191,157,104,.88) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 7px rgba(177,135,74,.52), inset 0 0 4px rgba(255,245,215,.4) !important;
+}
+/* Urano */
+.site[data-theme="light"] .orbiting-category-7 {
+  --planet-halo: rgba(126,220,232,.6) !important;
+}
+.site[data-theme="light"] .orbiting-category-7 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_uranus.jpg") !important;
+}
+/* Netuno */
+.site[data-theme="light"] .orbiting-category-8 {
+  --planet-halo: rgba(74,115,255,.65) !important;
+}
+.site[data-theme="light"] .orbiting-category-8 .planet-surface {
+  background-image: url("https://inove2.solarsystemscope.com/textures/download/2k_neptune.jpg") !important;
+}
+
+/* Em telas intermediárias, o Sol continua proporcional sem invadir a busca. */
+@media (max-width: 1100px) and (min-width: 751px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(340px, 43vw, 460px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 60% !important;
+    height: 60% !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(185px, 56vw, 220px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 48% !important;
+    height: 48% !important;
+  }
+  .site[data-theme="light"] .orbiting-category-1 { --planet-size: 11px !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --planet-size: 15px !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --planet-size: 13px !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --planet-size: 27px !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --planet-size: 22px !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --planet-size: 17px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core,
+  .site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+    animation: none !important;
+  }
+}
+
+
+/* NEXO — corrige a distância orbital após o aumento do Sol.
+   Os planetas ficam fora da fotosfera, com espaço visual entre as superfícies. */
+.site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .445) !important; }
+.site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .455) !important; }
+.site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .465) !important; }
+.site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .475) !important; }
+.site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .445) !important; }
+.site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .455) !important; }
+.site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .465) !important; }
+.site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .475) !important; }
+
+/* No celular, o Sol é menor; as órbitas acompanham essa escala. */
+@media (max-width: 750px) {
+  .site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .39) !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .40) !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .41) !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .42) !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .39) !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .40) !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .41) !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .42) !important; }
+}
+
+
+/* NEXO — oito trilhas orbitais individuais, discretas e alinhadas aos planetas. */
+.site[data-theme="light"] .atom-bouncer {
+  transform: translateY(-14px);
+}
+.site[data-theme="light"] .atom-orbit {
+  display: none !important;
+}
+.site[data-theme="light"] .solar-orbit {
+  --orbit-radius: calc(var(--atom-size) * .35);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  border: 1px solid rgba(164, 139, 105, .25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 5px rgba(220, 183, 125, .07);
+}
+.site[data-theme="light"] .solar-orbit-1 { --orbit-radius: calc(var(--atom-size) * .35); border-color: rgba(160, 151, 139, .30); }
+.site[data-theme="light"] .solar-orbit-2 { --orbit-radius: calc(var(--atom-size) * .37); border-color: rgba(198, 158, 105, .27); }
+.site[data-theme="light"] .solar-orbit-3 { --orbit-radius: calc(var(--atom-size) * .39); border-color: rgba(112, 159, 184, .28); }
+.site[data-theme="light"] .solar-orbit-4 { --orbit-radius: calc(var(--atom-size) * .41); border-color: rgba(194, 133, 105, .27); }
+.site[data-theme="light"] .solar-orbit-5 { --orbit-radius: calc(var(--atom-size) * .43); border-color: rgba(183, 157, 123, .29); }
+.site[data-theme="light"] .solar-orbit-6 { --orbit-radius: calc(var(--atom-size) * .45); border-color: rgba(183, 161, 117, .29); }
+.site[data-theme="light"] .solar-orbit-7 { --orbit-radius: calc(var(--atom-size) * .47); border-color: rgba(119, 174, 184, .30); }
+.site[data-theme="light"] .solar-orbit-8 { --orbit-radius: calc(var(--atom-size) * .49); border-color: rgba(113, 139, 190, .30); }
+
+/* As posições dos planetas acompanham exatamente os oito anéis. */
+.site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .35) !important; }
+.site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .37) !important; }
+.site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .39) !important; }
+.site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .41) !important; }
+.site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .43) !important; }
+.site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .45) !important; }
+.site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .47) !important; }
+.site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .49) !important; }
+
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    transform: translateY(-6px);
+  }
+  .site[data-theme="light"] .solar-orbit-1 { --orbit-radius: calc(var(--atom-size) * .32); }
+  .site[data-theme="light"] .solar-orbit-2 { --orbit-radius: calc(var(--atom-size) * .34); }
+  .site[data-theme="light"] .solar-orbit-3 { --orbit-radius: calc(var(--atom-size) * .36); }
+  .site[data-theme="light"] .solar-orbit-4 { --orbit-radius: calc(var(--atom-size) * .38); }
+  .site[data-theme="light"] .solar-orbit-5 { --orbit-radius: calc(var(--atom-size) * .40); }
+  .site[data-theme="light"] .solar-orbit-6 { --orbit-radius: calc(var(--atom-size) * .42); }
+  .site[data-theme="light"] .solar-orbit-7 { --orbit-radius: calc(var(--atom-size) * .44); }
+  .site[data-theme="light"] .solar-orbit-8 { --orbit-radius: calc(var(--atom-size) * .46); }
+
+  .site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .32) !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .34) !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .36) !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .38) !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .40) !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .42) !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .44) !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .46) !important; }
+}
+
+
+/* NEXO — composição equilibrada: destaque editorial à esquerda e sistema solar no canto. */
+@media (min-width: 901px) {
+  .site .hero-content {
+    width: min(54%, 720px) !important;
+    max-width: 720px !important;
+    align-self: flex-start !important;
+    margin: 42px auto 0 3% !important;
+    text-align: left !important;
+  }
+  .site .hero-intro {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    color: #e0e7fb !important;
+    text-shadow: 0 2px 18px rgba(7, 12, 30, .58);
+  }
+  .site .search-box {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .site .search-hint { justify-content: flex-start !important; }
+}
+.site .hero-title {
+  color: #fff !important;
+  text-shadow: 0 3px 24px rgba(5, 10, 28, .55), 0 0 42px rgba(151, 174, 255, .16) !important;
+}
+.site .hero-title span {
+  background-image: linear-gradient(100deg, #c3f1ff 0%, #d8ccff 54%, #ffffff 100%) !important;
+}
+.site .eyebrow {
+  color: #d2e5ff !important;
+  text-shadow: 0 1px 12px rgba(4, 9, 24, .55);
+}
+
+/* Sol fixo no canto inferior direito: não atravessa o título nem a pesquisa. */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(390px, 39vw, 500px) !important;
+  top: auto !important;
+  right: 3.5% !important;
+  bottom: 2% !important;
+  left: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+.site[data-theme="light"] .hero-art {
+  opacity: 1 !important;
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(320px, 37vw, 400px) !important;
+    right: 1.5% !important;
+    bottom: 5% !important;
+  }
+}
+@media (max-width: 900px) {
+  .site .hero-content {
+    width: min(720px, 100%) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+  .site .hero-intro { margin-left: auto !important; margin-right: auto !important; }
+  .site .search-box { margin-left: auto !important; margin-right: auto !important; }
+  .site .search-hint { justify-content: center !important; }
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(210px, 34vw, 300px) !important;
+    right: -5% !important;
+    bottom: 1% !important;
+    opacity: .62 !important;
+  }
+}
+@media (max-width: 650px) {
+  .site .hero-content { z-index: 4 !important; }
+  .site .hero-title {
+    text-shadow: 0 3px 22px rgba(5, 10, 28, .72) !important;
+  }
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: 205px !important;
+    right: -18% !important;
+    bottom: 0 !important;
+    opacity: .42 !important;
+  }
+}
+
+/* Naves: acabamento metálico mais nítido, com brilho concentrado na silhueta. */
+.site[data-theme="dark"] .nexo-vehicle-art {
+  filter:
+    drop-shadow(0 0 2px rgba(218, 239, 255, .48))
+    drop-shadow(0 0 7px color-mix(in srgb, var(--nexo-engine, #68cfff) 38%, transparent))
+    saturate(1.18) contrast(1.08) !important;
+}
+.site[data-theme="dark"] .nexo-ship-hull path,
+.site[data-theme="dark"] .nexo-rocket-hull path {
+  stroke-width: 1.2 !important;
+  stroke-linejoin: round !important;
+  stroke-linecap: round !important;
+  paint-order: stroke fill !important;
+}
+.site[data-theme="dark"] .nexo-ship-hull .nexo-ship-armor {
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.48))
+    drop-shadow(0 0 3px color-mix(in srgb, var(--nexo-edge, #d9efff) 35%, transparent)) !important;
+}
+.site[data-theme="dark"] .nexo-ship-cockpit,
+.site[data-theme="dark"] .nexo-rocket-window {
+  filter:
+    drop-shadow(0 0 2px #fff)
+    drop-shadow(0 0 7px var(--nexo-window, #c9fbff)) !important;
+}
+.site[data-theme="dark"] .nexo-ship-highlight {
+  stroke: rgba(255,255,255,.88) !important;
+  stroke-width: 1.1 !important;
+  stroke-linecap: round !important;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.5));
+}
+.site[data-theme="dark"] .nexo-vehicle-engine-glow {
+  opacity: .48 !important;
+  filter: drop-shadow(0 0 7px var(--nexo-engine, #55cfff)) !important;
+}
+.site .nexo-space-layer {
+  pointer-events: none !important;
+  contain: layout paint;
+}
+
+/* Evita animações contínuas desnecessárias quando a aba não está visível. */
+@media (prefers-reduced-motion: reduce) {
+  .site .atom-bouncer,
+  .site .nexo-vehicle-art,
+  .site .nexo-space-event {
+    animation: none !important;
+  }
+}
+
+
+/* Ao voltar ao tema escuro, reativa explicitamente os grupos SVG ocultados no tema claro. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1;
+}
+
+
+/* NEXO — constelações estáveis: sem ciclos que apagam o desenho inesperadamente. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines,
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: none !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-stars,
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Modo claro: recupera a identidade quente e legível da página original. */
+.site[data-theme="light"] .eyebrow {
+  color: #d65a25 !important;
+  text-shadow: none !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2.5px !important;
+}
+.site[data-theme="light"] .hero-title {
+  color: #71331f !important;
+  text-shadow: 0 4px 25px #f6a44b33 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -4px !important;
+}
+.site[data-theme="light"] .hero-title span {
+  background: linear-gradient(90deg, #ed5425, #f5a623, #d83235) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+.site[data-theme="light"] .hero-intro,
+.site[data-theme="light"] .hero-content > p {
+  color: #87543d !important;
+  text-shadow: none !important;
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+  font-weight: 400 !important;
+}
+@media (min-width: 901px) {
+  .site[data-theme="light"] .hero-content {
+    text-align: left !important;
+  }
+}
+
+
+/* NEXO — mostrar apenas uma constelação por vez, em sequência. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  animation: constellation-cycle 72s linear infinite !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected,
+.site[data-theme="dark"] .constellation-layer .constellation-group:focus-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: constellation-line-cycle 72s linear infinite !important;
+  stroke-dasharray: 300 !important;
+  stroke-dashoffset: 300 !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: constellation-star-cycle 72s linear infinite !important;
+}
+@keyframes constellation-star-cycle {
+  0%, 1.5% { opacity: 0; }
+  3%, 13.5% { opacity: 1; }
+  15%, 100% { opacity: 0; }
+}
+
+/* Modo escuro: desloca a Lua um pouco para a direita, longe do texto. */
+.site[data-theme="dark"] .atom-bouncer {
+  left: clamp(40px, 8vw, 130px) !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+@media (max-width: 900px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    left: 5vw !important;
+  }
+}
+
+
+/* NEXO — ciclo controlado: uma única constelação nítida por vez. */
+.site[data-theme="dark"] .constellation-layer {
+  opacity: 1 !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  animation: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity .7s ease, visibility .7s ease !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected .constellation-lines line {
+  animation: none !important;
+  stroke: rgba(177, 220, 255, .96) !important;
+  stroke-width: 2.2 !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 5px rgba(91, 174, 255, .75));
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected .constellation-star {
+  animation: none !important;
+  fill: #f4fbff !important;
+  stroke: rgba(126, 194, 255, .85) !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 7px rgba(116, 190, 255, .95));
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected .constellation-tooltip {
+  opacity: 1 !important;
+}
+
+
+/* NEXO — descrição discreta, exibida somente após selecionar uma constelação. */
+.constellation-info-card {
+  position: fixed;
+  z-index: 25;
+  right: 24px;
+  bottom: 24px;
+  width: min(340px, calc(100vw - 48px));
+  box-sizing: border-box;
+  padding: 18px 52px 18px 20px;
+  border: 1px solid rgba(117, 217, 255, .34);
+  border-radius: 16px;
+  background: rgba(8, 19, 42, .58);
+  color: #f0faff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22), 0 0 20px rgba(83, 190, 255, .08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  animation: constellation-card-in .22s ease-out both;
+}
+.site[data-theme="light"] .constellation-info-card {
+  border-color: rgba(49, 91, 140, .3);
+  background: rgba(255, 248, 233, .68);
+  color: #19385d;
+  box-shadow: 0 10px 30px rgba(48, 59, 75, .12);
+}
+.constellation-info-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #83dfff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.site[data-theme="light"] .constellation-info-eyebrow { color: #315b8c; }
+.constellation-info-card h3 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.site[data-theme="light"] .constellation-info-card h3 { color: #19385d; }
+.constellation-info-card p {
+  margin: 0;
+  color: #d5e7f5;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.site[data-theme="light"] .constellation-info-card p { color: #36516f; }
+.constellation-info-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+  color: inherit;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+@keyframes constellation-card-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 650px) {
+  .constellation-info-card {
+    left: 16px;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: auto;
+    padding: 16px 48px 16px 18px;
+  }
+}
+
+/* NEXO — desenho astronômico limpo e estrelas com brilho proporcional. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  animation: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity .55s ease, visibility .55s ease !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: visiblePainted !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: none !important;
+  stroke: rgba(163, 213, 255, .78) !important;
+  stroke-width: 1.35 !important;
+  stroke-linecap: round !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 2px rgba(91, 174, 255, .35)) !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star-halo {
+  fill: #8bdcff !important;
+  stroke: none !important;
+  filter: blur(1.6px) drop-shadow(0 0 4px rgba(100, 198, 255, .6)) !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: none !important;
+  fill: #f5fcff !important;
+  stroke: rgba(155, 220, 255, .45) !important;
+  stroke-width: .8 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 3px rgba(116, 190, 255, .7)) !important;
+}
+
+/* NEXO — constelações no plano de fundo, sem atravessar a interface. */
+.site[data-theme="dark"] .constellation-layer {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  pointer-events: visiblePainted !important;
+}
+.site[data-theme="dark"] .constellation-info-card {
+  z-index: 30 !important;
+}
+
+/* NEXO — correção final da interação e da hierarquia das constelações. */
+.site[data-theme="dark"] .constellation-layer {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  pointer-events: visiblePainted !important;
+  cursor: pointer !important;
+}
+.site[data-theme="dark"] .hero-content {
+  position: relative !important;
+  z-index: 3 !important;
+}
+.site[data-theme="dark"] .constellation-info-card {
+  position: fixed !important;
+  z-index: 1000 !important;
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  stroke-width: 2 !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
 }

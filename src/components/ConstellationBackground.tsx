@@ -44,7 +44,8 @@ function projectStars(stars: Star[]) {
   const minY = Math.min(...raw.map(star => star.y))
   const maxY = Math.max(...raw.map(star => star.y))
 
-  // Escala uniforme: preserva a proporção angular da figura.
+  // Recupera o enquadramento original: cada figura ocupa o espaço de desenho
+  // disponível sem ser reduzida por uma escala angular fixa.
   const width = Math.max(maxX - minX, 0.000001)
   const height = Math.max(maxY - minY, 0.000001)
   const scale = Math.min(190 / width, 150 / height)
@@ -56,6 +57,7 @@ function projectStars(stars: Star[]) {
     x: offsetX + (star.x - minX) * scale,
     y: offsetY + (maxY - star.y) * scale,
     radius: Math.max(1.35, Math.min(4.8, 5 - star.mag * 0.8)),
+    glow: Math.max(0.24, Math.min(0.9, 0.76 - (star.mag + 1.46) * 0.09)),
   }))
 }
 
@@ -65,6 +67,7 @@ const constellations = catalog.map(item => {
     ...item,
     stars,
     points: stars.map(star => [star.x, star.y] as const),
+    lines: item.lines,
   }
 })
 
@@ -115,7 +118,8 @@ const backgroundStars = createBackgroundStars()
 
 type SpaceEvent = {
   id: number
-  kind: 'meteor' | 'asteroid'
+  kind: 'ship' | 'rocket'
+  model: 'xwing' | 'tie' | 'falcon' | 'interceptor' | 'destroyer' | 'ywing' | 'awing' | 'bomber' | 'shuttle' | 'bwing' | 'classic'
   x: number
   y: number
   angle: number
@@ -123,217 +127,259 @@ type SpaceEvent = {
   scale: number
   path: string
   delay: number
-}
-
-function wrapNote(note: string, limit = 48) {
-  const words = note.split(' ')
-  const lines: string[] = []
-  let line = ''
-
-  for (const word of words) {
-    const candidate = line ? `${line} ${word}` : word
-    if (candidate.length > limit && line) {
-      lines.push(line)
-      line = word
-    } else {
-      line = candidate
-    }
-  }
-
-  if (line) lines.push(line)
-  return lines.slice(0, 2)
-}
-
-function tooltipPosition(item: typeof constellations[number]) {
-  const xs = item.points.map(point => point[0])
-  const ys = item.points.map(point => point[1])
-  const minX = item.position[0] + Math.min(...xs)
-  const maxY = item.position[1] + Math.max(...ys)
-  const minY = item.position[1] + Math.min(...ys)
-  const width = 270
-  const height = 64
-  const margin = 14
-
-  const globalX = Math.max(
-    margin,
-    Math.min(1000 - width - margin, minX + (Math.max(...xs) - Math.min(...xs)) / 2 - width / 2 + item.position[0]),
-  )
-
-  const below = maxY + 22
-  const globalY = below + height <= 760 - margin
-    ? below
-    : Math.max(margin, minY - height - 18)
-
-  return { x: globalX - item.position[0], y: globalY - item.position[1] }
+  variant?: number
 }
 
 // NEXO: painel mobile e eventos celestes naturais
-export default function ConstellationBackground() {
+export default function ConstellationBackground({ theme }: { theme: 'dark' | 'light' }) {
   const [selected, setSelected] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
+  const [activeConstellation, setActiveConstellation] = useState(0)
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
-  const selectedConstellation = constellations.find(
-    item => item.name === selected
-  )
+  const selectedConstellation = constellations.find(item => item.name === selected)
+  useEffect(() => {
+    if (theme !== 'dark' || constellations.length < 2) return
+    const cycle = window.setInterval(() => {
+      setActiveConstellation(current => (current + 1) % constellations.length)
+    }, 12000)
+    return () => window.clearInterval(cycle)
+  }, [theme])
 
   useEffect(() => {
-    let nextTimer = 0
+    // Reinicia apenas o ciclo das naves quando o tema muda.
+    // No modo claro, não mantém timers nem elementos invisíveis em execução.
+    setSpaceEvents([])
+    if (theme !== 'dark' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
     let cancelled = false
-    const cleanupTimers: number[] = []
+    let spawnTimer = 0
+    let nextTimer = 0
+    const cleanupTimers = new Set<number>()
 
     const randomBetween = (min: number, max: number) =>
       Math.random() * (max - min) + min
 
-    const createEvent = (
-      kind: SpaceEvent['kind'],
-      index: number,
-      delay: number
-    ): SpaceEvent => {
-      const duration = kind === 'meteor'
-        ? randomBetween(1700, 2300)
-        : randomBetween(2600, 4400)
-
-      let x: number
-      let y = randomBetween(90, 680)
-      let path: string
-
-      if (kind === 'asteroid') {
-        // Cada asteroide cruza a área inteira, de um canto ao oposto.
-        const reverse = Math.random() < 0.5
-        x = reverse ? 1100 : -120
-        y = reverse ? -90 : 850
-
-        const endX = reverse ? -120 : 1120
-        const endY = reverse ? 850 : -90
-        const dx = endX - x
-        const dy = endY - y
-        const curve = randomBetween(-130, 130)
-
-        path =
-          `M 0 0 C ${dx * 0.28} ${dy * 0.28 + curve} ` +
-          `${dx * 0.7} ${dy * 0.7 - curve} ${dx} ${dy}`
-      } else {
-        x = -140
-        const travelX = 1250
-        const travelY = randomBetween(-260, 260)
-        const curve = randomBetween(-45, 45)
-
-        path =
-          `M 0 0 C ${travelX * 0.28} ${curve} ` +
-          `${travelX * 0.7} ${travelY - curve * 0.25} ` +
-          `${travelX} ${travelY}`
-      }
+    const createVehicleEvent = (): SpaceEvent => {
+      const direction = Math.random() < 0.5 ? 1 : -1
+      const kind: SpaceEvent['kind'] = Math.random() < 0.88 ? 'ship' : 'rocket'
+      const shipModels: SpaceEvent['model'][] = [
+        'xwing', 'tie', 'falcon', 'interceptor', 'destroyer',
+        'ywing', 'awing', 'bomber', 'shuttle', 'bwing',
+      ]
+      const model = kind === 'rocket'
+        ? 'classic'
+        : shipModels[Math.floor(Math.random() * shipModels.length)]
+      const travel = direction * 1600
+      const curve = randomBetween(-85, 85)
+      const duration = randomBetween(9500, 13500)
+      const x = direction === 1 ? -190 : 1190
+      const y = randomBetween(110, 650)
 
       return {
-        id: Date.now() + Math.random() * 100000 + index,
+        id: Date.now() + Math.random() * 100000,
         kind,
+        model,
         x,
         y,
-        angle: randomBetween(-8, 8),
+        angle: direction === 1 ? 0 : 180,
         duration,
-        scale: kind === 'meteor'
-          ? randomBetween(0.9, 1.35)
-          : randomBetween(0.38, 0.78),
-        path,
-        delay,
+        scale: kind === 'rocket'
+          ? randomBetween(0.48, 0.62)
+          : randomBetween(0.5, 0.68),
+        path: `M ${x} ${y} C ${x + travel * 0.28} ${y + curve} ${x + travel * 0.7} ${y - curve * 0.25} ${x + travel} ${y}`,
+        delay: 0,
+        variant: Math.floor(Math.random() * 8),
       }
+    }
+
+    const spawnVehicle = () => {
+      if (cancelled || document.hidden) return
+      const vehicle = createVehicleEvent()
+      setSpaceEvents(current => [...current, vehicle])
+
+      const cleanup = window.setTimeout(() => {
+        setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
+        cleanupTimers.delete(cleanup)
+      }, vehicle.duration + 500)
+      cleanupTimers.add(cleanup)
     }
 
     const scheduleNext = () => {
+      if (cancelled) return
       nextTimer = window.setTimeout(() => {
-        if (cancelled) return
-
-        const isDark = document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
-        const reducedMotion = window.matchMedia(
-          '(prefers-reduced-motion: reduce)'
-        ).matches
-
-        if (!isDark || reducedMotion) {
-          scheduleNext()
-          return
-        }
-
-        const isMeteor = Math.random() < 0.65
-        const events: SpaceEvent[] = []
-
-        if (isMeteor) {
-          events.push(createEvent('meteor', 0, 0))
-        } else {
-          // Apenas um asteroide por passagem, atravessando o céu.
-          events.push(createEvent('asteroid', 0, 0))
-        }
-
-        setSpaceEvents(current => [...current, ...events])
-
-        events.forEach(event => {
-          const timer = window.setTimeout(() => {
-            setSpaceEvents(current =>
-              current.filter(item => item.id !== event.id)
-            )
-          }, event.duration + event.delay + 300)
-
-          cleanupTimers.push(timer)
-        })
-
+        spawnVehicle()
         scheduleNext()
-      }, randomBetween(10000, 30000))
+      }, randomBetween(12000, 15000))
     }
 
-    const demoTimer = window.setTimeout(() => {
-      const isDark =
-        document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
-      const reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches
-
-      if (cancelled || !isDark || reducedMotion) return
-
-      const demoEvents: SpaceEvent[] = [
-        {
-          ...createEvent('meteor', 0, 0),
-          x: -140,
-          y: 165,
-          path: 'M 0 0 C 180 -45 390 35 690 190',
-        },
-        {
-          ...createEvent('asteroid', 1, 0),
-          x: 470,
-          y: 490,
-          path: 'M 0 0 C 100 -85 270 -115 430 -65',
-        },
-      ]
-
-      setSpaceEvents(current => [...current, ...demoEvents])
-
-      demoEvents.forEach(event => {
-        const timer = window.setTimeout(() => {
-          setSpaceEvents(current =>
-            current.filter(item => item.id !== event.id)
-          )
-        }, event.duration + 400)
-
-        cleanupTimers.push(timer)
-      })
-    }, 1000)
-
-    scheduleNext()
+    // Uma nave inicial aparece rapidamente ao entrar no modo escuro.
+    spawnTimer = window.setTimeout(() => {
+      spawnVehicle()
+      scheduleNext()
+    }, 650)
 
     return () => {
       cancelled = true
+      window.clearTimeout(spawnTimer)
       window.clearTimeout(nextTimer)
-      window.clearTimeout(demoTimer)
       cleanupTimers.forEach(timer => window.clearTimeout(timer))
+      cleanupTimers.clear()
     }
-  }, [])
+  }, [theme])
 
   return (
-    <div className="constellation-layer" aria-label="Constelações animadas">
-      <svg
-        viewBox="0 0 1000 760"
-        preserveAspectRatio="xMidYMid meet"
-        role="group"
-        aria-label="Constelações desenhadas a partir das coordenadas das estrelas."
-      >
+    <>
+      <div className="nexo-space-layer" aria-hidden="true">
+        <svg viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid meet">
+        {spaceEvents.map(event => (
+          <g key={event.id} aria-hidden="true">
+            <animateMotion
+              begin="0s"
+              dur={`${event.duration}ms`}
+              path={event.path}
+              rotate="0"
+              calcMode="linear"
+              fill="freeze"
+            />
+            <g transform={`rotate(${event.angle}) scale(${event.scale})`}>
+              <g
+                className={`nexo-space-event ${event.kind}`}
+                style={{ animationDuration: `${event.duration}ms`, opacity: 1 }}
+              >
+
+
+              {(event.kind === 'ship' || event.kind === 'rocket') && (
+                <>
+                <g className={'nexo-vehicle-art ' + event.kind + ' variant-' + (event.variant ?? 0)}>
+                  <path className="nexo-vehicle-engine-glow" d="M -22 0 Q -58 -17 -104 0 Q -58 17 -22 0 Z" />
+                  <path className="nexo-vehicle-engine-flame" d="M -22 0 Q -54 -8 -86 0 Q -54 8 -22 0 Z" />
+                  {event.kind === 'ship' && (
+                    <g className={`nexo-ship-hull nexo-model-${event.model}`}>
+                      {event.model === 'xwing' && (
+                        <>
+                          <path d="M -42 0 L -24 -7 L 26 -5 L 48 0 L 26 5 L -24 7 Z" />
+                          <path d="M -12 -5 L 3 -34 L 19 -31 L 12 -5 Z M -12 5 L 3 34 L 19 31 L 12 5 Z" />
+                          <path d="M -12 -5 L 3 -34 L 19 -31 L 12 -5 Z M -12 5 L 3 34 L 19 31 L 12 5 Z" className="nexo-ship-armor" />
+                          <path d="M 8 -29 L 30 -39 L 33 -35 L 17 -24 M 8 29 L 30 39 L 33 35 L 17 24" className="nexo-model-cannon" />
+                          <path d="M 18 -4 L 35 0 L 18 4 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'tie' && (
+                        <>
+                          <path d="M -25 -5 L -42 -30 L -26 -39 L -10 -30 L -10 30 L -26 39 L -42 30 L -25 5 Z" />
+                          <path d="M 25 -5 L 42 -30 L 26 -39 L 10 -30 L 10 30 L 26 39 L 42 30 L 25 5 Z" />
+                          <path d="M -12 -5 L 8 -8 L 19 0 L 8 8 L -12 5 Z" />
+                          <circle cx="2" cy="0" r="12" className="nexo-ship-cockpit" />
+                          <path d="M -37 -29 L -22 -35 L -16 -28 L -16 28 L -22 35 L -37 29 Z M 37 -29 L 22 -35 L 16 -28 L 16 28 L 22 35 L 37 29 Z" className="nexo-ship-armor" />
+                        </>
+                      )}
+                      {event.model === 'falcon' && (
+                        <>
+                          <path d="M -35 -23 Q -12 -34 22 -23 L 40 -10 L 29 -2 L 48 0 L 29 2 L 40 10 L 22 23 Q -12 34 -35 23 L -43 8 L -43 -8 Z" />
+                          <path d="M -25 -18 Q 0 -27 25 -15 L 30 0 L 25 15 Q 0 27 -25 18 L -34 0 Z" className="nexo-ship-armor" />
+                          <path d="M -2 -14 L 20 -11 L 30 0 L 20 11 L -2 14 L -15 0 Z" />
+                          <path d="M -15 -6 L -4 -6 L -4 6 L -15 6 Z" className="nexo-ship-cockpit" />
+                          <circle cx="7" cy="0" r="7" className="nexo-model-dish" />
+                          <path d="M 28 -5 L 43 -5 M 28 5 L 43 5" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'interceptor' && (
+                        <>
+                          <path d="M -38 0 L -19 -8 L 26 -6 L 46 0 L 26 6 L -19 8 Z" />
+                          <path d="M -12 -6 L 2 -36 L 16 -31 L 11 -5 Z M -12 6 L 2 36 L 16 31 L 11 5 Z" />
+                          <path d="M -7 -7 L 4 -28 L 10 -25 L 7 -7 Z M -7 7 L 4 28 L 10 25 L 7 7 Z" className="nexo-ship-armor" />
+                          <path d="M 9 -4 L 29 0 L 9 4 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'destroyer' && (
+                        <>
+                          <path d="M -48 -25 L 48 0 L -48 25 L -30 0 Z" />
+                          <path d="M -30 -16 L 30 0 L -30 16 L -18 0 Z" className="nexo-ship-armor" />
+                          <path d="M -17 -7 L 4 -3 L 4 3 L -17 7 Z" />
+                          <path d="M -24 -4 L -7 -4 L -7 4 L -24 4 Z" className="nexo-ship-cockpit" />
+                          <path d="M -42 -17 L -30 -14 M -42 17 L -30 14" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'ywing' && (
+                        <>
+                          <path d="M -43 -7 L 18 -7 L 43 -3 L 43 3 L 18 7 L -43 7 Z" />
+                          <path d="M -27 -7 L -34 -20 L 16 -20 L 24 -7 Z M -27 7 L -34 20 L 16 20 L 24 7 Z" className="nexo-ship-armor" />
+                          <path d="M -34 -20 L -45 -20 L -49 -16 L -49 -10 L -34 -10 Z M -34 20 L -45 20 L -49 16 L -49 10 L -34 10 Z" />
+                          <path d="M 7 -5 L 29 -3 L 29 3 L 7 5 Z" className="nexo-ship-cockpit" />
+                          <path d="M -46 -15 L -46 -10 M -46 15 L -46 10" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'awing' && (
+                        <>
+                          <path d="M -42 0 L 34 -8 L 49 0 L 34 8 Z" />
+                          <path d="M -25 -5 L -7 -18 L 18 -7 L 18 -3 Z M -25 5 L -7 18 L 18 7 L 18 3 Z" className="nexo-ship-armor" />
+                          <path d="M 4 -3 L 28 0 L 4 3 Z" className="nexo-ship-cockpit" />
+                          <path d="M -38 -2 L -20 -2 M -38 2 L -20 2" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'bomber' && (
+                        <>
+                          <path d="M -34 -8 L 26 -8 L 43 0 L 26 8 L -34 8 Z" />
+                          <path d="M -21 -8 L -30 -28 L 8 -28 L 18 -8 Z M -21 8 L -30 28 L 8 28 L 18 8 Z" className="nexo-ship-armor" />
+                          <path d="M -27 -22 L 4 -22 M -27 22 L 4 22" className="nexo-model-cannon" />
+                          <circle cx="16" cy="0" r="7" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'shuttle' && (
+                        <>
+                          <path d="M -32 -7 L 23 -7 L 43 0 L 23 7 L -32 7 Z" />
+                          <path d="M -13 -7 L -2 -38 L 9 -35 L 4 -7 Z M -13 7 L -2 38 L 9 35 L 4 7 Z" className="nexo-ship-armor" />
+                          <path d="M 7 -4 L 29 0 L 7 4 Z" className="nexo-ship-cockpit" />
+                          <path d="M -4 -30 L 3 -30 M -4 30 L 3 30" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'bwing' && (
+                        <>
+                          <path d="M -38 -5 L 28 -5 L 46 0 L 28 5 L -38 5 Z" />
+                          <path d="M -4 -5 L 2 -36 L 13 -40 L 17 -5 Z M -4 5 L 2 36 L 13 40 L 17 5 Z" className="nexo-ship-armor" />
+                          <path d="M -25 -4 L -18 -17 L -10 -17 L -8 -4 Z M -25 4 L -18 17 L -10 17 L -8 4 Z" />
+                          <path d="M 12 -3 L 34 0 L 12 3 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'classic' && (
+                        <>
+                          <path d="M -38 0 L -20 -8 L 17 -7 L 39 0 L 17 7 L -20 8 Z" />
+                          <path d="M -13 -7 L -2 -19 L 13 -8 Z M -13 7 L -2 19 L 13 8 Z" />
+                          <path d="M -23 -5 L -8 -17 L 2 -8 Z M -23 5 L -8 17 L 2 8 Z" />
+                          <path d="M -18 -3 L 17 -3 L 29 0 L 17 3 L -18 3 Z" className="nexo-ship-armor" />
+                          <path d="M 13 -3.5 L 27 0 L 13 3.5 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model !== 'classic' && <path className="nexo-ship-highlight" d="M -22 -3 L 7 -5 L 20 -2" />}
+                    </g>
+                  )}
+                  {event.kind === 'rocket' && (
+                    <g className="nexo-rocket-hull">
+                      <path d="M -24 -7 L 7 -8 Q 30 -7 39 0 Q 30 7 7 8 L -24 7 Z" />
+                      <path d="M -12 -7 L -23 -17 L -19 -5 Z M -12 7 L -23 17 L -19 5 Z" />
+                      <path d="M 3 -8 L 10 -15 L 18 -8 Z M 3 8 L 10 15 L 18 8 Z" />
+                      <circle className="nexo-rocket-window" cx="20" cy="0" r="3.2" />
+                    </g>
+                  )}
+
+                </g>
+                </>
+              )}
+              </g>
+            </g>
+          </g>
+        ))}
+        </svg>
+      </div>
+      <div className="constellation-layer" aria-label="Constelações animadas">
+        <svg
+          viewBox="0 0 1000 760"
+          preserveAspectRatio="xMidYMid meet"
+          role="group"
+          aria-label="Constelações desenhadas a partir das coordenadas das estrelas."
+        >
         <g className="background-stars" aria-hidden="true">
           {backgroundStars.map((star, index) => (
             <circle
@@ -346,80 +392,15 @@ export default function ConstellationBackground() {
           ))}
         </g>
 
-        {spaceEvents.map(event => (
-          <g
-            key={event.id}
-            transform={`translate(${event.x} ${event.y}) rotate(${event.angle}) scale(${event.scale})`}
-            aria-hidden="true"
-          >
-            <g
-              className={`nexo-space-event ${event.kind}`}
-              style={{ animationDuration: `${event.duration}ms` }}
-            >
-              {event.kind === 'meteor' && (
-                <g className="nexo-meteor-streak">
-                  <path
-                    d="M -180 34 Q -85 17 0 0"
-                    className="nexo-meteor-tail"
-                    style={{ animationDuration: `${event.duration}ms` }}
-                  />
-                  <circle cx="0" cy="0" r="3.8" className="nexo-meteor-head" />
-                </g>
-              )}
-
-              {event.kind === 'asteroid' && (
-                <g className="nexo-asteroid-body">
-                  <polygon
-                    points="-24,-7 -19,-20 -5,-25 12,-20 25,-7 22,11 10,23 -9,22 -23,10"
-                    className="nexo-asteroid-shape"
-                  />
-                  <polygon points="-19,-8 -5,-22 3,-13 -4,2 -20,5" className="nexo-asteroid-facet light" />
-                  <polygon points="3,-13 12,-18 23,-7 13,2" className="nexo-asteroid-facet dark" />
-                  <polygon points="-4,2 13,2 10,20 -9,19" className="nexo-asteroid-facet mid" />
-                  <circle cx="-11" cy="-5" r="4.2" className="nexo-asteroid-crater" />
-                  <circle cx="10" cy="9" r="5" className="nexo-asteroid-crater" />
-                  <circle cx="8" cy="-11" r="2.5" className="nexo-asteroid-crater" />
-                  <path d="M-17 12 L-7 8 L1 15 L13 13 M-16 -2 L-8 -10 L-1 -7 L4 -15 M5 4 L13 1 L18 8" className="nexo-asteroid-detail" />
-                  <path d="M-2 -21 L2 -14 M16 -3 L11 2 M-20 7 L-13 4" className="nexo-asteroid-highlight" />
-                  <animateMotion
-                    begin={`${event.delay}ms`}
-                    dur={`${event.duration}ms`}
-                    path={event.path}
-                    rotate="0"
-                    calcMode="linear"
-                    fill="freeze"
-                  />
-                </g>
-              )}
-
-              {event.kind === 'meteor' && (
-                <animateTransform
-                  attributeName="transform"
-                  type="translate"
-                  from="0 0"
-                  to="1250 180"
-                  dur={`${event.duration}ms`}
-                  begin={`${event.delay}ms`}
-                  calcMode="linear"
-                  fill="freeze"
-                />
-              )}
-            </g>
-          </g>
-        ))}
-
-        {constellations.map((item, index) => {
-          const delay = `${index * -12}s`
-          const active = selected === item.name || hovered === item.name
-          const tooltip = tooltipPosition(item)
-          const noteLines = wrapNote(item.note)
+        {constellations.map(item => {
+          const activeName = selected ?? hovered ?? (theme === 'dark' ? constellations[activeConstellation]?.name : undefined)
+          const active = activeName === item.name
 
           return (
             <g
               key={item.name}
               className={`constellation-group${active ? ' is-selected' : ''}`}
               transform={`translate(${item.position[0]} ${item.position[1]})`}
-              style={{ animationDelay: delay }}
               role="button"
               tabIndex={0}
               aria-label={`${item.name}. ${item.note}`}
@@ -446,66 +427,52 @@ export default function ConstellationBackground() {
                     y1={item.points[line.from][1]}
                     x2={item.points[line.to][0]}
                     y2={item.points[line.to][1]}
-                    style={{ animationDelay: `calc(${delay} + ${lineIndex * 0.42}s)` }}
+                    
                   />
                 ))}
               </g>
 
               <g className="constellation-stars">
-                {item.stars.map((star, starIndex) => (
-                  <circle
-                    key={star.name}
-                    cx={star.x}
-                    cy={star.y}
-                    r={star.radius}
-                    className="constellation-star"
-                    style={{ animationDelay: `calc(${delay} + ${starIndex * 0.28}s)` }}
-                  />
+                {item.stars.map(star => (
+                  <g key={star.name}>
+                    <circle
+                      cx={star.x}
+                      cy={star.y}
+                      r={star.radius * 2.35}
+                      className="constellation-star-halo"
+                      style={{ opacity: star.glow }}
+                    />
+                    <circle
+                      cx={star.x}
+                      cy={star.y}
+                      r={star.radius}
+                      className="constellation-star"
+                    />
+                  </g>
                 ))}
               </g>
 
-              {active && (
-                <g
-                  className="constellation-tooltip"
-                  transform={`translate(${tooltip.x} ${tooltip.y})`}
-                >
-                  <rect width="270" height="64" rx="10" />
-                  <text x="12" y="21" className="tooltip-name">{item.name}</text>
-                  <text x="12" y="40" className="tooltip-note">
-                    {noteLines.map((line, lineIndex) => (
-                      <tspan key={lineIndex} x="12" dy={lineIndex === 0 ? 0 : 11}>
-                        {line}
-                      </tspan>
-                    ))}
-                  </text>
-                </g>
-              )}
             </g>
           )
         })}
       </svg>
 
+      </div>
       {selectedConstellation && (
-        <section
-          className="constellation-info-card"
-          aria-live="polite"
-          aria-label={`Informações sobre ${selectedConstellation.name}`}
-        >
+        <section className="constellation-info-card" aria-live="polite">
           <button
             type="button"
             className="constellation-info-close"
             onClick={() => setSelected(null)}
-            aria-label="Fechar informações da constelação"
+            aria-label="Fechar descrição da constelação"
           >
             ×
           </button>
-          <span className="constellation-info-eyebrow">
-            CONSTELAÇÃO
-          </span>
+          <span className="constellation-info-eyebrow">CONSTELAÇÃO</span>
           <h3>{selectedConstellation.name}</h3>
           <p>{selectedConstellation.note}</p>
         </section>
       )}
-    </div>
+    </>
   )
 }

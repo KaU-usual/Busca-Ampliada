@@ -56,10 +56,19 @@ export default function Hero({
       </div>
 
       <div className="hero-art">
+        <div className="earth-planet" aria-hidden="true"><div className="earth-surface" /><div className="earth-clouds" /></div>
         <div className="atom-bouncer">
           <div className="atom-orbit orbit orbit-one" />
           <div className="atom-orbit orbit orbit-two" />
           <div className="atom-orbit orbit orbit-three" />
+          <div className="solar-orbit solar-orbit-1" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-2" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-3" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-4" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-5" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-6" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-7" aria-hidden="true" />
+          <div className="solar-orbit solar-orbit-8" aria-hidden="true" />
           <div className="glow" />
           <div className="atom-core" aria-hidden="true" />
           {(theme === 'light' ? celestialBodies : categories).map((body, index) => {
