@@ -414,8 +414,8 @@ export default function ConstellationBackground() {
               {(event.kind === 'ship' || event.kind === 'rocket') && (
                 <>
                 <g className={'nexo-vehicle-art ' + event.kind + ' variant-' + (event.variant ?? 0)}>
-                  <path className="nexo-vehicle-engine-glow" d="M -18 0 Q -43 -12 -70 0 Q -43 12 -18 0 Z" />
-                  <path className="nexo-vehicle-engine-flame" d="M -18 0 Q -39 -5 -54 0 Q -39 5 -18 0 Z" />
+                  <path className="nexo-vehicle-engine-glow" d="M -22 0 Q -58 -17 -104 0 Q -58 17 -22 0 Z" />
+                  <path className="nexo-vehicle-engine-flame" d="M -22 0 Q -54 -8 -86 0 Q -54 8 -22 0 Z" />
                   {event.kind === 'ship' && (
                     <g className="nexo-ship-hull">
                       {event.variant === 0 && <>
