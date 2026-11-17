@@ -5707,3 +5707,80 @@ html[data-theme="light"] .nexo-space-event {
 .site[data-theme="dark"] .constellation-layer .constellation-group.is-selected .constellation-tooltip {
   opacity: 1 !important;
 }
+
+
+/* NEXO — descrição discreta, exibida somente após selecionar uma constelação. */
+.constellation-info-card {
+  position: fixed;
+  z-index: 25;
+  right: 24px;
+  bottom: 24px;
+  width: min(340px, calc(100vw - 48px));
+  box-sizing: border-box;
+  padding: 18px 52px 18px 20px;
+  border: 1px solid rgba(117, 217, 255, .34);
+  border-radius: 16px;
+  background: rgba(8, 19, 42, .58);
+  color: #f0faff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22), 0 0 20px rgba(83, 190, 255, .08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  animation: constellation-card-in .22s ease-out both;
+}
+.site[data-theme="light"] .constellation-info-card {
+  border-color: rgba(49, 91, 140, .3);
+  background: rgba(255, 248, 233, .68);
+  color: #19385d;
+  box-shadow: 0 10px 30px rgba(48, 59, 75, .12);
+}
+.constellation-info-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #83dfff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.site[data-theme="light"] .constellation-info-eyebrow { color: #315b8c; }
+.constellation-info-card h3 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.site[data-theme="light"] .constellation-info-card h3 { color: #19385d; }
+.constellation-info-card p {
+  margin: 0;
+  color: #d5e7f5;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.site[data-theme="light"] .constellation-info-card p { color: #36516f; }
+.constellation-info-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+  color: inherit;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+@keyframes constellation-card-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 650px) {
+  .constellation-info-card {
+    left: 16px;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: auto;
+    padding: 16px 48px 16px 18px;
+  }
+}
