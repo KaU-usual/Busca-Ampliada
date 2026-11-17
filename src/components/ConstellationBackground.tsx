@@ -173,10 +173,19 @@ function tooltipPosition(item: typeof constellations[number]) {
 export default function ConstellationBackground({ theme }: { theme: 'dark' | 'light' }) {
   const [selected, setSelected] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
+  const [activeConstellation, setActiveConstellation] = useState(0)
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
   const selectedConstellation = constellations.find(
     item => item.name === selected
   )
+
+  useEffect(() => {
+    if (theme !== 'dark' || constellations.length < 2) return
+    const cycle = window.setInterval(() => {
+      setActiveConstellation(current => (current + 1) % constellations.length)
+    }, 12000)
+    return () => window.clearInterval(cycle)
+  }, [theme])
 
   useEffect(() => {
     // Reinicia apenas o ciclo das naves quando o tema muda.
@@ -426,8 +435,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
         </g>
 
         {constellations.map((item, index) => {
-          const delay = `${index * -12}s`
-          const active = selected === item.name || hovered === item.name
+          const active = selected === item.name || hovered === item.name || (theme === 'dark' && activeConstellation === index)
           const tooltip = tooltipPosition(item)
           const noteLines = wrapNote(item.note)
 
@@ -436,7 +444,6 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
               key={item.name}
               className={`constellation-group${active ? ' is-selected' : ''}`}
               transform={`translate(${item.position[0]} ${item.position[1]})`}
-              style={{ animationDelay: delay }}
               role="button"
               tabIndex={0}
               aria-label={`${item.name}. ${item.note}`}
@@ -463,7 +470,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
                     y1={item.points[line.from][1]}
                     x2={item.points[line.to][0]}
                     y2={item.points[line.to][1]}
-                    style={{ animationDelay: `calc(${delay} + ${lineIndex * 0.42}s)` }}
+                    
                   />
                 ))}
               </g>
@@ -476,7 +483,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
                     cy={star.y}
                     r={star.radius}
                     className="constellation-star"
-                    style={{ animationDelay: `calc(${delay} + ${starIndex * 0.28}s)` }}
+                    
                   />
                 ))}
               </g>
