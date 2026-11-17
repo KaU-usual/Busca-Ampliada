@@ -486,6 +486,7 @@ export default function ConstellationBackground() {
               )}
 
               {event.kind === 'asteroid' && (
+                <>
                 <g className="nexo-asteroid-body">
                   <polygon
                     points="-24,-7 -19,-20 -5,-25 12,-20 25,-7 22,11 10,23 -9,22 -23,10"
@@ -508,6 +509,7 @@ export default function ConstellationBackground() {
                   calcMode="linear"
                   fill="freeze"
                 />
+                </>
               )}
 
               {event.kind === 'meteor' && (
