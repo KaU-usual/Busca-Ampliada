@@ -506,7 +506,6 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
       </svg>
 
       </div>
-}
     </>
   )
 }
