@@ -412,6 +412,7 @@ export default function ConstellationBackground() {
               )}
 
               {(event.kind === 'ship' || event.kind === 'rocket') && (
+                <>
                 <g className={'nexo-vehicle-art ' + event.kind + ' variant-' + (event.variant ?? 0)}>
                   <path className="nexo-vehicle-engine-glow" d="M -18 0 Q -43 -12 -70 0 Q -43 12 -18 0 Z" />
                   <path className="nexo-vehicle-engine-flame" d="M -18 0 Q -39 -5 -54 0 Q -39 5 -18 0 Z" />
@@ -455,6 +456,7 @@ export default function ConstellationBackground() {
                   )}
                 </g>
                 <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
+                </>
               )}
 
               {event.kind === 'asteroid' && (
