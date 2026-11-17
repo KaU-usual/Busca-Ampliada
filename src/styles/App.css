@@ -4631,3 +4631,85 @@ html[data-theme="light"] .nexo-space-event {
     animation: none !important;
   }
 }
+
+
+/* NEXO — ajuste de desempenho, Terra menor e textura corrigida. */
+.site[data-theme="dark"] .earth-planet {
+  width: 480px !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translate(82%, -50%) !important;
+  opacity: .96 !important;
+  box-shadow:
+    0 0 0 1px rgba(112, 190, 255, .28),
+    0 0 22px 4px rgba(67, 164, 255, .22),
+    inset 12px 4px 28px rgba(184, 235, 255, .12),
+    inset -42px -8px 58px rgba(0, 5, 25, .42) !important;
+}
+.site[data-theme="dark"] .earth-surface {
+  background-image: url("https://cdn.apewebapps.com/threejs/160/examples/textures/planets/earth_atmos_2048.jpg") !important;
+  background-size: 200% 100% !important;
+  filter: saturate(1.25) contrast(1.04) brightness(1.18) !important;
+  animation-duration: 160s !important;
+}
+.site[data-theme="dark"] .earth-clouds {
+  display: none !important;
+}
+.site[data-theme="dark"] .earth-surface::after {
+  background:
+    radial-gradient(ellipse at 28% 28%, rgba(255,255,255,.12), transparent 38%),
+    radial-gradient(ellipse at 72% 58%, transparent 36%, rgba(0,8,30,.12) 78%) !important;
+  box-shadow: inset 12px 0 24px rgba(210,244,255,.1) !important;
+}
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 390px !important;
+    transform: translate(82%, -50%) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 300px !important;
+    top: 78% !important;
+    transform: translate(82%, -50%) !important;
+    opacity: .78 !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .earth-planet {
+    width: 240px !important;
+    top: 82% !important;
+    transform: translate(82%, -50%) !important;
+    opacity: .68 !important;
+  }
+}
+
+/* As estrelas de fundo ficam estáticas: menos trabalho contínuo para a GPU. */
+.site .constellation-layer .background-stars circle {
+  animation: none !important;
+}
+
+/* Só os traços/estrelas das constelações recebem interação; a camada fica
+   sobre o fundo, sem bloquear campos, botões ou a pesquisa. */
+.site .constellation-layer {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: auto !important;
+}
+.site .constellation-layer .constellation-group {
+  visibility: visible !important;
+  pointer-events: visiblePainted !important;
+  cursor: pointer !important;
+}
+.site .constellation-layer .constellation-tooltip {
+  pointer-events: none !important;
+}
+.site .constellation-info-card {
+  position: fixed !important;
+  z-index: 30 !important;
+  pointer-events: auto !important;
+}
