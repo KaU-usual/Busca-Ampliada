@@ -5677,3 +5677,11 @@ html[data-theme="light"] .nexo-space-event {
     animation: none !important;
   }
 }
+
+
+/* Ao voltar ao tema escuro, reativa explicitamente os grupos SVG ocultados no tema claro. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1;
+}
