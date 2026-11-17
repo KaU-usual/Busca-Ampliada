@@ -5784,3 +5784,40 @@ html[data-theme="light"] .nexo-space-event {
     padding: 16px 48px 16px 18px;
   }
 }
+
+/* NEXO — desenho astronômico limpo e estrelas com brilho proporcional. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  animation: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity .55s ease, visibility .55s ease !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: visiblePainted !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: none !important;
+  stroke: rgba(163, 213, 255, .78) !important;
+  stroke-width: 1.35 !important;
+  stroke-linecap: round !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 2px rgba(91, 174, 255, .35)) !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star-halo {
+  fill: #8bdcff !important;
+  stroke: none !important;
+  filter: blur(1.6px) drop-shadow(0 0 4px rgba(100, 198, 255, .6)) !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: none !important;
+  fill: #f5fcff !important;
+  stroke: rgba(155, 220, 255, .45) !important;
+  stroke-width: .8 !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 3px rgba(116, 190, 255, .7)) !important;
+}
