@@ -4057,3 +4057,65 @@ html[data-theme="light"] .nexo-space-event {
   }
 }
 
+
+
+/* NEXO — acabamento cinematográfico das naves e propulsão. */
+.nexo-vehicle-art.ship {
+  filter:
+    drop-shadow(0 0 5px rgba(112, 207, 255, .72))
+    drop-shadow(0 0 13px rgba(65, 145, 255, .48))
+    drop-shadow(0 0 24px rgba(87, 116, 255, .22));
+}
+
+.nexo-ship-hull {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .7));
+}
+
+.nexo-ship-hull path {
+  fill: #b9d0e3;
+  stroke: #effaff;
+  stroke-width: 1.35;
+  stroke-linejoin: round;
+}
+
+.nexo-ship-hull path:nth-child(2n) {
+  fill: #526f91;
+  stroke: #b8e7ff;
+}
+
+.nexo-ship-hull .nexo-ship-armor {
+  fill: #203c5e;
+  stroke: #75c9f4;
+  stroke-width: 1;
+}
+
+.nexo-ship-hull .nexo-ship-cockpit {
+  fill: #d9fbff;
+  stroke: #fff;
+  stroke-width: 1.1;
+  filter:
+    drop-shadow(0 0 4px #8beaff)
+    drop-shadow(0 0 10px #4abfff);
+}
+
+.nexo-ship-highlight {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  opacity: .92;
+}
+
+.nexo-vehicle-engine-glow {
+  fill: #39bfff;
+  opacity: .5;
+  filter: blur(6px);
+}
+
+.nexo-vehicle-engine-flame {
+  fill: #d8fbff;
+  filter:
+    drop-shadow(0 0 5px #b8f7ff)
+    drop-shadow(0 0 12px #50caff)
+    drop-shadow(0 0 22px #397dff);
+}
