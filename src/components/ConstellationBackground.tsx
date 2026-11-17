@@ -516,6 +516,7 @@ export default function ConstellationBackground() {
         })}
       </svg>
 
+      </div>
       {selectedConstellation && (
         <section
           className="constellation-info-card"
@@ -537,7 +538,6 @@ export default function ConstellationBackground() {
           <p>{selectedConstellation.note}</p>
         </section>
       )}
-      </div>
     </>
   )
 }
