@@ -163,17 +163,17 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 6,
           "to": 7,
-          "thin": false
+          "thin": true
         },
         {
           "from": 7,
           "to": 8,
-          "thin": false
+          "thin": true
         },
         {
           "from": 8,
           "to": 10,
-          "thin": false
+          "thin": true
         },
         {
           "from": 10,
@@ -248,12 +248,12 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 12,
           "to": 13,
-          "thin": false
+          "thin": true
         },
         {
           "from": 13,
           "to": 14,
-          "thin": false
+          "thin": true
         }
       ]
   },
@@ -948,9 +948,22 @@ export const constellationCatalog: ConstellationDefinition[] = [
       { hip: 30122, name: "Furud", ra: 6.3385, dec: -30.0634, mag: 3.02 }
     ],
     lines: [
-      ...[ [0,1], [1,2], [2,3], [3,4], [4,5], [5,6], [6,7],
-           [8,9], [9,5], [9,10], [10,11], [11,12], [3,13],
-           [11,3], [14,8], [2,0] ].map(([from,to]) => ({from,to,thin:false}))
+      { from: 0, to: 1, thin: false },
+      { from: 1, to: 2, thin: false },
+      { from: 2, to: 3, thin: false },
+      { from: 3, to: 4, thin: false },
+      { from: 4, to: 5, thin: false },
+      { from: 5, to: 6, thin: false },
+      { from: 6, to: 7, thin: false },
+      { from: 8, to: 9, thin: false },
+      { from: 9, to: 5, thin: false },
+      { from: 9, to: 10, thin: true },
+      { from: 10, to: 11, thin: true },
+      { from: 11, to: 12, thin: false },
+      { from: 3, to: 13, thin: false },
+      { from: 11, to: 3, thin: false },
+      { from: 14, to: 8, thin: false },
+      { from: 2, to: 0, thin: false }
     ]
   },
     {
@@ -969,7 +982,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
     lines: [
       { from: 0, to: 1, thin: false },
       { from: 1, to: 2, thin: false },
-      { from: 2, to: 3, thin: false },
       { from: 3, to: 2, thin: false },
       { from: 2, to: 4, thin: false },
       { from: 4, to: 5, thin: false }
