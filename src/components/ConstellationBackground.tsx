@@ -1,46 +1,8 @@
 import { useEffect, useState } from 'react'
 import { constellationCatalog } from '../data/constellation-data'
-import type { Star, ConstellationLine } from '../data/constellation-data'
+import type { Star } from '../data/constellation-data'
 
 const catalog = constellationCatalog
-
-function connectMissingSegments(
-  points: readonly (readonly [number, number])[],
-  sourceLines: ConstellationLine[],
-): ConstellationLine[] {
-  const lines = [...sourceLines]
-  const parent = points.map((_, index) => index)
-  const find = (value: number): number => {
-    if (parent[value] !== value) parent[value] = find(parent[value])
-    return parent[value]
-  }
-
-  for (const line of lines) {
-    const from = find(line.from)
-    const to = find(line.to)
-    if (from !== to) parent[to] = from
-  }
-
-  // Se a cadeia recebida tiver trechos isolados, liga os grupos
-  // pelo par de estrelas visualmente mais próximo, sem duplicar arestas.
-  while (new Set(parent.map((_, index) => find(index))).size > 1) {
-    let best: { from: number; to: number; distance: number } | null = null
-    for (let from = 0; from < points.length; from++) {
-      for (let to = from + 1; to < points.length; to++) {
-        if (find(from) === find(to)) continue
-        const dx = points[from][0] - points[to][0]
-        const dy = points[from][1] - points[to][1]
-        const distance = dx * dx + dy * dy
-        if (!best || distance < best.distance) best = { from, to, distance }
-      }
-    }
-    if (!best) break
-    lines.push({ from: best.from, to: best.to, thin: false })
-    parent[find(best.to)] = find(best.from)
-  }
-
-  return lines
-}
 
 function projectStars(stars: Star[]) {
   // Centro calculado com média circular da ascensão reta.
@@ -105,10 +67,7 @@ const constellations = catalog.map(item => {
     ...item,
     stars,
     points: stars.map(star => [star.x, star.y] as const),
-    lines: connectMissingSegments(
-      stars.map(star => [star.x, star.y] as const),
-      item.lines,
-    ),
+    lines: item.lines,
   }
 })
 
