@@ -115,7 +115,7 @@ const backgroundStars = createBackgroundStars()
 
 type SpaceEvent = {
   id: number
-  kind: 'meteor' | 'asteroid'
+  kind: 'meteor' | 'asteroid' | 'ship' | 'rocket'
   x: number
   y: number
   angle: number
@@ -123,6 +123,7 @@ type SpaceEvent = {
   scale: number
   path: string
   delay: number
+  variant?: number
 }
 
 function wrapNote(note: string, limit = 48) {
@@ -239,6 +240,48 @@ export default function ConstellationBackground() {
       }
     }
 
+    const createVehicleEvent = (): SpaceEvent => {
+      const direction = Math.random() < 0.5 ? 1 : -1
+      const kind: SpaceEvent['kind'] = Math.random() < 0.78 ? 'ship' : 'rocket'
+      const travel = direction * 1400
+      const curve = randomBetween(-55, 55)
+      const duration = randomBetween(7500, 11500)
+
+      return {
+        id: Date.now() + Math.random() * 100000,
+        kind,
+        x: direction === 1 ? -150 : 1150,
+        y: randomBetween(110, 650),
+        angle: 0,
+        duration,
+        scale: kind === 'rocket' ? randomBetween(0.72, 0.96) : randomBetween(0.72, 1.08),
+        path: 'M 0 0 C ' + (travel * 0.28) + ' ' + curve + ' ' + (travel * 0.7) + ' ' + (-curve * 0.25) + ' ' + travel + ' 0',
+        delay: 0,
+        variant: Math.floor(Math.random() * 4),
+      }
+    }
+
+    const scheduleVehicle = () => {
+      const timer = window.setTimeout(() => {
+        if (cancelled) return
+
+        const isDark = document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+        if (isDark && !reducedMotion) {
+          const vehicle = createVehicleEvent()
+          setSpaceEvents(current => [...current, vehicle])
+          const cleanup = window.setTimeout(() => {
+            setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
+          }, vehicle.duration + 500)
+          cleanupTimers.push(cleanup)
+        }
+
+        scheduleVehicle()
+      }, randomBetween(15000, 25000))
+      cleanupTimers.push(timer)
+    }
+
     const scheduleNext = () => {
       nextTimer = window.setTimeout(() => {
         if (cancelled) return
@@ -317,6 +360,7 @@ export default function ConstellationBackground() {
     }, 1000)
 
     scheduleNext()
+    scheduleVehicle()
 
     return () => {
       cancelled = true
@@ -364,6 +408,32 @@ export default function ConstellationBackground() {
                     style={{ animationDuration: `${event.duration}ms` }}
                   />
                   <circle cx="0" cy="0" r="3.8" className="nexo-meteor-head" />
+                </g>
+              )}
+
+              {(event.kind === 'ship' || event.kind === 'rocket') && (
+                <g className={'nexo-vehicle-art ' + event.kind + ' variant-' + (event.variant ?? 0)}>
+                  <path className="nexo-vehicle-engine-glow" d="M -18 0 Q -43 -12 -70 0 Q -43 12 -18 0 Z" />
+                  <path className="nexo-vehicle-engine-flame" d="M -18 0 Q -39 -5 -54 0 Q -39 5 -18 0 Z" />
+                  {event.kind === 'ship' && (
+                    <g className="nexo-ship-hull">
+                      {event.variant === 0 && <><path d="M -25 0 L -12 -9 L 15 -8 L 31 0 L 15 8 L -12 9 Z" /><path d="M -5 -8 L 2 -17 L 13 -8 Z" /><path d="M -5 8 L 2 17 L 13 8 Z" /></>}
+                      {event.variant === 1 && <><path d="M -29 -5 L 9 -10 L 31 0 L 9 10 L -29 5 L -18 0 Z" /><path d="M -10 -7 L -2 -17 L 8 -9 L 8 9 L -2 17 L -10 7 Z" /></>}
+                      {event.variant === 2 && <><path d="M -30 0 L -12 -7 L 7 -7 L 25 -15 L 19 0 L 25 15 L 7 7 L -12 7 Z" /><path d="M -5 -6 L 2 -13 L 13 -7 L 13 7 L 2 13 L -5 6 Z" /></>}
+                      {event.variant === 3 && <><path d="M -25 0 L -8 -11 L 17 -8 L 32 0 L 17 8 L -8 11 Z" /><path d="M -3 -9 L 5 -20 L 15 -8 Z M -3 9 L 5 20 L 15 8 Z" /></>}
+                      <path className="nexo-ship-cockpit" d="M 10 -3 L 21 0 L 10 3 Z" />
+                      <path className="nexo-ship-highlight" d="M -14 -3 L 7 -5 L 17 -2" />
+                    </g>
+                  )}
+                  {event.kind === 'rocket' && (
+                    <g className="nexo-rocket-hull">
+                      <path d="M -24 -7 L 7 -8 Q 30 -7 39 0 Q 30 7 7 8 L -24 7 Z" />
+                      <path d="M -12 -7 L -23 -17 L -19 -5 Z M -12 7 L -23 17 L -19 5 Z" />
+                      <path d="M 3 -8 L 10 -15 L 18 -8 Z M 3 8 L 10 15 L 18 8 Z" />
+                      <circle className="nexo-rocket-window" cx="20" cy="0" r="3.2" />
+                    </g>
+                  )}
+                  <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
                 </g>
               )}
 
