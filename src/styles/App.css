@@ -1779,7 +1779,7 @@ body {
   --constellation-halo: #73dfff;
   --constellation-line: #83dfff99;
   --constellation-glow: #6edfff99;
-  --constellation-label-bg: #101c39ed;
+  --constellation-label-bg: #101c39b8;
   --constellation-label-text: #f0faff;
 }
 
@@ -1788,7 +1788,7 @@ body {
   --constellation-halo: #d9a94d;
   --constellation-line: #315b8c99;
   --constellation-glow: #d9a94d88;
-  --constellation-label-bg: #fff8e9f2;
+  --constellation-label-bg: #fff8e9c9;
   --constellation-label-text: #19385d;
 }
 
@@ -3837,125 +3837,13 @@ html[data-theme="light"] .nexo-space-event {
   }
 }
 
-/* O painel de descrição também aparece no desktop ao selecionar uma constelação. */
-.constellation-info-card {
-  display: block;
-  position: fixed;
-  z-index: 25;
-  right: 24px;
-  bottom: 24px;
-  width: min(340px, calc(100vw - 48px));
-  box-sizing: border-box;
-  padding: 18px 52px 18px 20px;
-  border: 1px solid rgba(117, 217, 255, .42);
-  border-radius: 16px;
-  background: rgba(8, 19, 42, .96);
-  color: #f0faff;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, .42), 0 0 24px rgba(83, 190, 255, .12);
-  backdrop-filter: blur(16px);
-  pointer-events: auto;
-}
-.constellation-info-eyebrow {
-  display: block;
-  margin-bottom: 5px;
-  color: #83dfff;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-}
-.constellation-info-card h3 {
-  margin: 0 0 7px;
-  color: #fff;
-  font-size: 18px;
-  line-height: 1.25;
-}
-.constellation-info-card p {
-  margin: 0;
-  color: #d5e7f5;
-  font-size: 14px;
-  line-height: 1.55;
-}
-.constellation-info-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .08);
-  color: #fff;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
-
+/* A descrição agora acompanha a própria constelação. */
 @media (max-width: 650px) {
-  .constellation-layer {
-    z-index: 0;
-  }
-
   .constellation-tooltip {
-    display: none !important;
-  }
-
-  .constellation-info-card {
-    display: block;
-    position: fixed;
-    z-index: 25;
-    left: 16px;
-    right: 16px;
-    bottom: max(16px, env(safe-area-inset-bottom));
-    width: auto;
-    box-sizing: border-box;
-    padding: 17px 48px 17px 18px;
-    border: 1px solid rgba(117, 217, 255, .42);
-    border-radius: 16px;
-    background: rgba(8, 19, 42, .96);
-    color: #f0faff;
-    box-shadow:
-      0 12px 36px rgba(0, 0, 0, .42),
-      0 0 24px rgba(83, 190, 255, .12);
-    backdrop-filter: blur(16px);
-    pointer-events: auto;
-  }
-
-  .constellation-info-eyebrow {
-    display: block;
-    margin-bottom: 5px;
-    color: #83dfff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-  }
-
-  .constellation-info-card h3 {
-    margin: 0 0 7px;
-    color: #fff;
-    font-size: 18px;
-    line-height: 1.25;
-  }
-
-  .constellation-info-card p {
-    margin: 0;
-    color: #d5e7f5;
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  .constellation-info-close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    width: 34px;
-    height: 34px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .08);
-    color: #fff;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
+    display: inline !important;
+    transform: scale(1.65);
+    transform-box: fill-box;
+    transform-origin: center;
   }
 }
 
