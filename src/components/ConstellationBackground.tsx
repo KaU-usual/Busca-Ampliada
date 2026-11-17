@@ -175,10 +175,6 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
   const [hovered, setHovered] = useState<string | null>(null)
   const [activeConstellation, setActiveConstellation] = useState(0)
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
-  const selectedConstellation = constellations.find(
-    item => item.name === selected
-  )
-
   useEffect(() => {
     if (theme !== 'dark' || constellations.length < 2) return
     const cycle = window.setInterval(() => {
@@ -510,27 +506,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
       </svg>
 
       </div>
-      {selectedConstellation && (
-        <section
-          className="constellation-info-card"
-          aria-live="polite"
-          aria-label={`Informações sobre ${selectedConstellation.name}`}
-        >
-          <button
-            type="button"
-            className="constellation-info-close"
-            onClick={() => setSelected(null)}
-            aria-label="Fechar informações da constelação"
-          >
-            ×
-          </button>
-          <span className="constellation-info-eyebrow">
-            CONSTELAÇÃO
-          </span>
-          <h3>{selectedConstellation.name}</h3>
-          <p>{selectedConstellation.note}</p>
-        </section>
-      )}
+}
     </>
   )
 }
