@@ -5821,3 +5821,18 @@ html[data-theme="light"] .nexo-space-event {
   opacity: 1 !important;
   filter: drop-shadow(0 0 3px rgba(116, 190, 255, .7)) !important;
 }
+
+/* NEXO — constelações no plano de fundo, sem atravessar a interface. */
+.site[data-theme="dark"] .constellation-layer {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  pointer-events: visiblePainted !important;
+}
+.site[data-theme="dark"] .constellation-info-card {
+  z-index: 30 !important;
+}
