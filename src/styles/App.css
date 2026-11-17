@@ -5685,3 +5685,61 @@ html[data-theme="light"] .nexo-space-event {
   visibility: visible !important;
   opacity: 1;
 }
+
+
+/* NEXO — constelações estáveis: sem ciclos que apagam o desenho inesperadamente. */
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  display: inline !important;
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines,
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  animation: none !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-stars,
+.site[data-theme="dark"] .constellation-layer .constellation-star {
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Modo claro: recupera a identidade quente e legível da página original. */
+.site[data-theme="light"] .eyebrow {
+  color: #d65a25 !important;
+  text-shadow: none !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2.5px !important;
+}
+.site[data-theme="light"] .hero-title {
+  color: #71331f !important;
+  text-shadow: 0 4px 25px #f6a44b33 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -4px !important;
+}
+.site[data-theme="light"] .hero-title span {
+  background: linear-gradient(90deg, #ed5425, #f5a623, #d83235) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+.site[data-theme="light"] .hero-intro,
+.site[data-theme="light"] .hero-content > p {
+  color: #87543d !important;
+  text-shadow: none !important;
+  font-size: 16px !important;
+  line-height: 1.8 !important;
+  font-weight: 400 !important;
+}
+@media (min-width: 901px) {
+  .site[data-theme="light"] .hero-content {
+    text-align: left !important;
+  }
+}
