@@ -476,7 +476,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
               </g>
 
               <g className="constellation-stars">
-                {item.stars.map((star, starIndex) => (
+                {item.stars.map(star => (
                   <circle
                     key={star.name}
                     cx={star.x}
