@@ -5542,3 +5542,138 @@ html[data-theme="light"] .nexo-space-event {
   .site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .44) !important; }
   .site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .46) !important; }
 }
+
+
+/* NEXO — composição equilibrada: destaque editorial à esquerda e sistema solar no canto. */
+@media (min-width: 901px) {
+  .site .hero-content {
+    width: min(54%, 720px) !important;
+    max-width: 720px !important;
+    align-self: flex-start !important;
+    margin: 42px auto 0 3% !important;
+    text-align: left !important;
+  }
+  .site .hero-intro {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    color: #e0e7fb !important;
+    text-shadow: 0 2px 18px rgba(7, 12, 30, .58);
+  }
+  .site .search-box {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .site .search-hint { justify-content: flex-start !important; }
+}
+.site .hero-title {
+  color: #fff !important;
+  text-shadow: 0 3px 24px rgba(5, 10, 28, .55), 0 0 42px rgba(151, 174, 255, .16) !important;
+}
+.site .hero-title span {
+  background-image: linear-gradient(100deg, #c3f1ff 0%, #d8ccff 54%, #ffffff 100%) !important;
+}
+.site .eyebrow {
+  color: #d2e5ff !important;
+  text-shadow: 0 1px 12px rgba(4, 9, 24, .55);
+}
+
+/* Sol fixo no canto inferior direito: não atravessa o título nem a pesquisa. */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(390px, 39vw, 500px) !important;
+  top: auto !important;
+  right: 3.5% !important;
+  bottom: 2% !important;
+  left: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+.site[data-theme="light"] .hero-art {
+  opacity: 1 !important;
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(320px, 37vw, 400px) !important;
+    right: 1.5% !important;
+    bottom: 5% !important;
+  }
+}
+@media (max-width: 900px) {
+  .site .hero-content {
+    width: min(720px, 100%) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+  .site .hero-intro { margin-left: auto !important; margin-right: auto !important; }
+  .site .search-box { margin-left: auto !important; margin-right: auto !important; }
+  .site .search-hint { justify-content: center !important; }
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(210px, 34vw, 300px) !important;
+    right: -5% !important;
+    bottom: 1% !important;
+    opacity: .62 !important;
+  }
+}
+@media (max-width: 650px) {
+  .site .hero-content { z-index: 4 !important; }
+  .site .hero-title {
+    text-shadow: 0 3px 22px rgba(5, 10, 28, .72) !important;
+  }
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: 205px !important;
+    right: -18% !important;
+    bottom: 0 !important;
+    opacity: .42 !important;
+  }
+}
+
+/* Naves: acabamento metálico mais nítido, com brilho concentrado na silhueta. */
+.site[data-theme="dark"] .nexo-vehicle-art {
+  filter:
+    drop-shadow(0 0 2px rgba(218, 239, 255, .48))
+    drop-shadow(0 0 7px color-mix(in srgb, var(--nexo-engine, #68cfff) 38%, transparent))
+    saturate(1.18) contrast(1.08) !important;
+}
+.site[data-theme="dark"] .nexo-ship-hull path,
+.site[data-theme="dark"] .nexo-rocket-hull path {
+  stroke-width: 1.2 !important;
+  stroke-linejoin: round !important;
+  stroke-linecap: round !important;
+  paint-order: stroke fill !important;
+}
+.site[data-theme="dark"] .nexo-ship-hull .nexo-ship-armor {
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.48))
+    drop-shadow(0 0 3px color-mix(in srgb, var(--nexo-edge, #d9efff) 35%, transparent)) !important;
+}
+.site[data-theme="dark"] .nexo-ship-cockpit,
+.site[data-theme="dark"] .nexo-rocket-window {
+  filter:
+    drop-shadow(0 0 2px #fff)
+    drop-shadow(0 0 7px var(--nexo-window, #c9fbff)) !important;
+}
+.site[data-theme="dark"] .nexo-ship-highlight {
+  stroke: rgba(255,255,255,.88) !important;
+  stroke-width: 1.1 !important;
+  stroke-linecap: round !important;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.5));
+}
+.site[data-theme="dark"] .nexo-vehicle-engine-glow {
+  opacity: .48 !important;
+  filter: drop-shadow(0 0 7px var(--nexo-engine, #55cfff)) !important;
+}
+.site .nexo-space-layer {
+  pointer-events: none !important;
+  contain: layout paint;
+}
+
+/* Evita animações contínuas desnecessárias quando a aba não está visível. */
+@media (prefers-reduced-motion: reduce) {
+  .site .atom-bouncer,
+  .site .nexo-vehicle-art,
+  .site .nexo-space-event {
+    animation: none !important;
+  }
+}
