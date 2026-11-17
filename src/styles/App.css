@@ -5836,3 +5836,38 @@ html[data-theme="light"] .nexo-space-event {
 .site[data-theme="dark"] .constellation-info-card {
   z-index: 30 !important;
 }
+
+/* NEXO — correção final da interação e da hierarquia das constelações. */
+.site[data-theme="dark"] .constellation-layer {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group {
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-group.is-selected {
+  pointer-events: visiblePainted !important;
+  cursor: pointer !important;
+}
+.site[data-theme="dark"] .hero-content {
+  position: relative !important;
+  z-index: 3 !important;
+}
+.site[data-theme="dark"] .constellation-info-card {
+  position: fixed !important;
+  z-index: 1000 !important;
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+.site[data-theme="dark"] .constellation-layer .constellation-lines line {
+  stroke-width: 2 !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 1 !important;
+}
