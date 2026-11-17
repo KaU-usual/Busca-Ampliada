@@ -5242,3 +5242,229 @@ html[data-theme="light"] .nexo-space-event {
     animation: none !important;
   }
 }
+
+
+/* NEXO — segunda etapa: texturas reais de alta resolução e Sol maior.
+   Mapas Solar System Scope baseados em imagens/dados NASA, CC BY 4.0:
+   https://www.solarsystemscope.com/textures/ */
+
+/* Sol maior, com fotosfera 8K e iluminação volumétrica mais natural. */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(480px, 48vw, 600px) !important;
+}
+.site[data-theme="light"] .atom-core {
+  width: 64% !important;
+  height: 64% !important;
+  border: 1px solid rgba(255,239,185,.72) !important;
+  background-image:
+    radial-gradient(circle at 29% 24%, rgba(255,255,225,.12), transparent 38%),
+    radial-gradient(ellipse at 74% 78%, rgba(82,18,2,.28), transparent 60%),
+    url("https://inove2.solarsystemscope.com/textures/download/8k_sun.jpg") !important;
+  background-size: 100% 100%, 100% 100%, 220% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  filter: saturate(1.2) contrast(1.2) brightness(1.03) !important;
+  box-shadow:
+    inset -30px -24px 38px rgba(91,24,4,.62),
+    inset 12px 9px 24px rgba(255,251,207,.48),
+    0 0 28px rgba(255,225,142,.98),
+    0 0 72px rgba(255,157,48,.9),
+    0 0 138px rgba(255,104,28,.66),
+    0 0 205px rgba(255,76,17,.38) !important;
+  animation: nexo-sun-texture-drift 105s linear infinite !important;
+}
+
+/* A textura já contém granulação solar; removemos os raios artificiais
+   e usamos apenas um halo fino na borda do disco. */
+.site[data-theme="light"] .atom-core::before {
+  inset: -2% !important;
+  opacity: .5 !important;
+  background: radial-gradient(
+    circle,
+    transparent 0 70%,
+    rgba(255,230,157,.08) 76%,
+    rgba(255,173,62,.3) 88%,
+    transparent 100%
+  ) !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  animation: none !important;
+}
+.site[data-theme="light"] .atom-core::after {
+  inset: 0 !important;
+  opacity: .52 !important;
+  background:
+    radial-gradient(ellipse at 24% 37%, rgba(255,248,196,.24) 0 2%, transparent 9%),
+    radial-gradient(ellipse at 69% 29%, rgba(104,25,4,.42) 0 3.5%, transparent 10%),
+    radial-gradient(ellipse at 58% 70%, rgba(111,27,3,.34) 0 4%, transparent 12%),
+    radial-gradient(circle at 50% 48%, transparent 54%, rgba(76,16,1,.18) 83%, rgba(43,8,0,.46) 100%) !important;
+  mix-blend-mode: multiply !important;
+  box-shadow: inset -22px -16px 28px rgba(75,17,2,.3) !important;
+}
+.site[data-theme="light"] .atom-bouncer .glow {
+  width: 112% !important;
+  height: 112% !important;
+  top: -6% !important;
+  left: -6% !important;
+  filter: blur(48px) !important;
+  opacity: .9 !important;
+}
+
+/* Os tamanhos definidos em --planet-size passam a controlar os discos.
+   Cada planeta recebe seu próprio mapa equiretangular em 2K. */
+.site[data-theme="light"] .orbiting-category {
+  width: var(--planet-size, 24px) !important;
+  height: var(--planet-size, 24px) !important;
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.site[data-theme="light"] .orbiting-category:hover {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: 0 0 18px var(--planet-halo, rgba(255,255,255,.42)) !important;
+  transform: scale(1.08);
+}
+.site[data-theme="light"] .orbiting-category > .category-icon {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  position: relative !important;
+}
+.site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background-size: 220% 100% !important;
+  background-position: 0% 50% !important;
+  background-repeat: repeat-x !important;
+  box-shadow:
+    inset -7px -5px 10px rgba(0,0,0,.72),
+    inset 2px 2px 5px rgba(255,255,255,.48),
+    0 0 8px var(--planet-halo, rgba(255,255,255,.25)) !important;
+  animation: nexo-planet-turn 48s linear infinite !important;
+}
+@keyframes nexo-planet-turn {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* Mercúrio */
+.site[data-theme="light"] .orbiting-category-1 {
+  --planet-halo: rgba(191,185,173,.5) !important;
+}
+.site[data-theme="light"] .orbiting-category-1 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.18), transparent 34%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_mercury.jpg") !important;
+}
+/* Vênus: atmosfera dourada */
+.site[data-theme="light"] .orbiting-category-2 {
+  --planet-halo: rgba(245,190,104,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-2 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,246,213,.24), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_venus_surface.jpg") !important;
+}
+/* Terra: oceanos, continentes e nuvens */
+.site[data-theme="light"] .orbiting-category-3 {
+  --planet-halo: rgba(81,174,255,.72) !important;
+}
+.site[data-theme="light"] .orbiting-category-3 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_earth_daymap.jpg") !important;
+}
+/* Marte */
+.site[data-theme="light"] .orbiting-category-4 {
+  --planet-halo: rgba(232,111,75,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-4 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,235,211,.18), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_mars.jpg") !important;
+}
+/* Júpiter: faixas atmosféricas e Grande Mancha Vermelha */
+.site[data-theme="light"] .orbiting-category-5 {
+  --planet-halo: rgba(222,179,132,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-5 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_jupiter.jpg") !important;
+}
+/* Saturno: atmosfera e anéis */
+.site[data-theme="light"] .orbiting-category-6 {
+  --planet-halo: rgba(231,201,151,.58) !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_saturn.jpg") !important;
+}
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  width: 190% !important;
+  height: 48% !important;
+  border: 3px solid rgba(191,157,104,.88) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 7px rgba(177,135,74,.52), inset 0 0 4px rgba(255,245,215,.4) !important;
+}
+/* Urano */
+.site[data-theme="light"] .orbiting-category-7 {
+  --planet-halo: rgba(126,220,232,.6) !important;
+}
+.site[data-theme="light"] .orbiting-category-7 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_uranus.jpg") !important;
+}
+/* Netuno */
+.site[data-theme="light"] .orbiting-category-8 {
+  --planet-halo: rgba(74,115,255,.65) !important;
+}
+.site[data-theme="light"] .orbiting-category-8 .planet-surface {
+  background-image:
+    radial-gradient(circle at 28% 28%, rgba(255,255,255,.2), transparent 38%),
+    url("https://inove2.solarsystemscope.com/textures/download/2k_neptune.jpg") !important;
+}
+
+/* Em telas intermediárias, o Sol continua proporcional sem invadir a busca. */
+@media (max-width: 1100px) and (min-width: 751px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(340px, 43vw, 460px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 60% !important;
+    height: 60% !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(185px, 56vw, 220px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 48% !important;
+    height: 48% !important;
+  }
+  .site[data-theme="light"] .orbiting-category-1 { --planet-size: 11px !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --planet-size: 15px !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --planet-size: 13px !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --planet-size: 27px !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --planet-size: 22px !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --planet-size: 17px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core,
+  .site[data-theme="light"] .orbiting-category > .category-icon > .planet-surface {
+    animation: none !important;
+  }
+}
