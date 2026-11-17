@@ -181,21 +181,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 9,
-          "to": 10,
-          "thin": false
-        },
-        {
-          "from": 10,
-          "to": 8,
-          "thin": false
-        },
-        {
-          "from": 8,
-          "to": 7,
-          "thin": false
-        },
-        {
           "from": 3,
           "to": 4,
           "thin": false
@@ -241,11 +226,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 15,
-          "to": 17,
-          "thin": false
-        },
-        {
           "from": 17,
           "to": 16,
           "thin": false
@@ -258,11 +238,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 15,
           "to": 5,
-          "thin": false
-        },
-        {
-          "from": 5,
-          "to": 15,
           "thin": false
         },
         {
@@ -437,11 +412,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 9,
-          "to": 0,
-          "thin": false
-        },
-        {
           "from": 0,
           "to": 1,
           "thin": false
@@ -457,22 +427,12 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 11,
-          "to": 2,
-          "thin": false
-        },
-        {
           "from": 8,
           "to": 11,
           "thin": false
         },
         {
           "from": 11,
-          "to": 12,
-          "thin": false
-        },
-        {
-          "from": 12,
           "to": 12,
           "thin": false
         },
@@ -494,11 +454,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 13,
           "to": 11,
-          "thin": false
-        },
-        {
-          "from": 11,
-          "to": 13,
           "thin": false
         },
         {
@@ -704,11 +659,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 11,
-          "to": 10,
-          "thin": false
-        },
-        {
           "from": 9,
           "to": 8,
           "thin": false
@@ -782,11 +732,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 1,
           "to": 0,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 3,
           "thin": false
         },
         {
@@ -916,11 +861,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
           "thin": false
         },
         {
-          "from": 5,
-          "to": 1,
-          "thin": false
-        },
-        {
           "from": 1,
           "to": 3,
           "thin": false
@@ -1013,11 +953,6 @@ export const constellationCatalog: ConstellationDefinition[] = [
         {
           "from": 4,
           "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 4,
           "thin": false
         },
         {
