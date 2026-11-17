@@ -4454,3 +4454,25 @@ html[data-theme="light"] .nexo-space-event {
   visibility: visible !important;
   pointer-events: all !important;
 }
+
+
+/* NEXO — naves como cenário: sempre atrás da pesquisa e dos controles. */
+.site .nexo-space-layer {
+  position: fixed !important;
+  inset: 0;
+  z-index: 0 !important;
+  overflow: hidden;
+  pointer-events: none !important;
+}
+
+.site .nexo-space-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none !important;
+}
+
+.site .constellation-layer {
+  z-index: 2 !important;
+}
