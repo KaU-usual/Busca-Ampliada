@@ -116,6 +116,7 @@ const backgroundStars = createBackgroundStars()
 type SpaceEvent = {
   id: number
   kind: 'ship' | 'rocket'
+  model: 'xwing' | 'tie' | 'falcon' | 'interceptor' | 'destroyer' | 'classic'
   x: number
   y: number
   angle: number
@@ -186,7 +187,9 @@ export default function ConstellationBackground() {
 
     const createVehicleEvent = (): SpaceEvent => {
       const direction = Math.random() < 0.5 ? 1 : -1
-      const kind: SpaceEvent['kind'] = Math.random() < 0.78 ? 'ship' : 'rocket'
+      const kind: SpaceEvent['kind'] = Math.random() < 0.88 ? 'ship' : 'rocket'
+      const shipModels: SpaceEvent['model'][] = ['xwing', 'tie', 'falcon', 'interceptor', 'destroyer', 'classic']
+      const model = kind === 'rocket' ? 'classic' : shipModels[Math.floor(Math.random() * shipModels.length)]
       const travel = direction * 1600
       const curve = randomBetween(-85, 85)
       const duration = randomBetween(9500, 13500)
@@ -196,6 +199,7 @@ export default function ConstellationBackground() {
       return {
         id: Date.now() + Math.random() * 100000,
         kind,
+        model,
         x,
         y,
         angle: direction === 1 ? 0 : 180,
@@ -224,7 +228,7 @@ export default function ConstellationBackground() {
         }
 
         scheduleVehicle()
-      }, randomBetween(15000, 25000))
+      }, randomBetween(10000, 15000))
       cleanupTimers.push(timer)
     }
 
@@ -307,57 +311,62 @@ export default function ConstellationBackground() {
                   <path className="nexo-vehicle-engine-glow" d="M -22 0 Q -58 -17 -104 0 Q -58 17 -22 0 Z" />
                   <path className="nexo-vehicle-engine-flame" d="M -22 0 Q -54 -8 -86 0 Q -54 8 -22 0 Z" />
                   {event.kind === 'ship' && (
-                    <g className="nexo-ship-hull">
-                      {event.variant === 0 && <>
-                        <path d="M -38 0 L -20 -8 L 17 -7 L 39 0 L 17 7 L -20 8 Z" />
-                        <path d="M -13 -7 L -2 -19 L 13 -8 Z M -13 7 L -2 19 L 13 8 Z" />
-                        <path d="M -23 -5 L -8 -17 L 2 -8 Z M -23 5 L -8 17 L 2 8 Z" />
-                        <path d="M -18 -3 L 17 -3 L 29 0 L 17 3 L -18 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 1 && <>
-                        <path d="M -38 -6 L 9 -10 L 39 0 L 9 10 L -38 6 L -23 0 Z" />
-                        <path d="M -18 -7 L -6 -23 L 8 -10 L 8 10 L -6 23 L -18 7 Z" />
-                        <path d="M -28 -5 L -18 -19 L -9 -8 Z M -28 5 L -18 19 L -9 8 Z" />
-                        <path d="M -7 -4 L 23 -2 L 32 0 L 23 2 L -7 4 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 2 && <>
-                        <path d="M -38 0 L -17 -8 L 9 -7 L 30 -17 L 23 0 L 30 17 L 9 7 L -17 8 Z" />
-                        <path d="M -14 -6 L -3 -18 L 13 -8 L 13 8 L -3 18 L -14 6 Z" />
-                        <path d="M -30 -3 L -21 -15 L -10 -7 Z M -30 3 L -21 15 L -10 7 Z" />
-                        <path d="M -9 -3 L 20 -2 L 30 0 L 20 2 L -9 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 3 && <>
-                        <path d="M -34 0 L -16 -12 L 15 -9 L 40 0 L 15 9 L -16 12 Z" />
-                        <path d="M -5 -9 L 4 -22 L 18 -9 Z M -5 9 L 4 22 L 18 9 Z" />
-                        <path d="M -25 -7 L -12 -20 L -2 -10 Z M -25 7 L -12 20 L -2 10 Z" />
-                        <path d="M -12 -3 L 20 -3 L 31 0 L 20 3 L -12 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 4 && <>
-                        <path d="M -42 0 L -25 -7 L 25 -7 L 43 0 L 25 7 L -25 7 Z" />
-                        <path d="M -18 -6 L -8 -29 L 3 -8 Z M -18 6 L -8 29 L 3 8 Z" />
-                        <path d="M 0 -6 L 13 -17 L 22 -6 L 22 6 L 13 17 L 0 6 Z" />
-                        <path d="M -30 -3 L 30 -3 L 39 0 L 30 3 L -30 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 5 && <>
-                        <path d="M -43 0 L -20 -9 L 26 -6 L 40 0 L 26 6 L -20 9 Z" />
-                        <path d="M -17 -7 L -35 -25 L 4 -10 Z M -17 7 L -35 25 L 4 10 Z" />
-                        <path d="M 1 -6 L 12 -15 L 24 -6 L 24 6 L 12 15 L 1 6 Z" />
-                        <path d="M -22 -3 L 25 -3 L 34 0 L 25 3 L -22 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 6 && <>
-                        <path d="M -40 0 L -20 -8 L 12 -8 L 42 0 L 12 8 L -20 8 Z" />
-                        <path d="M -18 -7 L -8 -27 L 7 -8 Z M -18 7 L -8 27 L 7 8 Z" />
-                        <path d="M -30 -5 L -42 -17 L -11 -9 Z M -30 5 L -42 17 L -11 9 Z" />
-                        <path d="M -12 -3 L 25 -3 L 35 0 L 25 3 L -12 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      {event.variant === 7 && <>
-                        <path d="M -38 0 L -17 -10 L 19 -7 L 43 0 L 19 7 L -17 10 Z" />
-                        <path d="M -8 -8 L 0 -30 L 16 -9 Z M -8 8 L 0 30 L 16 9 Z" />
-                        <path d="M -25 -5 L -34 -18 L -8 -9 Z M -25 5 L -34 18 L -8 9 Z" />
-                        <path d="M -14 -3 L 28 -3 L 38 0 L 28 3 L -14 3 Z" className="nexo-ship-armor" />
-                      </>}
-                      <path className="nexo-ship-cockpit" d="M 13 -3.5 L 27 0 L 13 3.5 Z" />
-                      <path className="nexo-ship-highlight" d="M -22 -3 L 7 -5 L 20 -2" />
+                    <g className={`nexo-ship-hull nexo-model-${event.model}`}>
+                      {event.model === 'xwing' && (
+                        <>
+                          <path d="M -42 0 L -24 -7 L 26 -5 L 48 0 L 26 5 L -24 7 Z" />
+                          <path d="M -12 -5 L 3 -34 L 19 -31 L 12 -5 Z M -12 5 L 3 34 L 19 31 L 12 5 Z" />
+                          <path d="M -12 -5 L 3 -34 L 19 -31 L 12 -5 Z M -12 5 L 3 34 L 19 31 L 12 5 Z" className="nexo-ship-armor" />
+                          <path d="M 8 -29 L 30 -39 L 33 -35 L 17 -24 M 8 29 L 30 39 L 33 35 L 17 24" className="nexo-model-cannon" />
+                          <path d="M 18 -4 L 35 0 L 18 4 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'tie' && (
+                        <>
+                          <path d="M -25 -5 L -42 -30 L -26 -39 L -10 -30 L -10 30 L -26 39 L -42 30 L -25 5 Z" />
+                          <path d="M 25 -5 L 42 -30 L 26 -39 L 10 -30 L 10 30 L 26 39 L 42 30 L 25 5 Z" />
+                          <path d="M -12 -5 L 8 -8 L 19 0 L 8 8 L -12 5 Z" />
+                          <circle cx="2" cy="0" r="12" className="nexo-ship-cockpit" />
+                          <path d="M -37 -29 L -22 -35 L -16 -28 L -16 28 L -22 35 L -37 29 Z M 37 -29 L 22 -35 L 16 -28 L 16 28 L 22 35 L 37 29 Z" className="nexo-ship-armor" />
+                        </>
+                      )}
+                      {event.model === 'falcon' && (
+                        <>
+                          <path d="M -35 -23 Q -12 -34 22 -23 L 40 -10 L 29 -2 L 48 0 L 29 2 L 40 10 L 22 23 Q -12 34 -35 23 L -43 8 L -43 -8 Z" />
+                          <path d="M -25 -18 Q 0 -27 25 -15 L 30 0 L 25 15 Q 0 27 -25 18 L -34 0 Z" className="nexo-ship-armor" />
+                          <path d="M -2 -14 L 20 -11 L 30 0 L 20 11 L -2 14 L -15 0 Z" />
+                          <path d="M -15 -6 L -4 -6 L -4 6 L -15 6 Z" className="nexo-ship-cockpit" />
+                          <circle cx="7" cy="0" r="7" className="nexo-model-dish" />
+                          <path d="M 28 -5 L 43 -5 M 28 5 L 43 5" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'interceptor' && (
+                        <>
+                          <path d="M -38 0 L -19 -8 L 26 -6 L 46 0 L 26 6 L -19 8 Z" />
+                          <path d="M -12 -6 L 2 -36 L 16 -31 L 11 -5 Z M -12 6 L 2 36 L 16 31 L 11 5 Z" />
+                          <path d="M -7 -7 L 4 -28 L 10 -25 L 7 -7 Z M -7 7 L 4 28 L 10 25 L 7 7 Z" className="nexo-ship-armor" />
+                          <path d="M 9 -4 L 29 0 L 9 4 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'destroyer' && (
+                        <>
+                          <path d="M -48 -25 L 48 0 L -48 25 L -30 0 Z" />
+                          <path d="M -30 -16 L 30 0 L -30 16 L -18 0 Z" className="nexo-ship-armor" />
+                          <path d="M -17 -7 L 4 -3 L 4 3 L -17 7 Z" />
+                          <path d="M -24 -4 L -7 -4 L -7 4 L -24 4 Z" className="nexo-ship-cockpit" />
+                          <path d="M -42 -17 L -30 -14 M -42 17 L -30 14" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'classic' && (
+                        <>
+                          <path d="M -38 0 L -20 -8 L 17 -7 L 39 0 L 17 7 L -20 8 Z" />
+                          <path d="M -13 -7 L -2 -19 L 13 -8 Z M -13 7 L -2 19 L 13 8 Z" />
+                          <path d="M -23 -5 L -8 -17 L 2 -8 Z M -23 5 L -8 17 L 2 8 Z" />
+                          <path d="M -18 -3 L 17 -3 L 29 0 L 17 3 L -18 3 Z" className="nexo-ship-armor" />
+                          <path d="M 13 -3.5 L 27 0 L 13 3.5 Z" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model !== 'classic' && <path className="nexo-ship-highlight" d="M -22 -3 L 7 -5 L 20 -2" />}
                     </g>
                   )}
                   {event.kind === 'rocket' && (
