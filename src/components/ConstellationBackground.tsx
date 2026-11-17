@@ -243,18 +243,18 @@ export default function ConstellationBackground() {
     const createVehicleEvent = (): SpaceEvent => {
       const direction = Math.random() < 0.5 ? 1 : -1
       const kind: SpaceEvent['kind'] = Math.random() < 0.78 ? 'ship' : 'rocket'
-      const travel = direction * 1400
-      const curve = randomBetween(-55, 55)
-      const duration = randomBetween(7500, 11500)
+      const travel = direction * 1600
+      const curve = randomBetween(-85, 85)
+      const duration = randomBetween(9500, 13500)
 
       return {
         id: Date.now() + Math.random() * 100000,
         kind,
-        x: direction === 1 ? -150 : 1150,
+        x: direction === 1 ? -190 : 1190,
         y: randomBetween(110, 650),
         angle: 0,
         duration,
-        scale: kind === 'rocket' ? randomBetween(0.72, 0.96) : randomBetween(0.72, 1.08),
+        scale: kind === 'rocket' ? randomBetween(1.05, 1.28) : randomBetween(1.12, 1.52),
         path: 'M 0 0 C ' + (travel * 0.28) + ' ' + curve + ' ' + (travel * 0.7) + ' ' + (-curve * 0.25) + ' ' + travel + ' 0',
         delay: 0,
         variant: Math.floor(Math.random() * 4),
@@ -417,12 +417,32 @@ export default function ConstellationBackground() {
                   <path className="nexo-vehicle-engine-flame" d="M -18 0 Q -39 -5 -54 0 Q -39 5 -18 0 Z" />
                   {event.kind === 'ship' && (
                     <g className="nexo-ship-hull">
-                      {event.variant === 0 && <><path d="M -25 0 L -12 -9 L 15 -8 L 31 0 L 15 8 L -12 9 Z" /><path d="M -5 -8 L 2 -17 L 13 -8 Z" /><path d="M -5 8 L 2 17 L 13 8 Z" /></>}
-                      {event.variant === 1 && <><path d="M -29 -5 L 9 -10 L 31 0 L 9 10 L -29 5 L -18 0 Z" /><path d="M -10 -7 L -2 -17 L 8 -9 L 8 9 L -2 17 L -10 7 Z" /></>}
-                      {event.variant === 2 && <><path d="M -30 0 L -12 -7 L 7 -7 L 25 -15 L 19 0 L 25 15 L 7 7 L -12 7 Z" /><path d="M -5 -6 L 2 -13 L 13 -7 L 13 7 L 2 13 L -5 6 Z" /></>}
-                      {event.variant === 3 && <><path d="M -25 0 L -8 -11 L 17 -8 L 32 0 L 17 8 L -8 11 Z" /><path d="M -3 -9 L 5 -20 L 15 -8 Z M -3 9 L 5 20 L 15 8 Z" /></>}
-                      <path className="nexo-ship-cockpit" d="M 10 -3 L 21 0 L 10 3 Z" />
-                      <path className="nexo-ship-highlight" d="M -14 -3 L 7 -5 L 17 -2" />
+                      {event.variant === 0 && <>
+                        <path d="M -38 0 L -20 -8 L 17 -7 L 39 0 L 17 7 L -20 8 Z" />
+                        <path d="M -13 -7 L -2 -19 L 13 -8 Z M -13 7 L -2 19 L 13 8 Z" />
+                        <path d="M -23 -5 L -8 -17 L 2 -8 Z M -23 5 L -8 17 L 2 8 Z" />
+                        <path d="M -18 -3 L 17 -3 L 29 0 L 17 3 L -18 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 1 && <>
+                        <path d="M -38 -6 L 9 -10 L 39 0 L 9 10 L -38 6 L -23 0 Z" />
+                        <path d="M -18 -7 L -6 -23 L 8 -10 L 8 10 L -6 23 L -18 7 Z" />
+                        <path d="M -28 -5 L -18 -19 L -9 -8 Z M -28 5 L -18 19 L -9 8 Z" />
+                        <path d="M -7 -4 L 23 -2 L 32 0 L 23 2 L -7 4 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 2 && <>
+                        <path d="M -38 0 L -17 -8 L 9 -7 L 30 -17 L 23 0 L 30 17 L 9 7 L -17 8 Z" />
+                        <path d="M -14 -6 L -3 -18 L 13 -8 L 13 8 L -3 18 L -14 6 Z" />
+                        <path d="M -30 -3 L -21 -15 L -10 -7 Z M -30 3 L -21 15 L -10 7 Z" />
+                        <path d="M -9 -3 L 20 -2 L 30 0 L 20 2 L -9 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 3 && <>
+                        <path d="M -34 0 L -16 -12 L 15 -9 L 40 0 L 15 9 L -16 12 Z" />
+                        <path d="M -5 -9 L 4 -22 L 18 -9 Z M -5 9 L 4 22 L 18 9 Z" />
+                        <path d="M -25 -7 L -12 -20 L -2 -10 Z M -25 7 L -12 20 L -2 10 Z" />
+                        <path d="M -12 -3 L 20 -3 L 31 0 L 20 3 L -12 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      <path className="nexo-ship-cockpit" d="M 13 -3.5 L 27 0 L 13 3.5 Z" />
+                      <path className="nexo-ship-highlight" d="M -22 -3 L 7 -5 L 20 -2" />
                     </g>
                   )}
                   {event.kind === 'rocket' && (
@@ -433,8 +453,8 @@ export default function ConstellationBackground() {
                       <circle className="nexo-rocket-window" cx="20" cy="0" r="3.2" />
                     </g>
                   )}
-                  <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
                 </g>
+                <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
               )}
 
               {event.kind === 'asteroid' && (
