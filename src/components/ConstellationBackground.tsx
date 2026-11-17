@@ -127,48 +127,6 @@ type SpaceEvent = {
   variant?: number
 }
 
-function wrapNote(note: string, limit = 48) {
-  const words = note.split(' ')
-  const lines: string[] = []
-  let line = ''
-
-  for (const word of words) {
-    const candidate = line ? `${line} ${word}` : word
-    if (candidate.length > limit && line) {
-      lines.push(line)
-      line = word
-    } else {
-      line = candidate
-    }
-  }
-
-  if (line) lines.push(line)
-  return lines.slice(0, 2)
-}
-
-function tooltipPosition(item: typeof constellations[number]) {
-  const xs = item.points.map(point => point[0])
-  const ys = item.points.map(point => point[1])
-  const minX = item.position[0] + Math.min(...xs)
-  const maxY = item.position[1] + Math.max(...ys)
-  const minY = item.position[1] + Math.min(...ys)
-  const width = 270
-  const height = 64
-  const margin = 14
-
-  const globalX = Math.max(
-    margin,
-    Math.min(1000 - width - margin, minX + (Math.max(...xs) - Math.min(...xs)) / 2 - width / 2 + item.position[0]),
-  )
-
-  const below = maxY + 22
-  const globalY = below + height <= 760 - margin
-    ? below
-    : Math.max(margin, minY - height - 18)
-
-  return { x: globalX - item.position[0], y: globalY - item.position[1] }
-}
-
 // NEXO: painel mobile e eventos celestes naturais
 export default function ConstellationBackground({ theme }: { theme: 'dark' | 'light' }) {
   const [selected, setSelected] = useState<string | null>(null)
@@ -433,8 +391,6 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
 
         {constellations.map((item, index) => {
           const active = selected === item.name || hovered === item.name || (theme === 'dark' && activeConstellation === index)
-          const tooltip = tooltipPosition(item)
-          const noteLines = wrapNote(item.note)
 
           return (
             <g
