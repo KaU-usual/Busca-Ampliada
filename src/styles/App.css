@@ -4767,3 +4767,24 @@ html[data-theme="light"] .nexo-space-event {
     --atom-size: 270px !important;
   }
 }
+
+
+/* NEXO — Lua um pouco menor, preservando sua aparência atual. */
+.site[data-theme="dark"] .atom-bouncer {
+  --atom-size: clamp(390px, 38vw, 500px) !important;
+}
+@media (max-width: 1100px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: clamp(340px, 43vw, 430px) !important;
+  }
+}
+@media (max-width: 750px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 275px !important;
+  }
+}
+@media (max-width: 450px) {
+  .site[data-theme="dark"] .atom-bouncer {
+    --atom-size: 240px !important;
+  }
+}
