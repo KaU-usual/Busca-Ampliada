@@ -180,6 +180,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         { "from": 16, "to": 17, "thin": true },
         { "from": 17, "to": 4, "thin": true }
       
+    ],
   },
   {
     "code": "Ori",
@@ -347,6 +348,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         { "from": 17, "to": 18, "thin": false },
         { "from": 5, "to": 7, "thin": false }
       
+    ],
   },
   {
     "code": "Cas",
@@ -399,6 +401,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         { "from": 2, "to": 3, "thin": false },
         { "from": 3, "to": 4, "thin": false }
       
+    ],
   },
   {
     "code": "Sco",
@@ -515,6 +518,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         { "from": 9, "to": 11, "thin": false },
         { "from": 9, "to": 12, "thin": false }
       
+    ],
   },
   {
     "code": "Cru",
@@ -652,6 +656,7 @@ export const constellationCatalog: ConstellationDefinition[] = [
         { "from": 7, "to": 8, "thin": false },
         { "from": 5, "to": 1, "thin": false }
       
+    ],
   },
   {
     code: "CMa",
