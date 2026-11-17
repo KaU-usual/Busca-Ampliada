@@ -5098,3 +5098,147 @@ html[data-theme="light"] .nexo-space-event {
   border-width: 4px !important;
   box-shadow: 0 0 7px rgba(177,135,74,.55), inset 0 0 4px rgba(255,245,215,.45) !important;
 }
+
+
+/* NEXO — Sol imponente com textura solar real e planetas proporcionais. */
+/* Mapa solar de 4.096 × 2.048 px, Solar System Scope, CC BY 4.0.
+   Textura baseada em dados e imagens NASA; licença e créditos:
+   https://commons.wikimedia.org/wiki/File:Solarsystemscope_texture_8k_sun.jpg */
+.site[data-theme="light"] .atom-bouncer {
+  --atom-size: clamp(420px, 43vw, 560px) !important;
+}
+
+/* O disco cresce de 43% para 55% do conjunto e ganha uma fotosfera detalhada. */
+.site[data-theme="light"] .atom-core {
+  width: 55% !important;
+  height: 55% !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,239,174,.9) !important;
+  background-image:
+    radial-gradient(circle at 32% 28%, rgba(255,255,225,.2), transparent 42%),
+    radial-gradient(ellipse at 70% 75%, rgba(104,24,5,.24), transparent 62%),
+    url("https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Solarsystemscope_texture_8k_sun.jpg/3840px-Solarsystemscope_texture_8k_sun.jpg?utm_campaign=index&utm_content=thumbnail&utm_source=commons.wikimedia.org") !important;
+  background-size: 100% 100%, 100% 100%, 220% 100% !important;
+  background-position: center, center, 0% 50% !important;
+  background-repeat: no-repeat, no-repeat, repeat-x !important;
+  background-blend-mode: screen, multiply, normal !important;
+  filter: saturate(1.12) contrast(1.12) brightness(1.02);
+  box-shadow:
+    inset -24px -18px 30px rgba(111,34,8,.58),
+    inset 10px 8px 20px rgba(255,250,206,.5),
+    0 0 22px rgba(255,222,123,.95),
+    0 0 58px rgba(255,155,49,.86),
+    0 0 112px rgba(255,111,35,.62),
+    0 0 180px rgba(255,91,24,.34) !important;
+  animation: nexo-sun-texture-drift 110s linear infinite !important;
+}
+@keyframes nexo-sun-texture-drift {
+  from { background-position: center, center, 0% 50%; }
+  to { background-position: center, center, 100% 50%; }
+}
+
+/* Granulação e regiões ativas sobre a fotosfera, sem os antigos raios pontudos. */
+.site[data-theme="light"] .atom-core::before {
+  inset: -13% !important;
+  opacity: .42 !important;
+  filter: drop-shadow(0 0 10px rgba(255,171,52,.65)) !important;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 8deg,
+      rgba(255,226,143,.5) 9deg 10deg,
+      transparent 11deg 28deg,
+      rgba(255,151,42,.48) 29deg 31deg,
+      transparent 32deg 52deg,
+      rgba(255,235,168,.44) 53deg 54deg,
+      transparent 55deg 82deg,
+      rgba(255,151,42,.42) 83deg 85deg,
+      transparent 86deg 112deg,
+      rgba(255,226,143,.48) 113deg 114deg,
+      transparent 115deg 144deg,
+      rgba(255,151,42,.42) 145deg 147deg,
+      transparent 148deg 180deg,
+      rgba(255,235,168,.44) 181deg 182deg,
+      transparent 183deg 214deg,
+      rgba(255,151,42,.42) 215deg 217deg,
+      transparent 218deg 250deg,
+      rgba(255,226,143,.48) 251deg 252deg,
+      transparent 253deg 286deg,
+      rgba(255,151,42,.42) 287deg 289deg,
+      transparent 290deg 322deg,
+      rgba(255,235,168,.44) 323deg 324deg,
+      transparent 325deg 360deg
+    );
+  -webkit-mask: radial-gradient(circle, transparent 0 48%, #000 55% 67%, transparent 78%) !important;
+  mask: radial-gradient(circle, transparent 0 48%, #000 55% 67%, transparent 78%) !important;
+  animation: nexo-solar-rays 95s linear infinite !important;
+}
+.site[data-theme="light"] .atom-core::after {
+  inset: 0 !important;
+  opacity: .48 !important;
+  background:
+    radial-gradient(ellipse at 24% 38%, rgba(255,250,204,.65) 0 2.5%, transparent 10%),
+    radial-gradient(ellipse at 68% 29%, rgba(107,27,9,.6) 0 3.5%, transparent 11%),
+    radial-gradient(ellipse at 59% 69%, rgba(128,33,8,.52) 0 4%, transparent 13%),
+    radial-gradient(ellipse at 34% 76%, rgba(255,233,156,.56) 0 3%, transparent 11%),
+    radial-gradient(ellipse at 50% 48%, rgba(255,244,184,.14), transparent 62%) !important;
+  mix-blend-mode: screen;
+  box-shadow: inset -20px -12px 26px rgba(103,26,5,.35) !important;
+}
+
+/* Coroa mais larga e suave, para o Sol parecer luminoso sem virar uma bola chapada. */
+.site[data-theme="light"] .atom-bouncer .glow {
+  width: 96% !important;
+  height: 96% !important;
+  top: 2% !important;
+  left: 2% !important;
+  opacity: .92 !important;
+  filter: blur(42px) !important;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,222,.9) 0 18%,
+    rgba(255,210,91,.78) 34%,
+    rgba(255,139,40,.55) 55%,
+    rgba(246,89,25,.2) 68%,
+    transparent 78%
+  ) !important;
+}
+
+/* Planetas crescem junto com o conjunto; órbitas já usam --atom-size. */
+.site[data-theme="light"] .orbiting-category-1 { --planet-size: 16px !important; }
+.site[data-theme="light"] .orbiting-category-2 { --planet-size: 24px !important; }
+.site[data-theme="light"] .orbiting-category-3 { --planet-size: 27px !important; }
+.site[data-theme="light"] .orbiting-category-4 { --planet-size: 21px !important; }
+.site[data-theme="light"] .orbiting-category-5 { --planet-size: 42px !important; }
+.site[data-theme="light"] .orbiting-category-6 { --planet-size: 33px !important; }
+.site[data-theme="light"] .orbiting-category-7 { --planet-size: 28px !important; }
+.site[data-theme="light"] .orbiting-category-8 { --planet-size: 27px !important; }
+.site[data-theme="light"] .orbiting-category-6 .category-icon::after {
+  width: 175% !important;
+  height: 46% !important;
+  border-width: 4px !important;
+}
+
+/* Em telas pequenas, mantemos a composição compacta e evitamos cobrir a busca. */
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    --atom-size: clamp(185px, 56vw, 220px) !important;
+  }
+  .site[data-theme="light"] .atom-core {
+    width: 48% !important;
+    height: 48% !important;
+  }
+  .site[data-theme="light"] .orbiting-category-1 { --planet-size: 11px !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --planet-size: 15px !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --planet-size: 13px !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --planet-size: 27px !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --planet-size: 22px !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --planet-size: 17px !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --planet-size: 17px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site[data-theme="light"] .atom-core {
+    animation: none !important;
+  }
+}
