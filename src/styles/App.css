@@ -5478,3 +5478,67 @@ html[data-theme="light"] .nexo-space-event {
   .site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .41) !important; }
   .site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .42) !important; }
 }
+
+
+/* NEXO — oito trilhas orbitais individuais, discretas e alinhadas aos planetas. */
+.site[data-theme="light"] .atom-bouncer {
+  transform: translateY(-14px);
+}
+.site[data-theme="light"] .atom-orbit {
+  display: none !important;
+}
+.site[data-theme="light"] .solar-orbit {
+  --orbit-radius: calc(var(--atom-size) * .35);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  border: 1px solid rgba(164, 139, 105, .25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 5px rgba(220, 183, 125, .07);
+}
+.site[data-theme="light"] .solar-orbit-1 { --orbit-radius: calc(var(--atom-size) * .35); border-color: rgba(160, 151, 139, .30); }
+.site[data-theme="light"] .solar-orbit-2 { --orbit-radius: calc(var(--atom-size) * .37); border-color: rgba(198, 158, 105, .27); }
+.site[data-theme="light"] .solar-orbit-3 { --orbit-radius: calc(var(--atom-size) * .39); border-color: rgba(112, 159, 184, .28); }
+.site[data-theme="light"] .solar-orbit-4 { --orbit-radius: calc(var(--atom-size) * .41); border-color: rgba(194, 133, 105, .27); }
+.site[data-theme="light"] .solar-orbit-5 { --orbit-radius: calc(var(--atom-size) * .43); border-color: rgba(183, 157, 123, .29); }
+.site[data-theme="light"] .solar-orbit-6 { --orbit-radius: calc(var(--atom-size) * .45); border-color: rgba(183, 161, 117, .29); }
+.site[data-theme="light"] .solar-orbit-7 { --orbit-radius: calc(var(--atom-size) * .47); border-color: rgba(119, 174, 184, .30); }
+.site[data-theme="light"] .solar-orbit-8 { --orbit-radius: calc(var(--atom-size) * .49); border-color: rgba(113, 139, 190, .30); }
+
+/* As posições dos planetas acompanham exatamente os oito anéis. */
+.site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .35) !important; }
+.site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .37) !important; }
+.site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .39) !important; }
+.site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .41) !important; }
+.site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .43) !important; }
+.site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .45) !important; }
+.site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .47) !important; }
+.site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .49) !important; }
+
+@media (max-width: 750px) {
+  .site[data-theme="light"] .atom-bouncer {
+    transform: translateY(-6px);
+  }
+  .site[data-theme="light"] .solar-orbit-1 { --orbit-radius: calc(var(--atom-size) * .32); }
+  .site[data-theme="light"] .solar-orbit-2 { --orbit-radius: calc(var(--atom-size) * .34); }
+  .site[data-theme="light"] .solar-orbit-3 { --orbit-radius: calc(var(--atom-size) * .36); }
+  .site[data-theme="light"] .solar-orbit-4 { --orbit-radius: calc(var(--atom-size) * .38); }
+  .site[data-theme="light"] .solar-orbit-5 { --orbit-radius: calc(var(--atom-size) * .40); }
+  .site[data-theme="light"] .solar-orbit-6 { --orbit-radius: calc(var(--atom-size) * .42); }
+  .site[data-theme="light"] .solar-orbit-7 { --orbit-radius: calc(var(--atom-size) * .44); }
+  .site[data-theme="light"] .solar-orbit-8 { --orbit-radius: calc(var(--atom-size) * .46); }
+
+  .site[data-theme="light"] .orbiting-category-1 { --orbit-radius: calc(var(--atom-size) * .32) !important; }
+  .site[data-theme="light"] .orbiting-category-2 { --orbit-radius: calc(var(--atom-size) * .34) !important; }
+  .site[data-theme="light"] .orbiting-category-3 { --orbit-radius: calc(var(--atom-size) * .36) !important; }
+  .site[data-theme="light"] .orbiting-category-4 { --orbit-radius: calc(var(--atom-size) * .38) !important; }
+  .site[data-theme="light"] .orbiting-category-5 { --orbit-radius: calc(var(--atom-size) * .40) !important; }
+  .site[data-theme="light"] .orbiting-category-6 { --orbit-radius: calc(var(--atom-size) * .42) !important; }
+  .site[data-theme="light"] .orbiting-category-7 { --orbit-radius: calc(var(--atom-size) * .44) !important; }
+  .site[data-theme="light"] .orbiting-category-8 { --orbit-radius: calc(var(--atom-size) * .46) !important; }
+}
