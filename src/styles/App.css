@@ -4274,3 +4274,28 @@ html[data-theme="light"] .nexo-space-event {
 .site[data-theme="light"] .nexo-space-event.rocket {
   display: none !important;
 }
+
+
+/* NEXO — estrelas cadentes removidas definitivamente do visual. */
+.nexo-space-event.meteor,
+.nexo-meteor-streak,
+.nexo-meteor-halo,
+.nexo-meteor-tail,
+.nexo-meteor-core,
+.nexo-meteor-head {
+  display: none !important;
+}
+
+/* NEXO — movimento contínuo aplicado ao grupo inteiro da nave/foguete. */
+.site[data-theme="dark"] .nexo-space-event.ship,
+.site[data-theme="dark"] .nexo-space-event.rocket {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+}
+.site[data-theme="dark"] .nexo-vehicle-art {
+  display: inline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
