@@ -86,7 +86,7 @@ function App() {
 
   return (
     <main className="site" data-theme={theme}>
-      <ConstellationBackground />
+      <ConstellationBackground theme={theme} />
       <Header theme={theme} setTheme={setTheme} />
 
       <Hero
