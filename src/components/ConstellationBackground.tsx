@@ -116,7 +116,7 @@ const backgroundStars = createBackgroundStars()
 type SpaceEvent = {
   id: number
   kind: 'ship' | 'rocket'
-  model: 'xwing' | 'tie' | 'falcon' | 'interceptor' | 'destroyer' | 'classic'
+  model: 'xwing' | 'tie' | 'falcon' | 'interceptor' | 'destroyer' | 'ywing' | 'awing' | 'bomber' | 'shuttle' | 'bwing' | 'classic'
   x: number
   y: number
   angle: number
@@ -188,7 +188,7 @@ export default function ConstellationBackground() {
     const createVehicleEvent = (): SpaceEvent => {
       const direction = Math.random() < 0.5 ? 1 : -1
       const kind: SpaceEvent['kind'] = Math.random() < 0.88 ? 'ship' : 'rocket'
-      const shipModels: SpaceEvent['model'][] = ['xwing', 'tie', 'falcon', 'interceptor', 'destroyer', 'classic']
+      const shipModels: SpaceEvent['model'][] = ['xwing', 'tie', 'falcon', 'interceptor', 'destroyer', 'ywing', 'awing', 'bomber', 'shuttle', 'bwing']
       const model = kind === 'rocket' ? 'classic' : shipModels[Math.floor(Math.random() * shipModels.length)]
       const travel = direction * 1600
       const curve = randomBetween(-85, 85)
@@ -219,12 +219,20 @@ export default function ConstellationBackground() {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
         if (isDark && !reducedMotion) {
-          const vehicle = createVehicleEvent()
-          setSpaceEvents(current => [...current, vehicle])
-          const cleanup = window.setTimeout(() => {
-            setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
-          }, vehicle.duration + 500)
-          cleanupTimers.push(cleanup)
+          // Cada passagem traz uma pequena formação, em vez de uma nave isolada.
+          const waveSize = Math.random() < 0.35 ? 3 : 2
+          for (let index = 0; index < waveSize; index++) {
+            const launch = window.setTimeout(() => {
+              if (cancelled) return
+              const vehicle = createVehicleEvent()
+              setSpaceEvents(current => [...current, vehicle])
+              const cleanup = window.setTimeout(() => {
+                setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
+              }, vehicle.duration + 500)
+              cleanupTimers.push(cleanup)
+            }, index * 1350)
+            cleanupTimers.push(launch)
+          }
         }
 
         scheduleVehicle()
@@ -355,6 +363,47 @@ export default function ConstellationBackground() {
                           <path d="M -17 -7 L 4 -3 L 4 3 L -17 7 Z" />
                           <path d="M -24 -4 L -7 -4 L -7 4 L -24 4 Z" className="nexo-ship-cockpit" />
                           <path d="M -42 -17 L -30 -14 M -42 17 L -30 14" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'ywing' && (
+                        <>
+                          <path d="M -43 -7 L 18 -7 L 43 -3 L 43 3 L 18 7 L -43 7 Z" />
+                          <path d="M -27 -7 L -34 -20 L 16 -20 L 24 -7 Z M -27 7 L -34 20 L 16 20 L 24 7 Z" className="nexo-ship-armor" />
+                          <path d="M -34 -20 L -45 -20 L -49 -16 L -49 -10 L -34 -10 Z M -34 20 L -45 20 L -49 16 L -49 10 L -34 10 Z" />
+                          <path d="M 7 -5 L 29 -3 L 29 3 L 7 5 Z" className="nexo-ship-cockpit" />
+                          <path d="M -46 -15 L -46 -10 M -46 15 L -46 10" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'awing' && (
+                        <>
+                          <path d="M -42 0 L 34 -8 L 49 0 L 34 8 Z" />
+                          <path d="M -25 -5 L -7 -18 L 18 -7 L 18 -3 Z M -25 5 L -7 18 L 18 7 L 18 3 Z" className="nexo-ship-armor" />
+                          <path d="M 4 -3 L 28 0 L 4 3 Z" className="nexo-ship-cockpit" />
+                          <path d="M -38 -2 L -20 -2 M -38 2 L -20 2" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'bomber' && (
+                        <>
+                          <path d="M -34 -8 L 26 -8 L 43 0 L 26 8 L -34 8 Z" />
+                          <path d="M -21 -8 L -30 -28 L 8 -28 L 18 -8 Z M -21 8 L -30 28 L 8 28 L 18 8 Z" className="nexo-ship-armor" />
+                          <path d="M -27 -22 L 4 -22 M -27 22 L 4 22" className="nexo-model-cannon" />
+                          <circle cx="16" cy="0" r="7" className="nexo-ship-cockpit" />
+                        </>
+                      )}
+                      {event.model === 'shuttle' && (
+                        <>
+                          <path d="M -32 -7 L 23 -7 L 43 0 L 23 7 L -32 7 Z" />
+                          <path d="M -13 -7 L -2 -38 L 9 -35 L 4 -7 Z M -13 7 L -2 38 L 9 35 L 4 7 Z" className="nexo-ship-armor" />
+                          <path d="M 7 -4 L 29 0 L 7 4 Z" className="nexo-ship-cockpit" />
+                          <path d="M -4 -30 L 3 -30 M -4 30 L 3 30" className="nexo-model-cannon" />
+                        </>
+                      )}
+                      {event.model === 'bwing' && (
+                        <>
+                          <path d="M -38 -5 L 28 -5 L 46 0 L 28 5 L -38 5 Z" />
+                          <path d="M -4 -5 L 2 -36 L 13 -40 L 17 -5 Z M -4 5 L 2 36 L 13 40 L 17 5 Z" className="nexo-ship-armor" />
+                          <path d="M -25 -4 L -18 -17 L -10 -17 L -8 -4 Z M -25 4 L -18 17 L -10 17 L -8 4 Z" />
+                          <path d="M 12 -3 L 34 0 L 12 3 Z" className="nexo-ship-cockpit" />
                         </>
                       )}
                       {event.model === 'classic' && (
