@@ -3965,6 +3965,11 @@ html[data-theme="light"] .nexo-space-event {
 }
 
 /* NEXO — naves e foguetes ocasionais, exclusivos do céu noturno. */
+.site[data-theme="dark"] .nexo-space-event.ship,
+.site[data-theme="dark"] .nexo-space-event.rocket {
+  opacity: 1 !important;
+}
+
 .site[data-theme="light"] .nexo-space-event.ship,
 .site[data-theme="light"] .nexo-space-event.rocket {
   display: none !important;
