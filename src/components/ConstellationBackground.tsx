@@ -35,7 +35,7 @@ function connectMissingSegments(
       }
     }
     if (!best) break
-    lines.push({ from: best.from, to: best.to, thin: true })
+    lines.push({ from: best.from, to: best.to, thin: false })
     parent[find(best.to)] = find(best.from)
   }
 
@@ -82,20 +82,20 @@ function projectStars(stars: Star[]) {
   const minY = Math.min(...raw.map(star => star.y))
   const maxY = Math.max(...raw.map(star => star.y))
 
-  // Escala angular fixa: constelações menores no céu também ficam menores no desenho.
-  // Isso evita ampliar artificialmente figuras compactas, como o Cruzeiro do Sul.
+  // Recupera o enquadramento original: cada figura ocupa o espaço de desenho
+  // disponível sem ser reduzida por uma escala angular fixa.
   const width = Math.max(maxX - minX, 0.000001)
   const height = Math.max(maxY - minY, 0.000001)
-  const scale = 340
-  const offsetX = 12 + (250 - width * scale) / 2
-  const offsetY = 12 + (200 - height * scale) / 2
+  const scale = Math.min(190 / width, 150 / height)
+  const offsetX = 12 + (190 - width * scale) / 2
+  const offsetY = 12 + (150 - height * scale) / 2
 
   return raw.map(star => ({
     ...star,
     x: offsetX + (star.x - minX) * scale,
     y: offsetY + (maxY - star.y) * scale,
-    radius: Math.max(1.2, Math.min(4.2, 3.3 - star.mag * 0.38)),
-    glow: Math.max(0.16, Math.min(0.72, 0.62 - (star.mag + 1.46) * 0.075)),
+    radius: Math.max(1.35, Math.min(4.8, 5 - star.mag * 0.8)),
+    glow: Math.max(0.24, Math.min(0.9, 0.76 - (star.mag + 1.46) * 0.09)),
   }))
 }
 
