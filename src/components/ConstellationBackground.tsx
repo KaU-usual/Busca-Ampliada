@@ -170,7 +170,7 @@ function tooltipPosition(item: typeof constellations[number]) {
 }
 
 // NEXO: painel mobile e eventos celestes naturais
-export default function ConstellationBackground() {
+export default function ConstellationBackground({ theme }: { theme: 'dark' | 'light' }) {
   const [selected, setSelected] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
   const [spaceEvents, setSpaceEvents] = useState<SpaceEvent[]>([])
@@ -179,8 +179,17 @@ export default function ConstellationBackground() {
   )
 
   useEffect(() => {
+    // Reinicia apenas o ciclo das naves quando o tema muda.
+    // No modo claro, não mantém timers nem elementos invisíveis em execução.
+    setSpaceEvents([])
+    if (theme !== 'dark' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
     let cancelled = false
-    const cleanupTimers: number[] = []
+    let spawnTimer = 0
+    let nextTimer = 0
+    const cleanupTimers = new Set<number>()
 
     const randomBetween = (min: number, max: number) =>
       Math.random() * (max - min) + min
@@ -188,8 +197,13 @@ export default function ConstellationBackground() {
     const createVehicleEvent = (): SpaceEvent => {
       const direction = Math.random() < 0.5 ? 1 : -1
       const kind: SpaceEvent['kind'] = Math.random() < 0.88 ? 'ship' : 'rocket'
-      const shipModels: SpaceEvent['model'][] = ['xwing', 'tie', 'falcon', 'interceptor', 'destroyer', 'ywing', 'awing', 'bomber', 'shuttle', 'bwing']
-      const model = kind === 'rocket' ? 'classic' : shipModels[Math.floor(Math.random() * shipModels.length)]
+      const shipModels: SpaceEvent['model'][] = [
+        'xwing', 'tie', 'falcon', 'interceptor', 'destroyer',
+        'ywing', 'awing', 'bomber', 'shuttle', 'bwing',
+      ]
+      const model = kind === 'rocket'
+        ? 'classic'
+        : shipModels[Math.floor(Math.random() * shipModels.length)]
       const travel = direction * 1600
       const curve = randomBetween(-85, 85)
       const duration = randomBetween(9500, 13500)
@@ -204,70 +218,49 @@ export default function ConstellationBackground() {
         y,
         angle: direction === 1 ? 0 : 180,
         duration,
-        scale: kind === 'rocket' ? randomBetween(0.48, 0.62) : randomBetween(0.5, 0.68),
+        scale: kind === 'rocket'
+          ? randomBetween(0.48, 0.62)
+          : randomBetween(0.5, 0.68),
         path: `M ${x} ${y} C ${x + travel * 0.28} ${y + curve} ${x + travel * 0.7} ${y - curve * 0.25} ${x + travel} ${y}`,
         delay: 0,
         variant: Math.floor(Math.random() * 8),
       }
     }
 
-    const scheduleVehicle = () => {
-      const timer = window.setTimeout(() => {
-        if (cancelled) return
+    const spawnVehicle = () => {
+      if (cancelled || document.hidden) return
+      const vehicle = createVehicleEvent()
+      setSpaceEvents(current => [...current, vehicle])
 
-        const isDark = document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-        if (isDark && !reducedMotion) {
-          // Uma nave por vez de entrada: mantém o céu movimentado sem aglomerar.
-          const vehicle = createVehicleEvent()
-          setSpaceEvents(current => [...current, vehicle])
-          const cleanup = window.setTimeout(() => {
-            setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
-          }, vehicle.duration + 500)
-          cleanupTimers.push(cleanup)
-        }
-
-        scheduleVehicle()
-      }, randomBetween(12000, 15000))
-      cleanupTimers.push(timer)
+      const cleanup = window.setTimeout(() => {
+        setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
+        cleanupTimers.delete(cleanup)
+      }, vehicle.duration + 500)
+      cleanupTimers.add(cleanup)
     }
 
-    const demoTimer = window.setTimeout(() => {
-      const isDark =
-        document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
-      const reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches
+    const scheduleNext = () => {
+      if (cancelled) return
+      nextTimer = window.setTimeout(() => {
+        spawnVehicle()
+        scheduleNext()
+      }, randomBetween(12000, 15000))
+    }
 
-      if (cancelled || !isDark || reducedMotion) return
-
-      const demoEvents: SpaceEvent[] = [
-        // Uma nave atravessa a tela logo no início para validar o deslocamento.
-        createVehicleEvent(),
-      ]
-
-      setSpaceEvents(current => [...current, ...demoEvents])
-
-      demoEvents.forEach(event => {
-        const timer = window.setTimeout(() => {
-          setSpaceEvents(current =>
-            current.filter(item => item.id !== event.id)
-          )
-        }, event.duration + 400)
-
-        cleanupTimers.push(timer)
-      })
-    }, 1000)
-
-    scheduleVehicle()
+    // Uma nave inicial aparece rapidamente ao entrar no modo escuro.
+    spawnTimer = window.setTimeout(() => {
+      spawnVehicle()
+      scheduleNext()
+    }, 650)
 
     return () => {
       cancelled = true
-      window.clearTimeout(demoTimer)
+      window.clearTimeout(spawnTimer)
+      window.clearTimeout(nextTimer)
       cleanupTimers.forEach(timer => window.clearTimeout(timer))
+      cleanupTimers.clear()
     }
-  }, [])
+  }, [theme])
 
   return (
     <>
