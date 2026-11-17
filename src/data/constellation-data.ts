@@ -160,102 +160,26 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ],
     "lines": [
-        {
-          "from": 6,
-          "to": 7,
-          "thin": true
-        },
-        {
-          "from": 7,
-          "to": 8,
-          "thin": true
-        },
-        {
-          "from": 8,
-          "to": 10,
-          "thin": true
-        },
-        {
-          "from": 10,
-          "to": 9,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 4,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 5,
-          "to": 6,
-          "thin": false
-        },
-        {
-          "from": 6,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 2,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 1,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 0,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 17,
-          "thin": false
-        },
-        {
-          "from": 17,
-          "to": 15,
-          "thin": false
-        },
-        {
-          "from": 17,
-          "to": 16,
-          "thin": false
-        },
-        {
-          "from": 16,
-          "to": 15,
-          "thin": false
-        },
-        {
-          "from": 15,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 15,
-          "to": 12,
-          "thin": false
-        },
-        {
-          "from": 12,
-          "to": 13,
-          "thin": true
-        },
-        {
-          "from": 13,
-          "to": 14,
-          "thin": true
-        }
-      ]
+        { "from": 0, "to": 1, "thin": false },
+        { "from": 1, "to": 2, "thin": false },
+        { "from": 2, "to": 3, "thin": false },
+        { "from": 3, "to": 4, "thin": false },
+        { "from": 4, "to": 5, "thin": false },
+        { "from": 5, "to": 6, "thin": false },
+        { "from": 6, "to": 3, "thin": false },
+        { "from": 6, "to": 7, "thin": true },
+        { "from": 7, "to": 8, "thin": true },
+        { "from": 8, "to": 9, "thin": true },
+        { "from": 8, "to": 10, "thin": true },
+        { "from": 5, "to": 11, "thin": true },
+        { "from": 11, "to": 12, "thin": true },
+        { "from": 12, "to": 13, "thin": true },
+        { "from": 12, "to": 14, "thin": true },
+        { "from": 11, "to": 15, "thin": true },
+        { "from": 15, "to": 16, "thin": true },
+        { "from": 16, "to": 17, "thin": true },
+        { "from": 17, "to": 4, "thin": true }
+      
   },
   {
     "code": "Ori",
@@ -401,82 +325,28 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ],
     "lines": [
-        {
-          "from": 8,
-          "to": 0,
-          "thin": false
-        },
-        {
-          "from": 0,
-          "to": 9,
-          "thin": false
-        },
-        {
-          "from": 0,
-          "to": 1,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 2,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 11,
-          "thin": false
-        },
-        {
-          "from": 8,
-          "to": 11,
-          "thin": false
-        },
-        {
-          "from": 11,
-          "to": 12,
-          "thin": false
-        },
-        {
-          "from": 12,
-          "to": 8,
-          "thin": false
-        },
-        {
-          "from": 18,
-          "to": 17,
-          "thin": false
-        },
-        {
-          "from": 17,
-          "to": 13,
-          "thin": false
-        },
-        {
-          "from": 13,
-          "to": 11,
-          "thin": false
-        },
-        {
-          "from": 13,
-          "to": 14,
-          "thin": false
-        },
-        {
-          "from": 8,
-          "to": 7,
-          "thin": false
-        },
-        {
-          "from": 7,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 6,
-          "to": 5,
-          "thin": false
-        }
-      ]
+        { "from": 0, "to": 1, "thin": false },
+        { "from": 1, "to": 2, "thin": false },
+        { "from": 3, "to": 4, "thin": false },
+        { "from": 4, "to": 5, "thin": false },
+        { "from": 5, "to": 6, "thin": false },
+        { "from": 4, "to": 7, "thin": false },
+        { "from": 7, "to": 8, "thin": false },
+        { "from": 8, "to": 0, "thin": false },
+        { "from": 0, "to": 9, "thin": false },
+        { "from": 9, "to": 10, "thin": false },
+        { "from": 10, "to": 2, "thin": false },
+        { "from": 2, "to": 11, "thin": false },
+        { "from": 11, "to": 12, "thin": false },
+        { "from": 12, "to": 8, "thin": false },
+        { "from": 11, "to": 13, "thin": false },
+        { "from": 13, "to": 14, "thin": false },
+        { "from": 14, "to": 15, "thin": false },
+        { "from": 15, "to": 16, "thin": false },
+        { "from": 13, "to": 17, "thin": false },
+        { "from": 17, "to": 18, "thin": false },
+        { "from": 5, "to": 7, "thin": false }
+      
   },
   {
     "code": "Cas",
@@ -524,27 +394,11 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ],
     "lines": [
-        {
-          "from": 4,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 2,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 1,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 0,
-          "thin": false
-        }
-      ]
+        { "from": 0, "to": 1, "thin": false },
+        { "from": 1, "to": 2, "thin": false },
+        { "from": 2, "to": 3, "thin": false },
+        { "from": 3, "to": 4, "thin": false }
+      
   },
   {
     "code": "Sco",
@@ -648,47 +502,19 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ],
     "lines": [
-        {
-          "from": 12,
-          "to": 10,
-          "thin": false
-        },
-        {
-          "from": 10,
-          "to": 11,
-          "thin": false
-        },
-        {
-          "from": 9,
-          "to": 8,
-          "thin": false
-        },
-        {
-          "from": 8,
-          "to": 7,
-          "thin": false
-        },
-        {
-          "from": 7,
-          "to": 6,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 2,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 1,
-          "thin": false
-        }
-      ]
+        { "from": 0, "to": 1, "thin": false },
+        { "from": 1, "to": 2, "thin": false },
+        { "from": 2, "to": 3, "thin": false },
+        { "from": 3, "to": 4, "thin": false },
+        { "from": 4, "to": 5, "thin": false },
+        { "from": 5, "to": 6, "thin": false },
+        { "from": 6, "to": 7, "thin": false },
+        { "from": 7, "to": 8, "thin": false },
+        { "from": 8, "to": 9, "thin": false },
+        { "from": 9, "to": 10, "thin": false },
+        { "from": 9, "to": 11, "thin": false },
+        { "from": 9, "to": 12, "thin": false }
+      
   },
   {
     "code": "Cru",
@@ -815,115 +641,17 @@ export const constellationCatalog: ConstellationDefinition[] = [
       }
     ],
     "lines": [
-        {
-          "from": 2,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 4,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 6,
-          "thin": false
-        },
-        {
-          "from": 6,
-          "to": 7,
-          "thin": false
-        },
-        {
-          "from": 7,
-          "to": 8,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 5,
-          "to": 0,
-          "thin": false
-        },
-        {
-          "from": 0,
-          "to": 1,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 8,
-          "to": 3,
-          "thin": false
-        }
-      ]
-  }
-,
-  {
-    code: "UMi",
-    name: "Ursa Menor",
-    note: "A Ursa Menor abriga Polaris, a Estrela do Norte, próxima ao polo celeste norte.",
-    position: [770, 65],
-    stars: [
-      { hip: 11767, name: "Polaris", ra: 2.5303, dec: 89.2641, mag: 1.98 },
-      { hip: 85822, name: "Yildun", ra: 17.5369, dec: 86.5863, mag: 4.35 },
-      { hip: 82080, name: "Epsilon UMi", ra: 16.7662, dec: 82.0373, mag: 4.21 },
-      { hip: 77055, name: "Eta UMi", ra: 15.7343, dec: 77.7945, mag: 4.95 },
-      { hip: 79822, name: "Zeta UMi", ra: 16.2942, dec: 75.7553, mag: 4.32 },
-      { hip: 75097, name: "Pherkad", ra: 15.3455, dec: 71.8339, mag: 3.05 },
-      { hip: 72607, name: "Kochab", ra: 14.8451, dec: 74.1555, mag: 2.08 }
-    ],
-    lines: [
-        {
-          "from": 0,
-          "to": 1,
-          "thin": false
-        },
-        {
-          "from": 1,
-          "to": 2,
-          "thin": false
-        },
-        {
-          "from": 2,
-          "to": 3,
-          "thin": false
-        },
-        {
-          "from": 3,
-          "to": 4,
-          "thin": false
-        },
-        {
-          "from": 4,
-          "to": 5,
-          "thin": false
-        },
-        {
-          "from": 5,
-          "to": 6,
-          "thin": false
-        },
-        {
-          "from": 6,
-          "to": 3,
-          "thin": false
-        }
-      ]
+        { "from": 0, "to": 1, "thin": false },
+        { "from": 1, "to": 2, "thin": false },
+        { "from": 2, "to": 3, "thin": false },
+        { "from": 3, "to": 4, "thin": false },
+        { "from": 4, "to": 5, "thin": false },
+        { "from": 5, "to": 0, "thin": false },
+        { "from": 4, "to": 6, "thin": false },
+        { "from": 6, "to": 7, "thin": false },
+        { "from": 7, "to": 8, "thin": false },
+        { "from": 5, "to": 1, "thin": false }
+      
   },
   {
     code: "CMa",
