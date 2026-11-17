@@ -4299,3 +4299,47 @@ html[data-theme="light"] .nexo-space-event {
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+
+/* NEXO — paletas variadas para cada nave e foguete. */
+.nexo-vehicle-art.variant-0 { --nexo-hull: #78b7d8; --nexo-panel: #315c83; --nexo-edge: #b9e9ff; --nexo-engine: #39c5ff; --nexo-flame: #d8f8ff; --nexo-window: #c9fbff; }
+.nexo-vehicle-art.variant-1 { --nexo-hull: #b49ae8; --nexo-panel: #59427f; --nexo-edge: #e0caff; --nexo-engine: #b47cff; --nexo-flame: #f1dfff; --nexo-window: #f1dcff; }
+.nexo-vehicle-art.variant-2 { --nexo-hull: #56c7c0; --nexo-panel: #236b70; --nexo-edge: #b3fff0; --nexo-engine: #31e0c8; --nexo-flame: #d3fff6; --nexo-window: #d3fff7; }
+.nexo-vehicle-art.variant-3 { --nexo-hull: #e0b65f; --nexo-panel: #805528; --nexo-edge: #ffe5a6; --nexo-engine: #ff9d38; --nexo-flame: #fff0c4; --nexo-window: #fff2c9; }
+.nexo-vehicle-art.variant-4 { --nexo-hull: #e17c91; --nexo-panel: #783b59; --nexo-edge: #ffc1d0; --nexo-engine: #ff668f; --nexo-flame: #ffe0e9; --nexo-window: #ffe2ec; }
+.nexo-vehicle-art.variant-5 { --nexo-hull: #91bd78; --nexo-panel: #42643b; --nexo-edge: #d8f5b8; --nexo-engine: #8be35c; --nexo-flame: #edffd9; --nexo-window: #eaffd8; }
+.nexo-vehicle-art.variant-6 { --nexo-hull: #d28e63; --nexo-panel: #75432f; --nexo-edge: #ffd0a7; --nexo-engine: #ff874d; --nexo-flame: #ffe2cd; --nexo-window: #ffe7d5; }
+.nexo-vehicle-art.variant-7 { --nexo-hull: #829ee0; --nexo-panel: #3e4e87; --nexo-edge: #c5d5ff; --nexo-engine: #6d91ff; --nexo-flame: #e0eaff; --nexo-window: #e0ebff; }
+
+.nexo-vehicle-art .nexo-ship-hull path:first-child,
+.nexo-vehicle-art .nexo-rocket-hull path:first-child {
+  fill: var(--nexo-hull) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art .nexo-ship-hull path:nth-child(2n),
+.nexo-vehicle-art .nexo-rocket-hull path:nth-child(2n) {
+  fill: var(--nexo-panel) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art .nexo-ship-hull .nexo-ship-armor {
+  fill: var(--nexo-panel) !important;
+  stroke: var(--nexo-edge) !important;
+}
+.nexo-vehicle-art .nexo-ship-cockpit,
+.nexo-vehicle-art .nexo-rocket-window {
+  fill: var(--nexo-window) !important;
+  filter: drop-shadow(0 0 5px var(--nexo-window)) !important;
+}
+.nexo-vehicle-art .nexo-vehicle-engine-glow {
+  fill: var(--nexo-engine) !important;
+}
+.nexo-vehicle-art .nexo-vehicle-engine-flame {
+  fill: var(--nexo-flame) !important;
+  filter: drop-shadow(0 0 5px var(--nexo-engine)) drop-shadow(0 0 12px var(--nexo-engine)) !important;
+}
+
+/* A trajetória é animada no grupo externo, sem competir com transforms do desenho. */
+.site[data-theme="dark"] .nexo-space-event {
+  transform: none;
+  will-change: opacity;
+}
