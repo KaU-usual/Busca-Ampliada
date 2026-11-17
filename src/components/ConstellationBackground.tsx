@@ -55,7 +55,8 @@ function projectStars(stars: Star[]) {
     ...star,
     x: offsetX + (star.x - minX) * scale,
     y: offsetY + (maxY - star.y) * scale,
-    radius: Math.max(1.35, Math.min(4.8, 5 - star.mag * 0.8)),
+    radius: Math.max(1.2, Math.min(4.2, 3.3 - star.mag * 0.38)),
+    glow: Math.max(0.16, Math.min(0.72, 0.62 - (star.mag + 1.46) * 0.075)),
   }))
 }
 
@@ -390,7 +391,8 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
         </g>
 
         {constellations.map((item, index) => {
-          const active = selected === item.name || hovered === item.name || (theme === 'dark' && activeConstellation === index)
+          const activeName = selected ?? hovered ?? (theme === 'dark' ? constellations[activeConstellation]?.name : undefined)
+          const active = activeName === item.name
 
           return (
             <g
@@ -430,14 +432,21 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
 
               <g className="constellation-stars">
                 {item.stars.map(star => (
-                  <circle
-                    key={star.name}
-                    cx={star.x}
-                    cy={star.y}
-                    r={star.radius}
-                    className="constellation-star"
-                    
-                  />
+                  <g key={star.name}>
+                    <circle
+                      cx={star.x}
+                      cy={star.y}
+                      r={star.radius * 2.35}
+                      className="constellation-star-halo"
+                      style={{ opacity: star.glow }}
+                    />
+                    <circle
+                      cx={star.x}
+                      cy={star.y}
+                      r={star.radius}
+                      className="constellation-star"
+                    />
+                  </g>
                 ))}
               </g>
 
