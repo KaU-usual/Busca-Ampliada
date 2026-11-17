@@ -204,7 +204,7 @@ export default function ConstellationBackground() {
         y,
         angle: direction === 1 ? 0 : 180,
         duration,
-        scale: kind === 'rocket' ? randomBetween(1.18, 1.42) : randomBetween(1.45, 1.9),
+        scale: kind === 'rocket' ? randomBetween(0.48, 0.62) : randomBetween(0.5, 0.68),
         path: `M ${x} ${y} C ${x + travel * 0.28} ${y + curve} ${x + travel * 0.7} ${y - curve * 0.25} ${x + travel} ${y}`,
         delay: 0,
         variant: Math.floor(Math.random() * 8),
