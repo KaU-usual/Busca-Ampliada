@@ -56,6 +56,7 @@ export default function Hero({
       </div>
 
       <div className="hero-art">
+        <div className="earth-planet" aria-hidden="true"><div className="earth-surface" /><div className="earth-clouds" /></div>
         <div className="atom-bouncer">
           <div className="atom-orbit orbit orbit-one" />
           <div className="atom-orbit orbit orbit-two" />
