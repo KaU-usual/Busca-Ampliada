@@ -4311,13 +4311,13 @@ html[data-theme="light"] .nexo-space-event {
 .nexo-vehicle-art.variant-6 { --nexo-hull: #d28e63; --nexo-panel: #75432f; --nexo-edge: #ffd0a7; --nexo-engine: #ff874d; --nexo-flame: #ffe2cd; --nexo-window: #ffe7d5; }
 .nexo-vehicle-art.variant-7 { --nexo-hull: #829ee0; --nexo-panel: #3e4e87; --nexo-edge: #c5d5ff; --nexo-engine: #6d91ff; --nexo-flame: #e0eaff; --nexo-window: #e0ebff; }
 
-.nexo-vehicle-art .nexo-ship-hull path:first-child,
-.nexo-vehicle-art .nexo-rocket-hull path:first-child {
+.nexo-vehicle-art[class*="variant-"] .nexo-ship-hull path:first-child,
+.nexo-vehicle-art[class*="variant-"] .nexo-rocket-hull path:first-child {
   fill: var(--nexo-hull) !important;
   stroke: var(--nexo-edge) !important;
 }
-.nexo-vehicle-art .nexo-ship-hull path:nth-child(2n),
-.nexo-vehicle-art .nexo-rocket-hull path:nth-child(2n) {
+.nexo-vehicle-art[class*="variant-"] .nexo-ship-hull path:nth-child(2n),
+.nexo-vehicle-art[class*="variant-"] .nexo-rocket-hull path:nth-child(2n) {
   fill: var(--nexo-panel) !important;
   stroke: var(--nexo-edge) !important;
 }
