@@ -4950,3 +4950,19 @@ html[data-theme="light"] .nexo-space-event {
     animation: none !important;
   }
 }
+
+
+/* CORREÇÃO — o SVG de constelações não pode cobrir os controles do cabeçalho. */
+.site .topbar {
+  position: relative !important;
+  z-index: 50 !important;
+}
+.site .constellation-layer {
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site .constellation-layer .constellation-group {
+  pointer-events: visiblePainted !important;
+}
