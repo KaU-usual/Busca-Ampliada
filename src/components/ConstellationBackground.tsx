@@ -44,10 +44,11 @@ function projectStars(stars: Star[]) {
   const minY = Math.min(...raw.map(star => star.y))
   const maxY = Math.max(...raw.map(star => star.y))
 
-  // Escala uniforme: preserva a proporção angular da figura.
+  // Escala angular fixa: constelações menores no céu também ficam menores no desenho.
+  // Isso evita ampliar artificialmente figuras compactas, como o Cruzeiro do Sul.
   const width = Math.max(maxX - minX, 0.000001)
   const height = Math.max(maxY - minY, 0.000001)
-  const scale = Math.min(190 / width, 150 / height)
+  const scale = 250
   const offsetX = 12 + (190 - width * scale) / 2
   const offsetY = 12 + (150 - height * scale) / 2
 
