@@ -219,24 +219,17 @@ export default function ConstellationBackground() {
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
         if (isDark && !reducedMotion) {
-          // Formações mais frequentes e variadas, com entradas escalonadas.
-          const waveSize = Math.random() < 0.45 ? 4 : 3
-          for (let index = 0; index < waveSize; index++) {
-            const launch = window.setTimeout(() => {
-              if (cancelled) return
-              const vehicle = createVehicleEvent()
-              setSpaceEvents(current => [...current, vehicle])
-              const cleanup = window.setTimeout(() => {
-                setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
-              }, vehicle.duration + 500)
-              cleanupTimers.push(cleanup)
-            }, index * 850)
-            cleanupTimers.push(launch)
-          }
+          // Uma nave por vez de entrada: mantém o céu movimentado sem aglomerar.
+          const vehicle = createVehicleEvent()
+          setSpaceEvents(current => [...current, vehicle])
+          const cleanup = window.setTimeout(() => {
+            setSpaceEvents(current => current.filter(item => item.id !== vehicle.id))
+          }, vehicle.duration + 500)
+          cleanupTimers.push(cleanup)
         }
 
         scheduleVehicle()
-      }, randomBetween(4500, 6500))
+      }, randomBetween(7000, 9000))
       cleanupTimers.push(timer)
     }
 
