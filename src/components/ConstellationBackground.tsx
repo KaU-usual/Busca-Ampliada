@@ -277,25 +277,9 @@ export default function ConstellationBackground() {
   }, [])
 
   return (
-    <div className="constellation-layer" aria-label="Constelações animadas">
-      <svg
-        viewBox="0 0 1000 760"
-        preserveAspectRatio="xMidYMid meet"
-        role="group"
-        aria-label="Constelações desenhadas a partir das coordenadas das estrelas."
-      >
-        <g className="background-stars" aria-hidden="true">
-          {backgroundStars.map((star, index) => (
-            <circle
-              key={index}
-              cx={star.x}
-              cy={star.y}
-              r={star.radius}
-              style={{ animationDelay: `${(index % 11) * 0.37}s` }}
-            />
-          ))}
-        </g>
-
+    <>
+      <div className="nexo-space-layer" aria-hidden="true">
+        <svg viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid meet">
         {spaceEvents.map(event => (
           <g key={event.id} aria-hidden="true">
             <animateMotion
@@ -434,6 +418,26 @@ export default function ConstellationBackground() {
             </g>
           </g>
         ))}
+        </svg>
+      </div>
+      <div className="constellation-layer" aria-label="Constelações animadas">
+        <svg
+          viewBox="0 0 1000 760"
+          preserveAspectRatio="xMidYMid meet"
+          role="group"
+          aria-label="Constelações desenhadas a partir das coordenadas das estrelas."
+        >
+        <g className="background-stars" aria-hidden="true">
+          {backgroundStars.map((star, index) => (
+            <circle
+              key={index}
+              cx={star.x}
+              cy={star.y}
+              r={star.radius}
+              style={{ animationDelay: `${(index % 11) * 0.37}s` }}
+            />
+          ))}
+        </g>
 
         {constellations.map((item, index) => {
           const delay = `${index * -12}s`
@@ -533,6 +537,7 @@ export default function ConstellationBackground() {
           <p>{selectedConstellation.note}</p>
         </section>
       )}
-    </div>
+      </div>
+    </>
   )
 }
