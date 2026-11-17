@@ -344,6 +344,8 @@ export default function ConstellationBackground() {
           y: 490,
           path: 'M 0 0 C 100 -85 270 -115 430 -65',
         },
+        // Uma nave aparece no primeiro ciclo para validar desenho e deslocamento.
+        createVehicleEvent(),
       ]
 
       setSpaceEvents(current => [...current, ...demoEvents])
