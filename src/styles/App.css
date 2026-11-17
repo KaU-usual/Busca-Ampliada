@@ -2755,9 +2755,9 @@ html[data-theme="light"] .nexo-space-event {
   animation: nexo-moon-breath 11s ease-in-out infinite;
 }
 
-.site[data-theme="dark"] .atom-core {
-  width: 45%;
-  height: 45%;
+ .site[data-theme="dark"] .atom-core {
+  width: 49%;
+  height: 49%;
   overflow: hidden;
   border: 1px solid #e4edf5aa;
   border-radius: 50%;
@@ -3844,7 +3844,7 @@ html[data-theme="light"] .nexo-space-event {
 
 @media (max-width: 650px) {
   .constellation-layer {
-    z-index: 20;
+    z-index: 0;
   }
 
   .constellation-tooltip {
@@ -4118,4 +4118,83 @@ html[data-theme="light"] .nexo-space-event {
     drop-shadow(0 0 5px #b8f7ff)
     drop-shadow(0 0 12px #50caff)
     drop-shadow(0 0 22px #397dff);
+}
+
+
+/* NEXO — refinamento do céu: camadas seguras, Lua e eventos mais legíveis. */
+.constellation-layer {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.constellation-layer svg {
+  pointer-events: none !important;
+}
+
+.site > :not(.constellation-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Aumenta discretamente a Lua sem alterar sua posição na composição. */
+.site[data-theme="dark"] .atom-core {
+  width: 49% !important;
+  height: 49% !important;
+}
+
+/* Estrelas cadentes: cauda mais longa, espessa e luminosa. */
+.nexo-meteor-tail {
+  stroke-width: 5 !important;
+  stroke-dasharray: 190 !important;
+  stroke-dashoffset: 190 !important;
+  filter:
+    drop-shadow(0 0 7px #c7eaff)
+    drop-shadow(0 0 16px #78c8ff)
+    drop-shadow(0 0 27px #4c9dff) !important;
+}
+
+.nexo-meteor-head {
+  r: 5.2px;
+  filter:
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 14px #a9dcff)
+    drop-shadow(0 0 25px #69baff) !important;
+}
+
+.nexo-meteor-streak {
+  opacity: 1 !important;
+}
+
+/* Naves com silhuetas variadas e acabamento metálico cinematográfico. */
+.nexo-vehicle-art {
+  opacity: .96;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.nexo-vehicle-art.variant-1 .nexo-ship-hull path:first-child { fill: #b6a7d8; }
+.nexo-vehicle-art.variant-2 .nexo-ship-hull path:first-child { fill: #8fb9c9; }
+.nexo-vehicle-art.variant-3 .nexo-ship-hull path:first-child { fill: #d2c49f; }
+.nexo-vehicle-art.variant-4 .nexo-ship-hull path:first-child { fill: #c4ccd8; }
+.nexo-vehicle-art.variant-5 .nexo-ship-hull path:first-child { fill: #a9c6b6; }
+.nexo-vehicle-art.variant-6 .nexo-ship-hull path:first-child { fill: #c5a995; }
+.nexo-vehicle-art.variant-7 .nexo-ship-hull path:first-child { fill: #9daed0; }
+
+.nexo-vehicle-art.variant-4 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-5 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-6 .nexo-ship-hull path:nth-child(2),
+.nexo-vehicle-art.variant-7 .nexo-ship-hull path:nth-child(2) {
+  fill: #344c70;
+  stroke: #b9e7ff;
+}
+
+.nexo-space-event.ship,
+.nexo-space-event.rocket {
+  pointer-events: none !important;
+}
+
+@media (max-width: 650px) {
+  .constellation-layer {
+    z-index: 0 !important;
+  }
 }
