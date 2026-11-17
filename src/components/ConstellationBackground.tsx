@@ -233,8 +233,8 @@ export default function ConstellationBackground() {
         angle: randomBetween(-8, 8),
         duration,
         scale: kind === 'meteor'
-          ? randomBetween(0.9, 1.35)
-          : randomBetween(0.38, 0.78),
+          ? randomBetween(1.05, 1.45)
+          : randomBetween(0.58, 0.9),
         path,
         delay,
       }
@@ -252,12 +252,12 @@ export default function ConstellationBackground() {
         kind,
         x: direction === 1 ? -190 : 1190,
         y: randomBetween(110, 650),
-        angle: 0,
+        angle: direction === 1 ? 0 : 180,
         duration,
-        scale: kind === 'rocket' ? randomBetween(1.05, 1.28) : randomBetween(1.12, 1.52),
+        scale: kind === 'rocket' ? randomBetween(1.18, 1.42) : randomBetween(1.45, 1.9),
         path: 'M 0 0 C ' + (travel * 0.28) + ' ' + curve + ' ' + (travel * 0.7) + ' ' + (-curve * 0.25) + ' ' + travel + ' 0',
         delay: 0,
-        variant: Math.floor(Math.random() * 4),
+        variant: Math.floor(Math.random() * 8),
       }
     }
 
@@ -444,6 +444,30 @@ export default function ConstellationBackground() {
                         <path d="M -25 -7 L -12 -20 L -2 -10 Z M -25 7 L -12 20 L -2 10 Z" />
                         <path d="M -12 -3 L 20 -3 L 31 0 L 20 3 L -12 3 Z" className="nexo-ship-armor" />
                       </>}
+                      {event.variant === 4 && <>
+                        <path d="M -42 0 L -25 -7 L 25 -7 L 43 0 L 25 7 L -25 7 Z" />
+                        <path d="M -18 -6 L -8 -29 L 3 -8 Z M -18 6 L -8 29 L 3 8 Z" />
+                        <path d="M 0 -6 L 13 -17 L 22 -6 L 22 6 L 13 17 L 0 6 Z" />
+                        <path d="M -30 -3 L 30 -3 L 39 0 L 30 3 L -30 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 5 && <>
+                        <path d="M -43 0 L -20 -9 L 26 -6 L 40 0 L 26 6 L -20 9 Z" />
+                        <path d="M -17 -7 L -35 -25 L 4 -10 Z M -17 7 L -35 25 L 4 10 Z" />
+                        <path d="M 1 -6 L 12 -15 L 24 -6 L 24 6 L 12 15 L 1 6 Z" />
+                        <path d="M -22 -3 L 25 -3 L 34 0 L 25 3 L -22 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 6 && <>
+                        <path d="M -40 0 L -20 -8 L 12 -8 L 42 0 L 12 8 L -20 8 Z" />
+                        <path d="M -18 -7 L -8 -27 L 7 -8 Z M -18 7 L -8 27 L 7 8 Z" />
+                        <path d="M -30 -5 L -42 -17 L -11 -9 Z M -30 5 L -42 17 L -11 9 Z" />
+                        <path d="M -12 -3 L 25 -3 L 35 0 L 25 3 L -12 3 Z" className="nexo-ship-armor" />
+                      </>}
+                      {event.variant === 7 && <>
+                        <path d="M -38 0 L -17 -10 L 19 -7 L 43 0 L 19 7 L -17 10 Z" />
+                        <path d="M -8 -8 L 0 -30 L 16 -9 Z M -8 8 L 0 30 L 16 9 Z" />
+                        <path d="M -25 -5 L -34 -18 L -8 -9 Z M -25 5 L -34 18 L -8 9 Z" />
+                        <path d="M -14 -3 L 28 -3 L 38 0 L 28 3 L -14 3 Z" className="nexo-ship-armor" />
+                      </>}
                       <path className="nexo-ship-cockpit" d="M 13 -3.5 L 27 0 L 13 3.5 Z" />
                       <path className="nexo-ship-highlight" d="M -22 -3 L 7 -5 L 20 -2" />
                     </g>
@@ -475,15 +499,15 @@ export default function ConstellationBackground() {
                   <circle cx="8" cy="-11" r="2.5" className="nexo-asteroid-crater" />
                   <path d="M-17 12 L-7 8 L1 15 L13 13 M-16 -2 L-8 -10 L-1 -7 L4 -15 M5 4 L13 1 L18 8" className="nexo-asteroid-detail" />
                   <path d="M-2 -21 L2 -14 M16 -3 L11 2 M-20 7 L-13 4" className="nexo-asteroid-highlight" />
-                  <animateMotion
-                    begin={`${event.delay}ms`}
-                    dur={`${event.duration}ms`}
-                    path={event.path}
-                    rotate="0"
-                    calcMode="linear"
-                    fill="freeze"
-                  />
                 </g>
+                <animateMotion
+                  begin={`${event.delay}ms`}
+                  dur={`${event.duration}ms`}
+                  path={event.path}
+                  rotate="auto"
+                  calcMode="linear"
+                  fill="freeze"
+                />
               )}
 
               {event.kind === 'meteor' && (
