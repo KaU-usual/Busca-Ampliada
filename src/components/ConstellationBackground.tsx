@@ -190,16 +190,18 @@ export default function ConstellationBackground() {
       const travel = direction * 1600
       const curve = randomBetween(-85, 85)
       const duration = randomBetween(9500, 13500)
+      const x = direction === 1 ? -190 : 1190
+      const y = randomBetween(110, 650)
 
       return {
         id: Date.now() + Math.random() * 100000,
         kind,
-        x: direction === 1 ? -190 : 1190,
-        y: randomBetween(110, 650),
+        x,
+        y,
         angle: direction === 1 ? 0 : 180,
         duration,
         scale: kind === 'rocket' ? randomBetween(1.18, 1.42) : randomBetween(1.45, 1.9),
-        path: 'M 0 0 C ' + (travel * 0.28) + ' ' + curve + ' ' + (travel * 0.7) + ' ' + (-curve * 0.25) + ' ' + travel + ' 0',
+        path: `M ${x} ${y} C ${x + travel * 0.28} ${y + curve} ${x + travel * 0.7} ${y - curve * 0.25} ${x + travel} ${y}`,
         delay: 0,
         variant: Math.floor(Math.random() * 8),
       }
@@ -236,14 +238,8 @@ export default function ConstellationBackground() {
       if (cancelled || !isDark || reducedMotion) return
 
       const demoEvents: SpaceEvent[] = [
-        // Uma nave aparece no primeiro ciclo para validar desenho e deslocamento.
-        {
-          ...createVehicleEvent(),
-          x: -190,
-          y: 205,
-          angle: 0,
-          path: 'M 0 0 C 350 -25 1050 25 1600 0',
-        },
+        // Uma nave atravessa a tela logo no início para validar o deslocamento.
+        createVehicleEvent(),
       ]
 
       setSpaceEvents(current => [...current, ...demoEvents])
@@ -289,15 +285,20 @@ export default function ConstellationBackground() {
         </g>
 
         {spaceEvents.map(event => (
-          <g
-            key={event.id}
-            transform={`translate(${event.x} ${event.y}) rotate(${event.angle}) scale(${event.scale})`}
-            aria-hidden="true"
-          >
-            <g
-              className={`nexo-space-event ${event.kind}`}
-              style={{ animationDuration: `${event.duration}ms`, opacity: event.kind === 'ship' || event.kind === 'rocket' ? 1 : undefined }}
-            >
+          <g key={event.id} aria-hidden="true">
+            <animateMotion
+              begin="0s"
+              dur={`${event.duration}ms`}
+              path={event.path}
+              rotate="0"
+              calcMode="linear"
+              fill="freeze"
+            />
+            <g transform={`rotate(${event.angle}) scale(${event.scale})`}>
+              <g
+                className={`nexo-space-event ${event.kind}`}
+                style={{ animationDuration: `${event.duration}ms`, opacity: 1 }}
+              >
 
 
               {(event.kind === 'ship' || event.kind === 'rocket') && (
@@ -371,14 +372,7 @@ export default function ConstellationBackground() {
                 </g>
                 </>
               )}
-              <animateMotion
-                begin="0s"
-                dur={`${event.duration}ms`}
-                path={event.path}
-                rotate="0"
-                calcMode="linear"
-                fill="freeze"
-              />
+              </g>
             </g>
           </g>
         ))}
