@@ -391,7 +391,7 @@ export default function ConstellationBackground({ theme }: { theme: 'dark' | 'li
           ))}
         </g>
 
-        {constellations.map((item, index) => {
+        {constellations.map(item => {
           const activeName = selected ?? hovered ?? (theme === 'dark' ? constellations[activeConstellation]?.name : undefined)
           const active = activeName === item.name
 
