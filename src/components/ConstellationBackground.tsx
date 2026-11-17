@@ -115,7 +115,7 @@ const backgroundStars = createBackgroundStars()
 
 type SpaceEvent = {
   id: number
-  kind: 'meteor' | 'ship' | 'rocket'
+  kind: 'ship' | 'rocket'
   x: number
   y: number
   angle: number
@@ -178,41 +178,11 @@ export default function ConstellationBackground() {
   )
 
   useEffect(() => {
-    let nextTimer = 0
     let cancelled = false
     const cleanupTimers: number[] = []
 
     const randomBetween = (min: number, max: number) =>
       Math.random() * (max - min) + min
-
-    const createEvent = (
-      _kind: 'meteor',
-      index: number,
-      delay: number
-    ): SpaceEvent => {
-      const duration = randomBetween(1900, 2600)
-      const x = -140
-      const y = randomBetween(90, 680)
-      const travelX = 1250
-      const travelY = randomBetween(-220, 220)
-      const curve = randomBetween(-65, 65)
-      const path =
-        `M 0 0 C ${travelX * 0.28} ${curve} ` +
-        `${travelX * 0.7} ${travelY - curve * 0.25} ` +
-        `${travelX} ${travelY}`
-
-      return {
-        id: Date.now() + Math.random() * 100000 + index,
-        kind: 'meteor',
-        x,
-        y,
-        angle: randomBetween(-8, 8),
-        duration,
-        scale: randomBetween(1.15, 1.55),
-        path,
-        delay,
-      }
-    }
 
     const createVehicleEvent = (): SpaceEvent => {
       const direction = Math.random() < 0.5 ? 1 : -1
@@ -256,38 +226,6 @@ export default function ConstellationBackground() {
       cleanupTimers.push(timer)
     }
 
-    const scheduleNext = () => {
-      nextTimer = window.setTimeout(() => {
-        if (cancelled) return
-
-        const isDark = document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
-        const reducedMotion = window.matchMedia(
-          '(prefers-reduced-motion: reduce)'
-        ).matches
-
-        if (!isDark || reducedMotion) {
-          scheduleNext()
-          return
-        }
-
-        const events: SpaceEvent[] = [createEvent('meteor', 0, 0)]
-
-        setSpaceEvents(current => [...current, ...events])
-
-        events.forEach(event => {
-          const timer = window.setTimeout(() => {
-            setSpaceEvents(current =>
-              current.filter(item => item.id !== event.id)
-            )
-          }, event.duration + event.delay + 300)
-
-          cleanupTimers.push(timer)
-        })
-
-        scheduleNext()
-      }, randomBetween(7000, 13000))
-    }
-
     const demoTimer = window.setTimeout(() => {
       const isDark =
         document.querySelector<HTMLElement>('.site')?.dataset.theme !== 'light'
@@ -298,18 +236,13 @@ export default function ConstellationBackground() {
       if (cancelled || !isDark || reducedMotion) return
 
       const demoEvents: SpaceEvent[] = [
-        {
-          ...createEvent('meteor', 0, 0),
-          x: -140,
-          y: 165,
-          path: 'M 0 0 C 180 -45 390 35 690 190',
-        },
         // Uma nave aparece no primeiro ciclo para validar desenho e deslocamento.
         {
           ...createVehicleEvent(),
-          x: 90,
+          x: -190,
           y: 205,
-          path: 'M 0 0 C 220 -35 520 35 900 0',
+          angle: 0,
+          path: 'M 0 0 C 350 -25 1050 25 1600 0',
         },
       ]
 
@@ -326,12 +259,10 @@ export default function ConstellationBackground() {
       })
     }, 1000)
 
-    scheduleNext()
     scheduleVehicle()
 
     return () => {
       cancelled = true
-      window.clearTimeout(nextTimer)
       window.clearTimeout(demoTimer)
       cleanupTimers.forEach(timer => window.clearTimeout(timer))
     }
@@ -367,14 +298,7 @@ export default function ConstellationBackground() {
               className={`nexo-space-event ${event.kind}`}
               style={{ animationDuration: `${event.duration}ms`, opacity: event.kind === 'ship' || event.kind === 'rocket' ? 1 : undefined }}
             >
-              {event.kind === 'meteor' && (
-                <g className="nexo-meteor-streak">
-                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-halo" style={{ animationDuration: `${event.duration}ms` }} />
-                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-tail" style={{ animationDuration: `${event.duration}ms` }} />
-                  <path d="M -180 34 Q -85 17 0 0" className="nexo-meteor-core" style={{ animationDuration: `${event.duration}ms` }} />
-                  <circle cx="0" cy="0" r="3.8" className="nexo-meteor-head" />
-                </g>
-              )}
+
 
               {(event.kind === 'ship' || event.kind === 'rocket') && (
                 <>
@@ -443,13 +367,18 @@ export default function ConstellationBackground() {
                       <circle className="nexo-rocket-window" cx="20" cy="0" r="3.2" />
                     </g>
                   )}
-                  <animateMotion begin={event.delay + 'ms'} dur={event.duration + 'ms'} path={event.path} rotate="auto" calcMode="linear" fill="freeze" />
+
                 </g>
                 </>
               )}
-
-
-
+              <animateMotion
+                begin="0s"
+                dur={`${event.duration}ms`}
+                path={event.path}
+                rotate="0"
+                calcMode="linear"
+                fill="freeze"
+              />
             </g>
           </g>
         ))}
