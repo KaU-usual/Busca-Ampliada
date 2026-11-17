@@ -4425,3 +4425,23 @@ html[data-theme="light"] .nexo-space-event {
 .nexo-model-destroyer {
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, .28));
 }
+
+
+/* NEXO — correção definitiva da camada de interação das constelações.
+   A camada fica acima do conteúdo, mas só os desenhos recebem cliques.
+   Isso mantém a interface utilizável e permite abrir o cartão de descrição. */
+.site .constellation-layer {
+  z-index: 2 !important;
+  pointer-events: none !important;
+}
+.site .constellation-layer svg {
+  pointer-events: none !important;
+}
+.site .constellation-layer .constellation-group {
+  pointer-events: visiblePainted !important;
+  cursor: pointer;
+}
+.site .constellation-layer .constellation-info-card {
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
